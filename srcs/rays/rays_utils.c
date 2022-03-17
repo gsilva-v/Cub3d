@@ -1,7 +1,5 @@
 #include <cub3d.h>
 
-extern char map[8][8];
-
 float	get_dist(t_game *datas, t_vec final_point)
 {
 	return (sqrt((datas->player.x - final_point.x) * \

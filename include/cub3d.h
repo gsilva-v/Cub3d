@@ -2,17 +2,17 @@
 # define CUB3D_H
 
 
-#include <X11/mlx.h>
-#include <X11/X.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+# include <X11/mlx.h>
+# include <X11/X.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
 
-#define ESC 0xff1b
-#define PI 3.1415f
-#define P2 PI/2
-#define P3 3*PI/2
-#define DR 0.0174533
+# define ESC 0xff1b
+# define PI 3.1415f
+# define P2 PI/2
+# define P3 3*PI/2
+# define DR 0.0174533
 
 typedef struct	s_data {
 	void	*img;
@@ -20,51 +20,51 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-} t_data;
+}	t_data;
 
 typedef struct s_vec{
-	float x;
-	float y;
-} t_vec;
+	float	x;
+	float	y;
+}	t_vec;
+
+typedef struct s_int_vec{
+	int	x;
+	int	y;
+}	t_int_vec;
 
 typedef struct s_rays{
-	int	 rays;
-	int doff;
-	int map_x;
-	int map_y;
-	int desloc;
-	int color;
-	float ray_angle;
-	float ray_x;
-	float ray_y;
-	float y_offset;
-	float x_offset;
-	float disT;
-	float disH;
-	float horizontal_x;
-	float horizontal_y;
-	float a_tan;
-	float n_tan;
-	float disV;
-	float vertical_x; 
-	float vertical_y;
-	float cos_angle;
-	float lineH;
-	float line_offset;
+	t_int_vec	map_pos;
+	t_vec		ray_vec;
+	t_vec		offset;
+	t_vec		horizontal;
+	t_vec		vertical;
+	float		ray_angle;
+	float		disT;
+	float		disH;
+	float		a_tan;
+	float		n_tan;
+	float		disV;
+	float		cos_angle;
+	float		lineH;
+	float		line_offset;
+	int			rays;
+	int			doff;
+	int			desloc;
+	int			color;
 }	t_rays;
 
 
 typedef struct s_game{
+	t_data	canvas;
+	t_vec	player;
+	t_vec	delta_player;
+	float	player_angle;
 	void	*mlx;
 	void	*win;
-	t_data	canvas;
-	t_vec player;
-	t_vec delta_player;
-	int height;
-	int width;
-	float player_angle;
-	int fov;
-
+	int		height;
+	int		width;
+	int		fov;
+	char	map[8][8];
 }	t_game;
 
 

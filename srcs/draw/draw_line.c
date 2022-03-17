@@ -1,6 +1,5 @@
 #include <cub3d.h>
 
-
 int    take_step(float dx, float dy)
 {
     if (dx < 0)
