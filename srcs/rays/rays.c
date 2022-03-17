@@ -14,7 +14,7 @@ void	draw_3d(t_rays *values, t_game *datas)
 
 	i = 0;
 	fix_fisheye(values, datas);
-	values->lineH = (64 * 320) / values->disT;
+	values->lineH = (BLOCK_SIZE * 320) / values->disT;
 	if (values->lineH > 320)
 		values->lineH = 320;
 	values->line_offset = 160 - values->lineH / 2;
@@ -24,12 +24,12 @@ void	draw_3d(t_rays *values, t_game *datas)
 		while (height < values->lineH)
 		{
 			drawpixel(&datas->canvas, (t_vec){.x = i + values->desloc + \
-			(8 * 64), .y = height + values->line_offset}, values->color);
+			(8 * BLOCK_SIZE), .y = height + values->line_offset}, values->color);
 			height++;
 		}
 		i++;
 	}
-	values->desloc += 8;
+	values->desloc += datas->width;
 }
 
 void	draw_rays(t_game *datas)

@@ -8,8 +8,9 @@
 # include <stdlib.h>
 # include <math.h>
 
+# define BLOCK_SIZE 64
 # define ESC 0xff1b
-# define PI 3.1415f
+# define PI 3.141592653589f
 # define P2 PI/2
 # define P3 3*PI/2
 # define DR 0.0174533

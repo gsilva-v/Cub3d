@@ -7,21 +7,23 @@ int main(void)
 	datas = (t_game){
 		.map = {
 		{1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,1},
 		{1,0,1,0,0,0,0,1},
-		{1,0,1,0,0,0,0,1},
-		{1,0,1,0,0,0,0,1},
+		{1,0,0,0,1,0,0,1},
 		{1,0,0,0,0,0,0,1},
 		{1,0,0,0,1,0,0,1},
 		{1,0,0,0,1,0,0,1},
 		{1,1,1,1,1,1,1,1}
 	}};
-	datas.player = (t_vec){.x = 64, .y = 64};
+	datas.player = (t_vec){.x = BLOCK_SIZE, .y = BLOCK_SIZE};
 	datas.player_angle = 0;
 	datas.delta_player.x = cos(datas.player_angle) * 5;
 	datas.delta_player.y = sin(datas.player_angle) * 5;
+	datas.width = 8;
+	datas.height = 10;
 	datas.mlx = mlx_init();
-	datas.win = mlx_new_window(datas.mlx, 64 * 16, 64 * 8, "RAY");
-	datas.canvas.img = mlx_new_image(datas.mlx, 64 * 16, 64 * 8);
+	datas.win = mlx_new_window(datas.mlx, BLOCK_SIZE * (datas.height * 2), BLOCK_SIZE * datas.width, "RAY");
+	datas.canvas.img = mlx_new_image(datas.mlx, BLOCK_SIZE * (datas.height * 2), BLOCK_SIZE * datas.width);
 	datas.canvas.addr = mlx_get_data_addr(datas.canvas.img, &datas.canvas.bits_per_pixel, &datas.canvas.line_length, &datas.canvas.endian);
 	mlx_loop_hook(datas.mlx, render_map, &datas);
 	mlx_hook(datas.win, KeyPress, KeyPressMask, update_map, &datas);

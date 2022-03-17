@@ -32,6 +32,7 @@ int	update_map(int key_code, t_game *datas)
 	{
 		mlx_clear_window(datas->mlx, datas->win);
 		mlx_loop_end(datas->mlx);
+		mlx_destroy_image(datas->mlx, datas->canvas.img);
 		mlx_destroy_window(datas->mlx, datas->win);
 		mlx_destroy_display(datas->mlx);
 		free(datas->mlx);

@@ -4,10 +4,10 @@ void	clean_map(t_game *game)
 {
 	int col = 0, line;
 
-	while (col < 16 * 64)
+	while (col < 16 * BLOCK_SIZE)
 	{
 		line = 0;
-		while(line < 8 * 64)
+		while(line < 8 * BLOCK_SIZE)
 		{
 			drawpixel(&game->canvas, (t_vec){.x = col, .y = line }, 0);
 			line++;
@@ -26,9 +26,9 @@ void	draw_map(t_game *game)
 		while(line < 8)
 		{
 			if (game->map[line][col] == 1)
-				draw_square(&game->canvas, (t_vec){.x = col * 64, .y = line * 64}, 64 - 1, 0xFFFFFF);
+				draw_square(&game->canvas, (t_vec){.x = col * BLOCK_SIZE, .y = line * BLOCK_SIZE}, BLOCK_SIZE - 1, 0xFFFFFF);
 			else if (game->map[line][col] == 0)
-				draw_square(&game->canvas, (t_vec){.x = col * 64, .y = line * 64}, 64 - 1, 0);
+				draw_square(&game->canvas, (t_vec){.x = col * BLOCK_SIZE, .y = line * BLOCK_SIZE}, BLOCK_SIZE - 1, 0);
 			line++;
 		}
 		col++;
