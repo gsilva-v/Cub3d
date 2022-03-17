@@ -2,15 +2,37 @@
 
 int	update_map(int key_code, t_game *datas)
 {
+	t_vec offset;
+	t_int_vec ip;
+	t_int_vec ip_add_offset;
+	t_int_vec ip_sub_offset;
+	
+	offset.x = 20;
+	if (datas->delta_player.x < 0)
+		offset.x = -20;
+	offset.y = 20;
+	if (datas->delta_player.y < 0)
+		offset.y = -20;
+	ip.x = datas->player.x / 64;
+	ip_add_offset.x = (datas->player.x + offset.x) / 64;
+	ip_sub_offset.x = (datas->player.x - offset.x) / 64;
+	ip.y = datas->player.y / 64;
+	ip_add_offset.y = (datas->player.y + offset.y) / 64;
+	ip_sub_offset.y = (datas->player.y - offset.y) / 64;
+	
 	if (key_code == 'w')
 	{
-		datas->player.y += datas->delta_player.y;
-		datas->player.x += datas->delta_player.x;
+		if (datas->map[ip.y][ip_add_offset.x] == 0)
+			datas->player.x += datas->delta_player.x;
+		if (datas->map[ip_add_offset.y][ip.x] == 0)
+			datas->player.y += datas->delta_player.y;
 	}
 	if (key_code == 's')
 	{
-		datas->player.x -= datas->delta_player.x;
-		datas->player.y -= datas->delta_player.y;
+		if (datas->map[ip.y][ip_sub_offset.x] == 0)
+			datas->player.x -= datas->delta_player.x;
+		if (datas->map[ip_sub_offset.y][ip.x] == 0)
+			datas->player.y -= datas->delta_player.y;
 	}
 	if (key_code == 'a')
 	{

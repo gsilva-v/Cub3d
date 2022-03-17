@@ -17,14 +17,14 @@ void	draw_3d(t_rays *values, t_game *datas)
 	values->lineH = (BLOCK_SIZE * 320) / values->disT;
 	if (values->lineH > 320)
 		values->lineH = 320;
-	values->line_offset = 160 - values->lineH / 2;
+	values->line_offset = 240 - values->lineH / 2;
 	while (i < 8)
 	{
 		height = 0;
 		while (height < values->lineH)
 		{
 			drawpixel(&datas->canvas, (t_vec){.x = i + values->desloc + \
-			(8 * BLOCK_SIZE), .y = height + values->line_offset}, values->color);
+			(8 * BLOCK_SIZE), .y = height + values->line_offset }, values->color);
 			height++;
 		}
 		i++;

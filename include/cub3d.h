@@ -57,6 +57,7 @@ typedef struct s_rays{
 
 typedef struct s_game{
 	t_data	canvas;
+	t_data	wall;
 	t_vec	player;
 	t_vec	delta_player;
 	float	player_angle;
