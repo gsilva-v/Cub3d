@@ -39,7 +39,7 @@ void	set_horizontal_walls(t_rays *values, t_game *datas)
 		// Provavelmente o bug do raio abrir é aqui
 		if ((values->map_pos.x < datas->height && values->map_pos.y < \
 		datas->width && values->map_pos.x >= 0 && values->map_pos.y >= 0) && \
-		datas->map[values->map_pos.y][values->map_pos.x] == 1)
+		datas->map[values->map_pos.y][values->map_pos.x] > 0)
 		{
 			values->horizontal.x = values->ray_vec.x;
 			values->horizontal.y = values->ray_vec.y;
@@ -94,7 +94,7 @@ void	set_vertical_walls(t_rays *values, t_game *datas)
 		values->map_pos.y = (int)values->ray_vec.y >> 6;
 		if ((values->map_pos.x < datas->height && values->map_pos.y < \
 		datas->width && values->map_pos.x >= 0 && values->map_pos.y >= 0) && \
-		datas->map[values->map_pos.y][values->map_pos.x] == 1)
+		datas->map[values->map_pos.y][values->map_pos.x] > 0)
 		{
 			values->vertical.x = values->ray_vec.x;
 			values->vertical.y = values->ray_vec.y;
@@ -118,13 +118,15 @@ void	set_distance(t_rays *values)
 		values->ray_vec.x = values->horizontal.x;
 		values->ray_vec.y = values->horizontal.y;
 		values->disT = values->disH;
-		values->color = 0xA9A9A9;
+		values->first_pixel = (int)values->ray_vec.x - (((int)values->ray_vec.x >> 6) << 6);
+		values->color = 0.7;
 	}
 	else if (values->disV < values->disH)
 	{
 		values->ray_vec.x = values->vertical.x;
 		values->ray_vec.y = values->vertical.y;
 		values->disT = values->disV;
-		values->color = 0x808080;
+		values->first_pixel = (int)values->ray_vec.y - (((int)values->ray_vec.y >> 6) << 6);
+		values->color = 1;
 	}
 }

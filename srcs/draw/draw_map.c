@@ -27,6 +27,8 @@ void	draw_map(t_game *game)
 		{
 			if (game->map[line][col] == 1)
 				draw_square(&game->canvas, (t_vec){.x = col * BLOCK_SIZE, .y = line * BLOCK_SIZE}, BLOCK_SIZE - 1, 0xFFFFFF);
+			else if (game->map[line][col] == 2)
+				draw_square(&game->canvas, (t_vec){.x = col * BLOCK_SIZE, .y = line * BLOCK_SIZE}, BLOCK_SIZE - 1, 0xFF00FF);
 			else if (game->map[line][col] == 0)
 				draw_square(&game->canvas, (t_vec){.x = col * BLOCK_SIZE, .y = line * BLOCK_SIZE}, BLOCK_SIZE - 1, 0);
 			line++;

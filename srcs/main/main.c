@@ -9,7 +9,7 @@ int main(void)
 		{1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,1},
 		{1,0,1,0,0,0,0,1},
-		{1,0,0,0,1,0,0,1},
+		{1,0,0,0,2,0,0,1},
 		{1,0,0,0,0,0,0,1},
 		{1,0,0,0,1,0,0,1},
 		{1,0,0,0,1,0,0,1},
@@ -28,6 +28,8 @@ int main(void)
 	int trash;
 	datas.wall.img = mlx_xpm_file_to_image(datas.mlx, "./imgs/wall.xpm", &trash, &trash);
 	datas.wall.addr = mlx_get_data_addr(datas.wall.img, &datas.wall.bits_per_pixel, &datas.wall.line_length, &datas.wall.endian);
+	datas.door.img = mlx_xpm_file_to_image(datas.mlx, "./imgs/door.xpm", &trash, &trash);
+	datas.door.addr = mlx_get_data_addr(datas.door.img, &datas.door.bits_per_pixel, &datas.door.line_length, &datas.door.endian);
 	mlx_loop_hook(datas.mlx, render_map, &datas);
 	mlx_hook(datas.win, KeyPress, KeyPressMask, update_map, &datas);
 	mlx_loop(datas.mlx);

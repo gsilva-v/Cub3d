@@ -35,10 +35,12 @@ typedef struct s_int_vec{
 
 typedef struct s_rays{
 	t_int_vec	map_pos;
-	t_vec		ray_vec;
 	t_vec		offset;
+	t_vec		ray_vec;
 	t_vec		horizontal;
 	t_vec		vertical;
+	float		color;
+	float		first_pixel;
 	float		ray_angle;
 	float		disT;
 	float		disH;
@@ -51,13 +53,13 @@ typedef struct s_rays{
 	int			rays;
 	int			doff;
 	int			desloc;
-	int			color;
 }	t_rays;
 
 
 typedef struct s_game{
 	t_data	canvas;
 	t_data	wall;
+	t_data	door;
 	t_vec	player;
 	t_vec	delta_player;
 	float	player_angle;
@@ -69,6 +71,8 @@ typedef struct s_game{
 	char	map[8][8];
 }	t_game;
 
+
+int	get_pixel(t_data *data, t_vec point);
 
 // DRAW
 void	clean_map(t_game *game);
