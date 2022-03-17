@@ -82,6 +82,18 @@ int		update_map(int key_code, t_game *datas);
 // RAYS
 void	draw_rays(t_game *datas);
 
+// RAYS SETS
+void	set_rays_horizontal(t_rays *values, t_game *datas);
+void	set_horizontal_walls(t_rays *values, t_game *datas);
+void	set_rays_vertical(t_rays *values, t_game *datas);
+void	set_vertical_walls(t_rays *values, t_game *datas);
+void	set_distance(t_rays *values);
+
+// RAYS UTILS
+t_rays	init_values(t_game *datas);
+float	get_dist(t_game *datas, t_vec final_point);
+float	check_valid_pi(float num);
+
 // UTILS
 void	*ft_calloc(size_t nbytes, size_t sizemem);
 void	ft_bzero(void *s, size_t n);

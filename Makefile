@@ -20,7 +20,7 @@ SRCS =   $(PATH_MAIN)main.c\
 		$(PATH_DRAW)draw_line.c $(PATH_DRAW)draw_pixel.c $(PATH_DRAW)draw_square.c\
 		$(PATH_DRAW)draw_map.c\
 		$(PATH_RENDMAP)render_map.c\
-		$(PATH_RAYS)rays.c\
+		$(PATH_RAYS)rays.c $(PATH_RAYS)rays_set_values.c $(PATH_RAYS)rays_utils.c\
 		$(PATH_UTILS)ft_calloc.c
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
