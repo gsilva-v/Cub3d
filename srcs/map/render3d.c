@@ -31,22 +31,22 @@ void	draw_3d(t_rays *values, t_game *game)
 
 	i = 0;
 	fix_fisheye(values, game);
-	values->lineH = (BLOCK_SIZE * 320) / values->disT;
+	values->lineH = (BLOCK_SIZE * 512) / values->disT;
 	float text_y_step = 64 / values->lineH;
 	float text_y_offset = 0;
-	if (values->lineH > 320)
+	if (values->lineH > 512)
 	{
-		text_y_offset = (values->lineH - 320) / 2;
-		values->lineH = 320;
+		text_y_offset = (values->lineH - 512) / 2;
+		values->lineH = 512;
 	}
-	values->line_offset = 240 - values->lineH / 2;
+	values->line_offset = (512 - values->lineH) / 2;
 	int pixel;
 	float text_y = 0;
 	t_int_vec map_pos;
 
+	int y;
 	while (i < 8)
 	{
-
 		height = 0;
 		text_y = text_y_offset * text_y_step;
 		while (height < values->lineH)
@@ -56,8 +56,6 @@ void	draw_3d(t_rays *values, t_game *game)
 			map_pos.y = (int)values->ray_vec.y >> 6;
 			if (game->map[map_pos.y][map_pos.x] == 2)
 				pixel = get_pixel(&game->door, (t_vec){.x = values->first_pixel, .y = text_y});
-			else if (game->map[map_pos.y][map_pos.x] == 2)
-				pixel = 0xFFFFFF;
 			else 
 				pixel = get_pixel(&game->wall, (t_vec){.x = values->first_pixel, .y = text_y});
 			pixel = get_color_shade(pixel, values->color);
@@ -65,6 +63,13 @@ void	draw_3d(t_rays *values, t_game *game)
 			(8 * BLOCK_SIZE), .y = height + values->line_offset }, pixel);
 			text_y += text_y_step;
 			height++;
+		}
+		y = values->line_offset + values->lineH;
+		while (y < 512)
+		{
+			draw_pixel(&game->canvas, (t_vec){.x = i + values->desloc + (8 * BLOCK_SIZE), .y = y }, 0x0000F15);//floor
+			draw_pixel(&game->canvas, (t_vec){.x = i + values->desloc + (8 * BLOCK_SIZE), .y = 512 - y }, 0xF1400000);//teto
+			y++;
 		}
 		i++;
 	}
