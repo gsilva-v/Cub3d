@@ -28,7 +28,7 @@ SRCS =   $(PATH_MAIN)main.c\
 		$(PATH_MAP)render3d.c\
 		$(PATH_MOVE)handle_move.c\
 		$(PATH_RENDMAP)render_map.c\
-		$(PATH_RAYS)rays.c $(PATH_RAYS)rays_set_values.c $(PATH_RAYS)rays_utils.c\
+		$(PATH_RAYS)rays.c \
 		$(PATH_UTILS)ft_calloc.c
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))

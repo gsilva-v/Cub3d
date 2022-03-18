@@ -14,6 +14,11 @@
 # define P3 3*PI/2
 # define DR 0.0174533
 
+#define screenWidth 640
+#define screenHeight 480
+#define mapWidth 24
+#define mapHeight 24
+
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -68,7 +73,8 @@ typedef struct s_game{
 	t_data	wall;
 	t_data	door;
 	t_vec	player;
-	t_vec	delta_player;
+	t_vec	plane;
+	t_vec	direction;
 	float	player_angle;
 	void	*mlx;
 	void	*win;
@@ -83,8 +89,7 @@ void	init_game(t_game *game);
 void	load_imgs(t_game *game);
 
 // 3D
-void	draw_3d(t_rays *values, t_game *game);
-int		get_pixel(t_data *data, t_vec point);
+void	draw_rays(t_game *game);
 
 // DRAW
 void	clean_map(t_game *game);
@@ -98,19 +103,8 @@ int		render_map(t_game *game);
 int		update_map(int key_code, t_game *game);
 
 // RAYS
-void	draw_rays(t_game *game);
-
-// RAYS SETS
-void	set_rays_horizontal(t_rays *values, t_game *game);
-void	set_horizontal_walls(t_rays *values, t_game *game);
-void	set_rays_vertical(t_rays *values, t_game *game);
-void	set_vertical_walls(t_rays *values, t_game *game);
-void	set_distance(t_rays *values);
 
 // RAYS UTILS
-t_rays	init_values(t_game *game);
-float	get_dist(t_game *game, t_vec final_point);
-float	check_valid_pi(float num);
 
 // MOVES
 void	kill_window(t_game *game);

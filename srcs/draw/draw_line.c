@@ -15,21 +15,25 @@ void draw_line(t_vec vec1, t_vec vec2, int color, t_game *game)
     int        steps;
 	t_vec point;
 
-    dx=vec2.x-vec1.x;
-    dy=vec2.y-vec1.y;
+    dx = vec2.x - vec1.x;
+    dy = vec2.y - vec1.y;
     
 
     x = vec1.x;
     y = vec1.y;
 
     steps = take_step(dx, dy);
+	if (steps < 0)
+		return ;
     dx = (double) (dx / steps);
     dy = (double) (dy / steps);
+		printf("steps: %d\n", steps);
     while (steps--)
     {
     
 		point = (t_vec){.x = x, .y = y};
-		draw_pixel(&game->canvas, point, color);
+		if (x > 0 && y > 0 && x < screenWidth && y < screenHeight)
+			draw_pixel(&game->canvas, point, color);
         x += dx;
         y += dy;
     }
