@@ -12,7 +12,7 @@ void	draw_square(t_data *canvas, t_vec point, int size, int color)
 		y = point.y;
 		while (y < point.y + size)
 		{
-			drawpixel(canvas, (t_vec){ .x = x, .y = y}, color);
+			draw_pixel(canvas, (t_vec){ .x = x, .y = y}, color);
 			y++;
 		}
 		x++;

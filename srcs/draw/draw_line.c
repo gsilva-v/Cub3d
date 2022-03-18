@@ -9,7 +9,7 @@ int    take_step(float dx, float dy)
     return (dx > dy ? dx : dy);
 }
 
-void drawline(t_vec vec1, t_vec vec2, int color, t_game *datas)
+void draw_line(t_vec vec1, t_vec vec2, int color, t_game *game)
 {
     double    dx, dy, x, y;
     int        steps;
@@ -29,7 +29,7 @@ void drawline(t_vec vec1, t_vec vec2, int color, t_game *datas)
     {
     
 		point = (t_vec){.x = x, .y = y};
-		drawpixel(&datas->canvas, point, color);
+		draw_pixel(&game->canvas, point, color);
         x += dx;
         y += dy;
     }

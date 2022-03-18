@@ -1,6 +1,6 @@
 #include <cub3d.h>
 
-void	drawpixel(t_data *data, t_vec point, int color)
+void	draw_pixel(t_data *data, t_vec point, int color)
 {
 	char	*dst;
 

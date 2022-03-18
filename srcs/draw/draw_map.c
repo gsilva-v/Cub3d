@@ -9,7 +9,7 @@ void	clean_map(t_game *game)
 		line = 0;
 		while(line < 8 * BLOCK_SIZE)
 		{
-			drawpixel(&game->canvas, (t_vec){.x = col, .y = line }, 0);
+			draw_pixel(&game->canvas, (t_vec){.x = col, .y = line }, 0);
 			line++;
 		}
 		col++;
