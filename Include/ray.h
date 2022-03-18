@@ -15,6 +15,10 @@
 #define HORIZONTAL 1
 #define VERTICAL 2
 
+#define mapWidth 8
+#define mapHeight 8
+#define screenWidth 640
+#define screenHeight 480
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -33,8 +37,7 @@ typedef struct s_server
 typedef struct s_player
 {
 	t_vec	position;
-	float	delta_x;
-	float	delta_y;
+	t_vec	dir;
 	float	angle;
 } t_player;
 
@@ -44,8 +47,9 @@ typedef struct s_game
 	t_player	player;
 	t_data		wall;
 	t_data		door;
+	t_vec		plane;
 	int			first_pixel;
-	char		map[HEIGHT][WIDTH];
+	char		map[mapWidth][mapHeight];
 }	t_game;
 
 /******
