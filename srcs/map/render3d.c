@@ -56,7 +56,9 @@ void	draw_3d(t_rays *values, t_game *game)
 			map_pos.y = (int)values->ray_vec.y >> 6;
 			if (game->map[map_pos.y][map_pos.x] == 2)
 				pixel = get_pixel(&game->door, (t_vec){.x = values->first_pixel, .y = text_y});
-			else
+			else if (game->map[map_pos.y][map_pos.x] == 2)
+				pixel = 0xFFFFFF;
+			else 
 				pixel = get_pixel(&game->wall, (t_vec){.x = values->first_pixel, .y = text_y});
 			pixel = get_color_shade(pixel, values->color);
 			draw_pixel(&game->canvas, (t_vec){.x = i + values->desloc + \
