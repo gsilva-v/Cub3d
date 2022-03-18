@@ -2,9 +2,9 @@
 
 float	get_dist(t_game *game, t_vec final_point)
 {
-	return (sqrt((game->player.x - final_point.x) * \
-	(game->player.x - final_point.x) + (game->player.y - final_point.y) * \
-	(game->player.y - final_point.y)));
+	return (sqrt(((final_point.x - game->player.x) * \
+	(final_point.x - game->player.x)) + ((final_point.y - game->player.y) * \
+	(final_point.y - game->player.y))));
 }
 
 float	check_valid_pi(float num)

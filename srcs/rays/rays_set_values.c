@@ -33,6 +33,8 @@ void	set_horizontal_walls(t_rays *values, t_game *game)
 {
 	while (values->doff < 8)
 	{
+		if (values->ray_vec.x && values->ray_vec.y && values->ray_vec.x < game->width * 64 && values->ray_vec.y < game->height * 64)
+			draw_pixel(&game->canvas, values->ray_vec, 0xFF0000);
 		values->map_pos.x = (int)values->ray_vec.x >> 6;
 		values->map_pos.y = (int)values->ray_vec.y >> 6;
 		if ((values->map_pos.x < game->height && values->map_pos.y < \
@@ -49,7 +51,7 @@ void	set_horizontal_walls(t_rays *values, t_game *game)
 		{
 			values->ray_vec.x += values->offset.x;
 			values->ray_vec.y += values->offset.y;
-			values->doff++;
+			values->doff += 1;
 		}
 	}
 }
@@ -88,6 +90,8 @@ void	set_vertical_walls(t_rays *values, t_game *game)
 {
 	while (values->doff < 8)
 	{
+		if (values->ray_vec.x && values->ray_vec.y && values->ray_vec.x < game->width * 64 && values->ray_vec.y < game->height * 64)
+			draw_pixel(&game->canvas, values->ray_vec, 0xFF0000);
 		values->map_pos.x = (int)values->ray_vec.x >> 6;
 		values->map_pos.y = (int)values->ray_vec.y >> 6;
 		if ((values->map_pos.x < game->height && values->map_pos.y < \
@@ -104,7 +108,7 @@ void	set_vertical_walls(t_rays *values, t_game *game)
 		{
 			values->ray_vec.x += values->offset.x;
 			values->ray_vec.y += values->offset.y;
-			values->doff++;
+			values->doff += 1;
 		}
 	}
 }
