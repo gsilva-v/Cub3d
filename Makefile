@@ -1,62 +1,39 @@
-NAME = cub3d
+NAME = ray
+
+SRC =	./Src/main.c ./Src/Draw/drawline.c ./Src/Draw/put_pixel.c ./Src/Draw/drawsquare.c ./Src/Draw/draw_map.c ./Src/Draw/draw_circle.c \
+		./Src/Entity/Game/render.c ./Src/Entity/Game/update.c ./Src/Entity/Game/run.c \
+		./Src/Entity/Player/render.c ./Src/Entity/Player/update.c ./Src/Ray/raycasting.c ./Src/Ray/get_rays.c \
+		./Src/Ray/draw_rays.c \
+		./Src/Util/reset_circle.c
+
+OBJ = $(SRC:.c=.o)
 
 CC = gcc
-INCLUDE = -I ./include/
-CFLAGS = -g $(INCLUDE)
-MLX_FLAGS = -lmlx_Linux -L/usr/lib/X11/ -lXext -lX11
 
-RM = rm -rf
+MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L./Src/Lib/Mlx/ -Imlx_linux -lXext -lX11 -lm -lz
 
-PATH_SRCS = ./srcs/
-PATH_MAIN = $(PATH_SRCS)main/
-PATH_CLOSE = $(PATH_SRCS)close_game/
-PATH_DRAW = $(PATH_SRCS)draw/
-PATH_INIT = $(PATH_SRCS)init/
-PATH_MOVE = $(PATH_SRCS)moves/
-PATH_MAP = $(PATH_SRCS)map/
-PATH_RENDMAP = $(PATH_SRCS)render_map/
-PATH_RAYS = $(PATH_SRCS)rays/
-PATH_UTILS = $(PATH_SRCS)utils/
+VEC_LIB = ./Src/Lib/VecLib
 
-PATH_OBJS = ./objs/
+CFLAGS= -g
 
-SRCS =   $(PATH_MAIN)main.c\
-		$(PATH_CLOSE)kill_window.c\
-		$(PATH_DRAW)draw_line.c $(PATH_DRAW)draw_pixel.c $(PATH_DRAW)draw_square.c\
-		$(PATH_DRAW)draw_map.c\
-		$(PATH_INIT)init_game.c $(PATH_INIT)load_imgs.c\
-		$(PATH_MAP)render3d.c\
-		$(PATH_MOVE)handle_move.c\
-		$(PATH_RENDMAP)render_map.c\
-		$(PATH_RAYS)rays.c $(PATH_RAYS)rays_set_values.c $(PATH_RAYS)rays_utils.c\
-		$(PATH_UTILS)ft_calloc.c
-
-OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
+INCLUDE = -I ./Include/ -I ./Src/Lib/VecLib/
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) ./objs/*/*.o -o $(NAME) $(MLX_FLAGS) -lm
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDE) -Imlx_linux -O3 -c $< -o $@
 
-$(PATH_OBJS)%.o: $(PATH_SRCS)%.c
-		@mkdir -p $(PATH_OBJS)
-		@mkdir -p $(PATH_OBJS)close_game/
-		@mkdir -p $(PATH_OBJS)main/
-		@mkdir -p $(PATH_OBJS)map/
-		@mkdir -p $(PATH_OBJS)init/
-		@mkdir -p $(PATH_OBJS)render_map/
-		@mkdir -p $(PATH_OBJS)draw/
-		@mkdir -p $(PATH_OBJS)moves/
-		@mkdir -p $(PATH_OBJS)rays/
-		@mkdir -p $(PATH_OBJS)utils/
-		$(CC) $(CFLAGS) -c $< -o $@ $(MLX_FLAGS) -lm
+$(NAME): $(OBJ)
+	make -C $(VEC_LIB)
+	$(CC) $(CFLAGS)  $(INCLUDE) -o $(NAME) $(OBJ) $(MLX_FLAGS) -L$(VEC_LIB) -lvec -lm
 
 clean:
-	$(RM) ./objs
+	rm -f $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
+	make re -C $(VEC_LIB)
 
-.PHONY: all clean fclean re
+.PHONY: re fclean clean
