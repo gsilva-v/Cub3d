@@ -32,5 +32,5 @@ int	render_map(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->canvas.img, 0, 0);
 	char buffer[1024];
 	sprintf(buffer, "angulo = %f\n", game->player_angle);
-	mlx_string_put(game->mlx, game->win, 1, 150, 0xFF0000, buffer);
+	mlx_string_put(game->mlx, game->win, 10, 10, 0xFF0000, buffer);
 }

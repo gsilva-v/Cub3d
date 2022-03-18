@@ -23,7 +23,6 @@ t_rays	init_values(t_game *game)
 	ft_bzero(&aux, sizeof(t_rays));
 	aux.ray_angle = game->player_angle - DR * 30;
 	aux.ray_angle = check_valid_pi(aux.ray_angle);
-	aux.disH = 1000000;
-	aux.disV = 1000000;
+
 	return (aux);
 }

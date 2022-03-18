@@ -5,8 +5,10 @@ void	draw_rays(t_game *game)
 	t_rays	values;
 
 	values = init_values(game);
-	while (values.rays < 10)
+	while (values.rays < 60)
 	{
+		values.disH = 1000000;
+		values.disV = 1000000;
 		values.doff = 0;
 		set_rays_horizontal(&values, game);
 		set_horizontal_walls(&values, game);
