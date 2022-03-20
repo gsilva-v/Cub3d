@@ -46,6 +46,7 @@ typedef struct s_player
 	double	movement_speed;
 	double	rotation_speed;
 	t_vec	velocity;
+	t_vec	strafeVelocity;
 	t_vec	aceleration;
 } t_player;
 
@@ -70,6 +71,7 @@ typedef struct s_game
 	t_vec			plane;
 	t_keyHandler	keyHandler;
 	int				first_pixel;
+	int				last_x;
 	char			map[mapWidth][mapHeight];
 }	t_game;
 

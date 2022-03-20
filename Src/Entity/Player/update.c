@@ -5,9 +5,9 @@ int	player_update(t_game *game)
 	float rotSpeed = 0.1f;
 
 
-	if(game->keyHandler.right)
+	if(game->keyHandler.rotate_right)
 		game->player.rotation_speed = rotSpeed;
-    else if(game->keyHandler.left)
+    else if(game->keyHandler.rotate_left)
 		game->player.rotation_speed = -rotSpeed;
     else
 		game->player.rotation_speed = 0;
@@ -21,6 +21,32 @@ int	player_update(t_game *game)
 		game->plane.x = game->plane.x * cos(game->player.rotation_speed) - game->plane.y * sin(game->player.rotation_speed);
 		game->plane.y = oldPlaneX * sin(game->player.rotation_speed) + game->plane.y * cos(game->player.rotation_speed);
 	}
+
+
+	if(game->keyHandler.right)
+	{
+		game->player.strafeVelocity = game->player.dir;
+		double oldDirX =game->player.strafeVelocity.x;
+		game->player.strafeVelocity.x = game->player.strafeVelocity.x * cos(PI / 2) - game->player.strafeVelocity.y * sin(PI / 2);
+		game->player.strafeVelocity.y = oldDirX * sin(PI / 2) + game->player.dir.y * cos(PI / 2);
+
+		vec_scale(&game->player.strafeVelocity, game->player.movement_speed);
+	}
+    else if(game->keyHandler.left)
+    {
+		game->player.strafeVelocity = game->player.dir;
+		double oldDirX =game->player.strafeVelocity.x;
+		game->player.strafeVelocity.x = game->player.strafeVelocity.x * cos(PI / 2) - game->player.strafeVelocity.y * sin(PI / 2);
+		game->player.strafeVelocity.y = oldDirX * sin(PI / 2) + game->player.dir.y * cos(PI / 2);
+
+		vec_scale(&game->player.strafeVelocity, -game->player.movement_speed);
+    }
+    else
+	{
+		vec_scale(&game->player.strafeVelocity, 0);
+	}
+
+
 
 	if(game->keyHandler.up)
 	{
@@ -66,6 +92,10 @@ int	player_update(t_game *game)
 	if (game->map[(int)(game->player.position.y + game->player.velocity.y * 2.3f)][(int)game->player.position.x] == 0)
 		game->player.position.y += game->player.velocity.y;
 
+	if (game->map[(int)game->player.position.y][(int)(game->player.position.x + game->player.strafeVelocity.x * 2.3f)] == 0)
+		game->player.position.x += game->player.strafeVelocity.x;
+	if (game->map[(int)(game->player.position.y + game->player.strafeVelocity.y * 2.3f)][(int)game->player.position.x] == 0)
+		game->player.position.y += game->player.strafeVelocity.y;
 
 	if(game->keyHandler.shoot)
     {

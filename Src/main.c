@@ -36,6 +36,7 @@ int	main(void)
 			},
 			.movement_speed = 0.2f,
 			.velocity = {0},
+			.strafeVelocity = {0},
 			.aceleration = {.x = 0.03f, .y = 0.03f},
 			.rotation_speed = 0
 		},
@@ -43,7 +44,8 @@ int	main(void)
 			.x = 0.66f,
 			.y = 0
 		},
-		.keyHandler = {0}
+		.keyHandler = {0},
+		.last_x = 0
 	};
 	int	o;
 	init_server(&game.server);
