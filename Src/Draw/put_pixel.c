@@ -20,17 +20,22 @@ int		get_pixel(t_data *data, t_vec point)
 void	clear_pixels(t_data *canvas, int width, int height)
 {
 	t_vec	point;
+	int		mid_point;
 
-	point.x = 0;
-	while (point.x < width)
+	mid_point = height / 2;
+	point.y = 0;
+	while (point.y < height)
 	{
-		point.y = 0;
-		while (point.y < height)
+		point.x = 0;
+		while (point.x < width)
 		{
-			put_pixel(canvas, point, 0xa9a9a9);
-			point.y++;
+			if (point.y < mid_point)
+				put_pixel(canvas, point, 0x00005a);
+			else
+				put_pixel(canvas, point, 0xa9a9a9);
+			point.x++;
 		}
-		point.x++;
+		point.y++;
 	}
 	
 }

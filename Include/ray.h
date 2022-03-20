@@ -17,8 +17,12 @@
 
 #define mapWidth 8
 #define mapHeight 8
-#define screenWidth 640
-#define screenHeight 480
+#define screenWidth 1200
+#define screenHeight 700
+#define TRUE 1;
+#define FALSE 0;
+typedef short int bool;
+
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -39,18 +43,37 @@ typedef struct s_player
 	t_vec	position;
 	t_vec	dir;
 	float	angle;
+	double	movement_speed;
+	double	rotation_speed;
+	t_vec	velocity;
+	t_vec	aceleration;
 } t_player;
+
+typedef struct s_keyHandler
+{
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
+	bool	rotate_right;
+	bool	rotate_left;
+	bool	shoot;
+
+}	t_keyHandler;
 
 typedef struct s_game
 {
-	t_server	server;
-	t_player	player;
-	t_data		wall;
-	t_data		door;
-	t_vec		plane;
-	int			first_pixel;
-	char		map[mapWidth][mapHeight];
+	t_server		server;
+	t_player		player;
+	t_data			wall;
+	t_data			door;
+	t_vec			plane;
+	t_keyHandler	keyHandler;
+	int				first_pixel;
+	char			map[mapWidth][mapHeight];
 }	t_game;
+
+
 
 /******
  * 
@@ -67,7 +90,7 @@ int		game_render(t_game *game);
 /*
 	* PLAYER
 */
-int		player_update(int keycode, t_game *game);
+int		splayer_update(t_game *game);
 int		player_render(t_game *game);
 
 /*

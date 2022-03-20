@@ -15,31 +15,35 @@ void	init_server(t_server *server)
 int	main(void)
 {
 	static t_game	game = {
-		.map = (char [8][8]){
+		.map = {
 		{1, 1, 1, 1, 1, 1, 1, 1},
 		{1, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 1},
+		{1, 0, 0, 2, 0, 0, 0, 1},
+		{1, 0, 1, 0, 0, 0, 2, 1},
+		{1, 0, 0, 0, 0, 1, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1},
 		},
 		.player = {
 			.position = {
 				.x = 2,
-				.y = 2
+				.y = 3
 			},
 			.dir = {
-				.x = -1,
-				.y = 0
+				.x = 0,
+				.y = -1
 			},
-			.angle = 0.f
+			.movement_speed = 0.2f,
+			.velocity = {0},
+			.aceleration = {.x = 0.03f, .y = 0.03f},
+			.rotation_speed = 0
 		},
 		.plane = {
-			.x = 0,
-			.y = 0.66f
-		}
+			.x = 0.66f,
+			.y = 0
+		},
+		.keyHandler = {0}
 	};
 	int	o;
 	init_server(&game.server);

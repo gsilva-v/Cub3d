@@ -7,5 +7,7 @@ int	player_render(t_game *game)
 
 	
 	//drawsquare(game->player.position, 10, 0xFF, &game->server);
+	player_update(game);
+
 	raycasting(game);
 }
