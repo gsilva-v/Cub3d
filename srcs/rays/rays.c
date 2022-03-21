@@ -90,7 +90,10 @@ void	raycasting(t_game *game)
 		if(drawEnd >= screenHeight)
 			drawEnd = screenHeight - 1;
 		draw_line((t_vec){.x = rays, .y = drawStart}, (t_vec){.x = rays, .y = drawEnd}, 0xFF, game);
+
+
 	}
+
 }
 
 
