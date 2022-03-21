@@ -27,7 +27,6 @@ void draw_line(t_vec vec1, t_vec vec2, int color, t_game *game)
 		return ;
     dx = (double) (dx / steps);
     dy = (double) (dy / steps);
-		printf("steps: %d\n", steps);
     while (steps--)
     {
     

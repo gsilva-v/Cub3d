@@ -7,7 +7,7 @@ void	clean_map(t_game *game)
 	while (col < screenWidth)
 	{
 		line = 0;
-		while(line < screenHeight)
+		while (line < screenHeight)
 		{
 			draw_pixel(&game->canvas, (t_vec){.x = col, .y = line }, 0);
 			line++;

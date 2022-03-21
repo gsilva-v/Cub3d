@@ -9,6 +9,7 @@ RM = rm -rf
 
 PATH_SRCS = ./srcs/
 PATH_MAIN = $(PATH_SRCS)main/
+PATH_LIBS = $(PATH_SRCS)libs/
 PATH_CLOSE = $(PATH_SRCS)close_game/
 PATH_DRAW = $(PATH_SRCS)draw/
 PATH_INIT = $(PATH_SRCS)init/
@@ -17,6 +18,8 @@ PATH_MAP = $(PATH_SRCS)map/
 PATH_RENDMAP = $(PATH_SRCS)render_map/
 PATH_RAYS = $(PATH_SRCS)rays/
 PATH_UTILS = $(PATH_SRCS)utils/
+
+PATH_VEC = $(PATH_LIBS)vec_lib/
 
 PATH_OBJS = ./objs/
 
@@ -36,7 +39,8 @@ OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) ./objs/*/*.o -o $(NAME) $(MLX_FLAGS) -lm
+	make -C $(PATH_VEC)
+	$(CC) $(CFLAGS) ./objs/*/*.o -o $(NAME) $(MLX_FLAGS) -lm -L$(PATH_VEC) -lvec
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 		@mkdir -p $(PATH_OBJS)

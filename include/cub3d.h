@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include "../srcs/libs/vec_lib/vec.h"
 
 # define BLOCK_SIZE 64
 # define ESC 0xff1b
@@ -26,17 +27,6 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }	t_data;
-
-typedef struct s_vec{
-	float	x;
-	float	y;
-}	t_vec;
-
-typedef struct s_int_vec{
-	int	x;
-	int	y;
-}	t_int_vec;
-
 
 typedef struct s_colisions{
 	t_vec	offset;
@@ -89,7 +79,10 @@ void	init_game(t_game *game);
 void	load_imgs(t_game *game);
 
 // 3D
-void	draw_rays(t_game *game);
+// void	draw_rays(t_game *game);
+
+//  RAYCASTING
+void	raycasting(t_game *game);
 
 // DRAW
 void	clean_map(t_game *game);
