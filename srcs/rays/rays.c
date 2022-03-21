@@ -1,5 +1,23 @@
 #include <cub3d.h>
 
+int    create_rgb(int r, int g, int b)
+{
+    return (r << 16 | g << 8 | b);
+}
+
+int    get_color_shade(int color, double qnt_shade)
+{
+    int    r;
+    int    g;
+    int    b;
+
+    r = ((color & (0xFF << 16)) >> 16) * qnt_shade;
+    g = ((color & (0xFF << 8)) >> 8) * qnt_shade;
+    b = (color & 0xFF) * qnt_shade;
+    return (create_rgb(r, g, b));
+}
+
+
 void	draw_rays(t_game *game)
 {
 	for (int rays = 0; rays < screenWidth; rays++)
@@ -73,7 +91,7 @@ void	draw_rays(t_game *game)
 		}
 
 // calculo da proporção da parede
-		int perpWallDist;
+		double perpWallDist;
 		if (hit_side == 0)
 			perpWallDist = (fabs(map_pos.x - game->player.x + ((1 - stepX)/2)) / ray_dir.x);
 		else
@@ -88,7 +106,12 @@ void	draw_rays(t_game *game)
 		int drawEnd = lineHeight / 2 + screenHeight / 2;
 		if(drawEnd >= screenHeight)
 			drawEnd = screenHeight - 1;
-		draw_line((t_vec){.x = rays, .y = drawStart}, (t_vec){.x = rays, .y = drawEnd}, 0xFF, game);
+
+		int color = get_color_shade(0xFF0000, 0.7);
+		if (hit_side)
+			color = get_color_shade(color, 0.7); 
+
+		draw_line((t_vec){.x = rays, .y = drawStart}, (t_vec){.x = rays, .y = drawEnd}, color, game);
 
 
 	}
