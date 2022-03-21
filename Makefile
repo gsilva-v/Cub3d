@@ -24,6 +24,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) $(INCLUDE) -Imlx_linux -O3 -c $< -o $@
 
 $(NAME): $(OBJ)
+	make -C ./Src/Lib/Mlx
 	make -C $(VEC_LIB)
 	$(CC) $(CFLAGS)  $(INCLUDE) -o $(NAME) $(OBJ) $(MLX_FLAGS) -L$(VEC_LIB) -lvec -lm
 
