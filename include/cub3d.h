@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include "../srcs/libs/vec_lib/vec.h"
 
 # define BLOCK_SIZE 64
 # define ESC 0xff1b
@@ -13,6 +14,8 @@
 # define P2 PI/2
 # define P3 3*PI/2
 # define DR 0.0174533
+# define screenHeight 600
+# define screenWidth 600
 
 typedef struct	s_data {
 	void	*img;
@@ -21,16 +24,6 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }	t_data;
-
-typedef struct s_vec{
-	float	x;
-	float	y;
-}	t_vec;
-
-typedef struct s_int_vec{
-	int	x;
-	int	y;
-}	t_int_vec;
 
 
 typedef struct s_colisions{
@@ -69,6 +62,8 @@ typedef struct s_game{
 	t_data	door;
 	t_vec	player;
 	t_vec	delta_player;
+	t_vec		plane;
+	t_vec		direction;
 	float	player_angle;
 	void	*mlx;
 	void	*win;

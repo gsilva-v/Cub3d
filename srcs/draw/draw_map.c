@@ -4,10 +4,10 @@ void	clean_map(t_game *game)
 {
 	int col = 0, line;
 
-	while (col < 16 * BLOCK_SIZE)
+	while (col < screenWidth)
 	{
 		line = 0;
-		while(line < 8 * BLOCK_SIZE)
+		while(line < screenHeight)
 		{
 			draw_pixel(&game->canvas, (t_vec){.x = col, .y = line }, 0);
 			line++;
