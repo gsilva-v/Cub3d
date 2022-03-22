@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <X11/mlx.h>
+# include <mlx.h>
 # include <X11/X.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -14,8 +14,8 @@
 # define P2 PI/2
 # define P3 3*PI/2
 # define DR 0.0174533
-# define screenHeight 600
-# define screenWidth 600
+# define screenHeight 700
+# define screenWidth 1200
 
 typedef struct	s_data {
 	void	*img;
@@ -35,24 +35,23 @@ typedef struct s_colisions{
 
 typedef struct s_rays{
 	t_int_vec	map_pos;
-	t_vec		offset;
-	t_vec		ray_vec;
-	t_vec		horizontal;
-	t_vec		vertical;
+	t_vec		ray_dir;
+	t_vec		camera_pixel;
+	double		multiplier;
+	double		delta_x;
+	double		delta_y;
+	double		dist_x;
+	double		dist_y;
+	double		perp_wall;
 	float		color;
 	float		first_pixel;
-	float		ray_angle;
-	float		disT;
-	float		disH;
-	float		a_tan;
-	float		n_tan;
-	float		disV;
-	float		cos_angle;
-	float		lineH;
-	float		line_offset;
+	int			line_height;
+	int			start_line;
+	int			end_line;
 	int			rays;
-	int			doff;
-	int			desloc;
+	int			hit_side;
+	int			step_x;
+	int			step_y;
 }	t_rays;
 
 typedef struct s_game{
@@ -93,19 +92,14 @@ int		render_map(t_game *game);
 int		update_map(int key_code, t_game *game);
 
 // RAYS
-void	draw_rays(t_game *game);
+void	raycasting(t_game *game);
 
 // RAYS SETS
-void	set_rays_horizontal(t_rays *values, t_game *game);
-void	set_horizontal_walls(t_rays *values, t_game *game);
-void	set_rays_vertical(t_rays *values, t_game *game);
-void	set_vertical_walls(t_rays *values, t_game *game);
-void	set_distance(t_rays *values);
+
 
 // RAYS UTILS
 t_rays	init_values(t_game *game);
-float	get_dist(t_game *game, t_vec final_point);
-float	check_valid_pi(float num);
+
 
 // MOVES
 void	kill_window(t_game *game);

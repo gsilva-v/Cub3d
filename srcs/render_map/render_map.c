@@ -32,7 +32,7 @@ int	render_map(t_game *game)
 	// player_aux.y = game->player.y;
 	// player_delta_aux.x =  game->player.x + (game->delta_player.x * 7);
 	// player_delta_aux.y =  game->player.y + (game->delta_player.y * 7);
-	draw_rays(game);
+	raycasting(game);
 	// draw_line(player_aux, player_delta_aux, 0xFF00000, game);
 	mlx_put_image_to_window(game->mlx, game->win, game->canvas.img, 0, 0);
 	// char buffer[1024];
