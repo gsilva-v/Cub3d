@@ -9,7 +9,7 @@ RM = rm -rf
 
 PATH_SRCS = ./srcs/
 PATH_MAIN = $(PATH_SRCS)main/
-PATH_LIBS = $(PATH_SRCS)libs/
+PATH_LIBS = $(PATH_SRCS)lib/
 PATH_CLOSE = $(PATH_SRCS)close_game/
 PATH_DRAW = $(PATH_SRCS)draw/
 PATH_INIT = $(PATH_SRCS)init/
