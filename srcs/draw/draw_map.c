@@ -10,9 +10,9 @@ void	clean_map(t_game *game)
 		while (col < screenWidth)
 		{
 			if (line < screenHeight  / 2)
-				draw_pixel(&game->canvas, (t_vec){.x = col, .y = line }, 0xF1);
+				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, 0xF1);
 			else
-				draw_pixel(&game->canvas, (t_vec){.x = col, .y = line }, 0xDCDCDC);
+				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, 0xDCDCDC);
 			col++;
 		}
 		line++;

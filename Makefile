@@ -23,16 +23,7 @@ PATH_VEC = $(PATH_LIBS)vec_lib/
 
 PATH_OBJS = ./objs/
 
-SRCS =   $(PATH_MAIN)main.c\
-		$(PATH_CLOSE)kill_window.c\
-		$(PATH_DRAW)draw_line.c $(PATH_DRAW)draw_pixel.c $(PATH_DRAW)draw_square.c\
-		$(PATH_DRAW)draw_map.c\
-		$(PATH_INIT)init_game.c $(PATH_INIT)load_imgs.c\
-		$(PATH_MAP)render3d.c\
-		$(PATH_MOVE)handle_move.c\
-		$(PATH_RENDMAP)render_map.c\
-		$(PATH_RAYS)rays.c $(PATH_RAYS)rays_set_values.c $(PATH_RAYS)rays_utils.c\
-		$(PATH_UTILS)ft_calloc.c
+SRCS =  
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
 

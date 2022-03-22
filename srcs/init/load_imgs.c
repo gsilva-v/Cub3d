@@ -3,10 +3,10 @@
 void	load_imgs(t_game *game)
 {
 	int trash;
-	game->canvas.img = mlx_new_image(game->mlx, screenWidth, screenHeight);
-	game->canvas.addr = mlx_get_data_addr(game->canvas.img, &game->canvas.bits_per_pixel, &game->canvas.line_length, &game->canvas.endian);
-	game->wall.img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", &trash, &trash);
-	game->wall.addr = mlx_get_data_addr(game->wall.img, &game->wall.bits_per_pixel, &game->wall.line_length, &game->wall.endian);
-	game->door.img = mlx_xpm_file_to_image(game->mlx, "./imgs/door.xpm", &trash, &trash);
-	game->door.addr = mlx_get_data_addr(game->door.img, &game->door.bits_per_pixel, &game->door.line_length, &game->door.endian);
+	game->resources.canvas.img = mlx_new_image(game->mlx, screenWidth, screenHeight);
+	game->resources.canvas.addr = mlx_get_data_addr(game->resources.canvas.img, &game->resources.canvas.bits_per_pixel, &game->resources.canvas.line_length, &game->resources.canvas.endian);
+	game->resources.wall.img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", &trash, &trash);
+	game->resources.wall.addr = mlx_get_data_addr(game->resources.wall.img, &game->resources.wall.bits_per_pixel, &game->resources.wall.line_length, &game->resources.wall.endian);
+	game->resources.door.img = mlx_xpm_file_to_image(game->mlx, "./imgs/door.xpm", &trash, &trash);
+	game->resources.door.addr = mlx_get_data_addr(game->resources.door.img, &game->resources.door.bits_per_pixel, &game->resources.door.line_length, &game->resources.door.endian);
 }

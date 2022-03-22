@@ -6,19 +6,22 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <get_next_line.h>
 # include "../srcs/lib/vec_lib/vec.h"
+# include "../srcs/lib/libft/libft.h"
 
 # define BLOCK_SIZE 64
 # define ESC 0xff1b
 # define PI 3.141592653589f
-# define P2 PI/2
-# define P3 3*PI/2
-# define DR 0.0174533
 # define screenHeight 700
 # define screenWidth 1200
-# define FLOOR 0
-# define WALL 1
-# define DOOR 2
+# define FLOOR '0'
+# define WALL '1'
+# define DOOR '2'
+# define VALID_BLOCK "012 \n"
 
 typedef struct s_buttons
 {
@@ -32,11 +35,22 @@ typedef struct s_buttons
 	int	function;
 }	t_buttons;
 
-
-
-
+typedef struct s_rays{
+	t_int_vec	map_pos;
+	t_vec		ray_dir;
+	double		dlt_x;
+	double		dlt_y;
+	double		dst_x;
+	double		dst_y;
+	double		perp_wall;
+	int			rays;
+	int			hit_side;
+	int			step_x;
+	int			step_y;
+}	t_rays;
 
 typedef struct	s_data {
+	char	*name;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -44,60 +58,49 @@ typedef struct	s_data {
 	int		endian;
 }	t_data;
 
-typedef struct s_colisions{
-	t_vec	offset;
-	t_int_vec ip;
-	t_int_vec ip_add_offset;
-	t_int_vec ip_sub_offset;
-}	t_colisions;
-
-typedef struct s_rays{
-	t_int_vec	map_pos;
-	t_vec		ray_dir;
-	t_vec		camera_pixel;
-	double		multiplier;
-	double		dlt_x;
-	double		dlt_y;
-	double		dst_x;
-	double		dst_y;
-	double		perp_wall;
-	float		color;
-	float		first_pixel;
-	int			line_height;
-	int			start_line;
-	int			end_line;
-	int			rays;
-	int			hit_side;
-	int			step_x;
-	int			step_y;
-}	t_rays;
-
-typedef struct s_game{
-	t_colisions	colisions;
-	t_data	canvas;
-	t_data	wall;
-	t_data	door;
-	t_vec	player;
-	t_vec	delta_player;
+typedef struct	s_player {
+	t_vec		pos;
 	t_vec		plane;
 	t_vec		direction;
-	t_buttons buttons;
-	float	player_angle;
+} t_player;
+
+typedef struct s_block{
+	t_data	no;//norte cima
+	t_data	so;//sul baixo
+	t_data	we;//oeste <- esquerda
+	t_data	ea;//leste -> direita
+}	t_block;
+
+
+
+typedef struct s_resource {
+	t_data	canvas;
+	t_block	wall;
+	t_block	door;
+	int		ceil_color;
+	int		floor_color;
+}	t_resource;
+
+typedef struct s_game{
+	t_player	player;
+	t_buttons	buttons;
+	t_resource resources;
 	void	*mlx;
 	void	*win;
-	int		height;
-	int		width;
-	int		fov;
-	char	map[8][8];
+	char	**map;
 }	t_game;
 
 // INIT
 void	init_game(t_game *game);
 void	load_imgs(t_game *game);
 
-// 3D
-void	draw_3d(t_rays *values, t_game *game);
+// PARSE
+int	parse_resources(t_game *game, char *file);
+
+// COLOR
 int		get_pixel(t_data *data, t_vec point);
+int    get_color_shade(int color, double qnt_shade);
+int    create_rgb(int r, int g, int b);
 
 // DRAW
 void	clean_map(t_game *game);
@@ -106,19 +109,21 @@ void	draw_pixel(t_data *data, t_vec vec, int color);
 void	draw_square(t_data *canvas, t_vec point, int size, int color);
 void	draw_map(t_game *game);
 
-// RENDER MAP
+// GAME ENTITY
+void	game_render(t_game *game);
+void	game_run(t_game *game);
+void	game_update(t_game *game);
+
+// PLAYER ENTITY
+void	player_render(t_game *game);
+void	player_update(t_game *game);
+
+// MAP
 int		render_map(t_game *game);
 int		update_map(int key_code, t_game *game);
 
 // RAYS
 void	raycasting(t_game *game);
-
-// RAYS SETS
-
-
-// RAYS UTILS
-t_rays	init_values(t_game *game);
-
 
 // MOVES
 void	kill_window(t_game *game);
@@ -131,5 +136,6 @@ void	look_right(t_game *game);
 // UTILS
 void	*ft_calloc(size_t nbytes, size_t sizemem);
 void	ft_bzero(void *s, size_t n);
+int matrix_len(char **matrix);
 
 #endif
