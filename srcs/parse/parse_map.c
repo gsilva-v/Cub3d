@@ -13,10 +13,12 @@ int	parse_map(t_game *game, char *file)
 	while (line && line[0] != 'C')
 	{
 		free(line);	
-		line = get_line_size(fd);
+		line = get_next_line(fd);
 	}
 	if (line)
 		free(line);
+	else
+		return (1);
 	line = get_next_line(fd);
 	if (!line)
 		return (1);
@@ -27,7 +29,7 @@ int	parse_map(t_game *game, char *file)
 		i = 0;
 		while (line[i])
 		{
-			if (!ft_char_in_set(line[i], "012 \n"))
+			if (!ft_char_in_set(line[i], VALID_BLOCK))
 				return (1);
 			i++;
 		}	
@@ -38,5 +40,5 @@ int	parse_map(t_game *game, char *file)
 	game->map = ft_split(map_str, '\n');
 	close(fd);
 	free(map_str);
-
+	return (0);
 }

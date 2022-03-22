@@ -21,7 +21,7 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
-# define VALID_BLOCK "012 \n"
+# define VALID_BLOCK "012 \nWENS"
 
 typedef struct s_buttons
 {
@@ -110,7 +110,7 @@ void	draw_square(t_data *canvas, t_vec point, int size, int color);
 void	draw_map(t_game *game);
 
 // GAME ENTITY
-void	game_render(t_game *game);
+int		game_render(t_game *game);
 void	game_run(t_game *game);
 void	game_update(t_game *game);
 
@@ -134,8 +134,6 @@ void	look_left(t_game *game);
 void	look_right(t_game *game);
 
 // UTILS
-void	*ft_calloc(size_t nbytes, size_t sizemem);
-void	ft_bzero(void *s, size_t n);
 int matrix_len(char **matrix);
 
 #endif

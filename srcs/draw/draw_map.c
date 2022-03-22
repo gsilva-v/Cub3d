@@ -10,16 +10,16 @@ void	clean_map(t_game *game)
 		while (col < screenWidth)
 		{
 			if (line < screenHeight  / 2)
-				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, 0xF1);
+				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, game->resources.ceil_color);
 			else
-				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, 0xDCDCDC);
+				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, game->resources.floor_color);
 			col++;
 		}
 		line++;
 	}
 }
 
-void	draw_map(t_game *game)
+/* void	draw_map(t_game *game)
 {
 	int col = 0, line;
 
@@ -39,3 +39,4 @@ void	draw_map(t_game *game)
 		col++;
 	}
 }
+ */

@@ -2,7 +2,7 @@
 
 int	set_config(t_game *game, char **config)
 {
-	if ((ft_strncmp(config[0], "C", -1)) && (ft_strncmp(config[0], "F", -1)))
+	if ((ft_strncmp(config[0], "C", 1)) && (ft_strncmp(config[0], "F", 1)))
 	{
 		int fd = open(config[1], O_RDONLY);
 		if (fd == -1)
@@ -27,7 +27,6 @@ int	set_config(t_game *game, char **config)
 			game->resources.ceil_color = create_rgb(ft_atoi(rgb[0]),ft_atoi(rgb[1]), ft_atoi(rgb[2])); 
 		if (!ft_strncmp(config[0], "F", -1))
 			game->resources.floor_color = create_rgb(ft_atoi(rgb[0]),ft_atoi(rgb[1]), ft_atoi(rgb[2])); 
-
 	}
 	return (0);
 }
@@ -56,11 +55,18 @@ int	parse_resources(t_game *game, char *file)
 	while (line)
 	{
 		config = ft_split(line, ' ');
-		if(set_config(game, config))
+		if (config && config[0] && config[1])
+			config[1] = ft_strtrim(config[1], "\n");
+		if(line[0] != '\n' && set_config(game, config))
 		{
 			free(line);
 			close(fd);
 			return(1);
+		}
+		if (line[0] == 'C')
+		{
+			free(line);	
+			break ;
 		}
 		free(line);	
 		line = get_next_line(fd);

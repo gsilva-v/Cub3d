@@ -13,6 +13,7 @@ static void 	reset_values(t_rays *values, t_player *player)
 	values->dlt_y = 10000000;
 	if (values->ray_dir.y != 0)
 		values->dlt_y = fabs(1/values->ray_dir.y);
+	
 }
 
 static void	check_dist(t_rays *values, t_player *player)
@@ -37,7 +38,7 @@ static void	check_dist(t_rays *values, t_player *player)
 
 static void	dda(t_rays *values, t_game *game)
 {
-	while (game->map[values->map_pos.y][values->map_pos.x] == 0)
+	while (game->map[values->map_pos.y][values->map_pos.x] == FLOOR)
 	{
 		if (values->dst_x < values->dst_y)
 		{
@@ -92,10 +93,10 @@ static void	render3d(t_rays *values, t_game *game)
 	{
 		int texture_y = (int)texture_pos & (64 - 1);
 		texture_pos += step;
-		if (game->map[values->map_pos.y][values->map_pos.x] > 1)
-			color = get_pixel(&game->resources.door, (t_vec){.x = texture_x, .y = texture_y});
+		if (game->map[values->map_pos.y][values->map_pos.x] == DOOR)
+			color = get_pixel(&game->resources.door.so, (t_vec){.x = texture_x, .y = texture_y});
 		else
-			color = get_pixel(&game->resources.wall, (t_vec){.x = texture_x, .y = texture_y});
+			color = get_pixel(&game->resources.wall.so, (t_vec){.x = texture_x, .y = texture_y});
 		if (values->hit_side == 1)
 			color = get_color_shade(color, 0.6);
 		draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, .y = y}, color);

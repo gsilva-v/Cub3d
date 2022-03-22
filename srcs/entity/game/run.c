@@ -43,7 +43,7 @@ int	release_key(int key_code, t_game *game)
 void	game_run(t_game *game)
 {
 	mlx_loop_hook(game->mlx, &game_render, game);
-	mlx_hook(game->win, KeyPress, KeyPressMask, press_key, &game);
-	mlx_hook(game->win, KeyRelease, KeyReleaseMask, release_key, &game);
+	mlx_hook(game->win, KeyPress, KeyPressMask, press_key, game);
+	mlx_hook(game->win, KeyRelease, KeyReleaseMask, release_key, game);
 	mlx_loop(game->mlx);
 }
