@@ -2,17 +2,20 @@
 
 void	clean_map(t_game *game)
 {
-	int col = 0, line;
+	int col = 0, line = 0;
 
-	while (col < screenWidth)
+	while (line < screenHeight)
 	{
-		line = 0;
-		while(line < screenHeight)
+		col = 0;
+		while (col < screenWidth)
 		{
-			draw_pixel(&game->canvas, (t_vec){.x = col, .y = line }, 0);
-			line++;
+			if (line < screenHeight  / 2)
+				draw_pixel(&game->canvas, (t_vec){.x = col, .y = line }, 0xF1);
+			else
+				draw_pixel(&game->canvas, (t_vec){.x = col, .y = line }, 0xDCDCDC);
+			col++;
 		}
-		col++;
+		line++;
 	}
 }
 

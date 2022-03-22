@@ -16,6 +16,25 @@
 # define DR 0.0174533
 # define screenHeight 700
 # define screenWidth 1200
+# define FLOOR 0
+# define WALL 1
+# define DOOR 2
+
+typedef struct s_buttons
+{
+	int	up;
+	int	down;
+	int	left;
+	int	right;
+	int	exit;
+	int	rotate_right;
+	int	rotate_left;
+	int	function;
+}	t_buttons;
+
+
+
+
 
 typedef struct	s_data {
 	void	*img;
@@ -24,7 +43,6 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }	t_data;
-
 
 typedef struct s_colisions{
 	t_vec	offset;
@@ -38,10 +56,10 @@ typedef struct s_rays{
 	t_vec		ray_dir;
 	t_vec		camera_pixel;
 	double		multiplier;
-	double		delta_x;
-	double		delta_y;
-	double		dist_x;
-	double		dist_y;
+	double		dlt_x;
+	double		dlt_y;
+	double		dst_x;
+	double		dst_y;
 	double		perp_wall;
 	float		color;
 	float		first_pixel;
@@ -63,6 +81,7 @@ typedef struct s_game{
 	t_vec	delta_player;
 	t_vec		plane;
 	t_vec		direction;
+	t_buttons buttons;
 	float	player_angle;
 	void	*mlx;
 	void	*win;
