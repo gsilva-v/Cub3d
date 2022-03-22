@@ -6,7 +6,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
-# include "../srcs/libs/vec_lib/vec.h"
+# include "../srcs/lib/vec_lib/vec.h"
 
 # define BLOCK_SIZE 64
 # define ESC 0xff1b
