@@ -59,7 +59,6 @@ typedef struct s_keyHandler
 	bool	rotate_right;
 	bool	rotate_left;
 	bool	shoot;
-
 }	t_keyHandler;
 
 typedef struct s_game

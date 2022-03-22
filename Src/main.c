@@ -1,8 +1,5 @@
 #include <ray.h>
 
-t_vec	delta_player;
-float	player_angle = 0;
-
 void	init_server(t_server *server)
 {
 	server->mlx = mlx_init();
@@ -23,7 +20,7 @@ int	main(void)
 		{1, 0, 0, 2, 0, 0, 0, 1},
 		{1, 0, 1, 0, 0, 0, 2, 1},
 		{1, 0, 0, 0, 0, 1, 0, 1},
-		{1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1}
 		},
 		.player = {
 			.position = {

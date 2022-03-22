@@ -213,7 +213,7 @@ void	raycasting(t_game *game)
 
 
 
-		while (hit == 0)
+		while (game->map[mapPos.y][mapPos.x] == 0)
 		{
 			if (ddaLineSizeX < ddaLineSizeY)
 			{
@@ -223,14 +223,9 @@ void	raycasting(t_game *game)
 			}
 			else
 			{
-
 				mapPos.y += stepY;
 				ddaLineSizeY += deltaDistY;
 				side = 1;
-			}
-			if (game->map[mapPos.y][mapPos.x] > 0)
-			{
-				hit = 1;
 			}
 		}
 

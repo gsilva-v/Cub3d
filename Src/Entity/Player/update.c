@@ -87,9 +87,9 @@ int	player_update(t_game *game)
 		} */
 		vec_scale(&game->player.velocity, 0);
 	}
-	if (game->map[(int)game->player.position.y][(int)(game->player.position.x + game->player.velocity.x * 2.3f)] == 0)
+	if (game->map[(int)game->player.position.y][(int)(game->player.position.x + game->player.velocity.x * 5.f)] == 0)
 		game->player.position.x += game->player.velocity.x;
-	if (game->map[(int)(game->player.position.y + game->player.velocity.y * 2.3f)][(int)game->player.position.x] == 0)
+	if (game->map[(int)(game->player.position.y + game->player.velocity.y * 5.f)][(int)game->player.position.x] == 0)
 		game->player.position.y += game->player.velocity.y;
 
 	if (game->map[(int)game->player.position.y][(int)(game->player.position.x + game->player.strafeVelocity.x * 2.3f)] == 0)
