@@ -4,22 +4,26 @@ void	load_block(t_game *game, t_block *block)
 {
 	int	trash;
 
-	block->no.img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", \
+	block->no.img = mlx_xpm_file_to_image(game->mlx, block->no.name, \
 	&trash, &trash);
 	block->no.addr = mlx_get_data_addr(block->no.img, \
 	&block->no.bits_per_pixel, &block->no.line_length, &block->no.endian);
-	block->so.img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", \
+
+	block->so.img = mlx_xpm_file_to_image(game->mlx, block->so.name, \
 	&trash, &trash);
 	block->so.addr = mlx_get_data_addr(block->so.img, \
 	&block->so.bits_per_pixel, &block->so.line_length, &block->so.endian);
-	block->we.img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", \
+	
+	block->we.img = mlx_xpm_file_to_image(game->mlx, block->we.name, \
 	&trash, &trash);
 	block->we.addr = mlx_get_data_addr(block->we.img, \
 	&block->we.bits_per_pixel, &block->we.line_length, &block->we.endian);
-	block->ea.img = mlx_xpm_file_to_image(game->mlx, "./imgs/wall.xpm", \
+
+	block->ea.img = mlx_xpm_file_to_image(game->mlx, block->ea.name, \
 	&trash, &trash);
 	block->ea.addr = mlx_get_data_addr(block->ea.img, \
 	&block->ea.bits_per_pixel, &block->ea.line_length, &block->ea.endian);
+
 }
 
 void	load_imgs(t_game *game)
@@ -36,5 +40,9 @@ void	load_imgs(t_game *game)
 	r->pov.addr = mlx_get_data_addr(r->pov.img, &r->pov.bits_per_pixel, \
 	&r->pov.line_length, &r->pov.endian);
 	load_block(game, &r->wall);
-	load_block(game, &r->door);
+// G A M B I A R R A
+	r->door = r->wall;
+// G A M B I A R R A
+	// load_block(game, &r->door);
+	
 }

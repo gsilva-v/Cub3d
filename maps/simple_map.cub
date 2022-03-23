@@ -1,7 +1,7 @@
-NO ./imgs/wall_n.xpm
-SO ./imgs/wall_s.xpm
-WE ./imgs/wall_w.xpm
-EA ./imgs/wall_e.xpm
+NO ./imgs/wall.xpm
+SO ./imgs/wall.xpm
+WE ./imgs/wall.xpm
+EA ./imgs/wall.xpm
 
 F 100,100,100
 C 50,50,50
