@@ -33,6 +33,7 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 {
 	int	index;
 	int	color;
+	int	color2;
 
 	index = text->start_line;
 	while (index < text->end_line)
@@ -43,7 +44,12 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		.y = text->texture_y});
 		if (values->hit_side == 1)
 			color = get_color_shade(color, 0.6);
-		draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, \
+		color2 = get_pixel(&game->resources.pov, (t_vec){.x = values->rays, .y = index});
+		if (color2 != 0xff00ff)
+			draw_pixel(&game->resources.canvas, \
+			(t_vec){.x = values->rays, .y = index}, color2);
+		else
+			draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, \
 		.y = index}, color);
 		index++;
 	}

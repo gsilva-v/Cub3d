@@ -3,13 +3,18 @@
 void	clean_map(t_game *game)
 {
 	int col = 0, line = 0;
+	int	color;
 
 	while (line < screenHeight)
 	{
 		col = 0;
 		while (col < screenWidth)
 		{
-			if (line < screenHeight  / 2)
+			color = get_pixel(&game->resources.pov, (t_vec){.x = col, .y = line});
+			if (color != 0xff00ff)
+				draw_pixel(&game->resources.canvas, \
+				(t_vec){.x = col, .y = line}, color);
+			else if (line < screenHeight  / 2)
 				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, game->resources.ceil_color);
 			else
 				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, game->resources.floor_color);
