@@ -34,6 +34,7 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 	int	index;
 	int	color;
 	int	color2;
+	int	dist;
 
 	index = text->start_line;
 	while (index < text->end_line)
@@ -45,6 +46,9 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		if (values->hit_side == 1)
 			color = get_color_shade(color, 0.6);
 		color2 = get_pixel(&game->resources.pov, (t_vec){.x = values->rays, .y = index});
+		dist = distance((t_vec){.x = values->rays, .y = index}, (t_vec){.x = screenWidth / 2, .y = screenHeight / 2});
+		if (dist < 400 && game->buttons.light)
+			color = get_color_shade(color, 1 + (((2.f * dist) / 400 - 2.f) * -1));
 		if (color2 != 0xff00ff)
 			draw_pixel(&game->resources.canvas, \
 			(t_vec){.x = values->rays, .y = index}, color2);

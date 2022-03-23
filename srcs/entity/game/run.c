@@ -18,6 +18,10 @@ int	press_key(int key_code, t_game *game)
 		game->buttons.rotate_right = 1;
 	if (key_code == 65361)//seta esquerda
 		game->buttons.rotate_left = 1;
+	if (key_code == 65505)
+		game->buttons.acelerate = 1;
+	if (key_code == 'f')
+		game->buttons.light = 1;
 }
 
 int	release_key(int key_code, t_game *game)
@@ -38,6 +42,10 @@ int	release_key(int key_code, t_game *game)
 		game->buttons.rotate_right = 0;
 	if (key_code == 65361)//seta esquerda
 		game->buttons.rotate_left = 0;
+	if (key_code == 65505)
+		game->buttons.acelerate = 0;
+	if (key_code == 'f')
+		game->buttons.light = 0;
 }
 
 void	game_run(t_game *game)

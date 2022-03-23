@@ -34,6 +34,8 @@ typedef struct s_buttons
 	int	rotate_right;
 	int	rotate_left;
 	int	function;
+	int	acelerate;
+	int	light;
 }	t_buttons;
 
 typedef struct	s_data {
@@ -75,6 +77,7 @@ typedef struct	s_player {
 	t_vec		pos;
 	t_vec		plane;
 	t_vec		direction;
+	float		movespeed;
 } t_player;
 
 typedef struct s_block{
@@ -187,5 +190,5 @@ void	kill_window(t_game *game);
 // UTILS
 int		matrix_len(char **matrix);
 void	free_matrix(char **matrix);
-
+int		distance(t_vec a, t_vec b);
 #endif

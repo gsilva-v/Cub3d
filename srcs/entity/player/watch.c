@@ -25,9 +25,9 @@ void	watch_walk(t_game *game)
 
 	velocity = game->player.direction;
 	if (game->buttons.up)
-		vec_scale(&velocity, 0.1f);
+		vec_scale(&velocity, game->player.movespeed);
 	else if (game->buttons.down)
-		vec_scale(&velocity, -0.1f);
+		vec_scale(&velocity, -game->player.movespeed);
 	else
 		vec_scale(&velocity, 0);
 	if (game->map[(int)game->player.pos.y]\
@@ -50,9 +50,9 @@ void	watch_strafe(t_game *game)
 	strafe_velocity.y = oldDirX * sin(PI / 2) + strafe_velocity.y * \
 	cos(PI / 2);
 	if (game->buttons.right)
-		vec_scale(&strafe_velocity, 0.1f);
+		vec_scale(&strafe_velocity, game->player.movespeed);
 	else if (game->buttons.left)
-		vec_scale(&strafe_velocity, -0.1f);
+		vec_scale(&strafe_velocity, -game->player.movespeed);
 	else
 		vec_scale(&strafe_velocity, 0);
 	if (game->map[(int)game->player.pos.y]\
