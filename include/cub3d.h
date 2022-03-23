@@ -87,6 +87,7 @@ typedef struct s_block{
 
 
 typedef struct s_resource {
+	t_data	pov;
 	t_data	canvas;
 	t_block	wall;
 	t_block	door;
