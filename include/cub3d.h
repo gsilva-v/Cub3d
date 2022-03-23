@@ -108,7 +108,14 @@ typedef struct s_game{
 void	init_game(t_game *game);
 void	load_imgs(t_game *game);
 
+// START ORIENTATION
+void	player_north(t_game *game, int x, int y);
+void	player_south(t_game *game, int x, int y);
+void	player_west(t_game *game, int x, int y);
+void	player_east(t_game *game, int x, int y);
+
 // PARSE
+int		parse_map(t_game *game, char *file);
 int		parse_resources(t_game *game, char *file);
 
 // COLOR

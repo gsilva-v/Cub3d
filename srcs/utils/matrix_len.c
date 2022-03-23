@@ -1,8 +1,8 @@
 #include <cub3d.h>
 
-int matrix_len(char **matrix)
+int	matrix_len(char **matrix)
 {
-	int	i; 
+	int	i;
 
 	i = 0;
 	if (!matrix)

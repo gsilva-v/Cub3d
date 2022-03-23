@@ -34,10 +34,9 @@ void	set_perp_wall(t_rays *values, t_game *game)
 
 int	solve_mirroring(int texture, t_rays *values)
 {
-	if(values->hit_side == 0 && values->ray_dir.x < 0)
+	if (values->hit_side == 0 && values->ray_dir.x < 0)
 		texture = 64 - texture - 1;
-    if(values->hit_side == 1 && values->ray_dir.y > 0) 
+	if (values->hit_side == 1 && values->ray_dir.y > 0)
 		texture = 64 - texture - 1;
-	return(texture);
+	return (texture);
 }
-

@@ -2,8 +2,11 @@
 
 static void	reset_values(t_rays *values, t_player *player)
 {
-	double multiplier = 2 * values->rays / (double)screenWidth - 1;
-	t_vec camera_pixel = player->plane;
+	double	multiplier;
+	t_vec	camera_pixel;
+
+	multiplier = 2 * values->rays / (double)screenWidth - 1;
+	camera_pixel = player->plane;
 	vec_scale(&camera_pixel, multiplier);
 	values->ray_dir = player->direction;
 	vec_sum(&values->ray_dir, &camera_pixel);
@@ -13,7 +16,6 @@ static void	reset_values(t_rays *values, t_player *player)
 	values->dlt_y = 10000000;
 	if (values->ray_dir.y != 0)
 		values->dlt_y = fabs(1 / values->ray_dir.y);
-	
 }
 
 static void	check_dist(t_rays *values, t_player *player)
@@ -63,7 +65,7 @@ static void	dda(t_rays *values, t_game *game)
 
 void	raycasting(t_game *game)
 {
-	t_rays values;
+	t_rays	values;
 
 	values.rays = 0;
 	while (values.rays < screenWidth)
@@ -71,12 +73,11 @@ void	raycasting(t_game *game)
 		// reset values
 		reset_values(&values, &game->player);
 		// calculo de distancias atuais
-		check_dist(&values,&game->player);
+		check_dist(&values, &game->player);
 		// algoritmo DDA
 		dda(&values, game);
 		// renderização
 		render_engine(&values, game);
-		// rend(&values, game);
 		values.rays++;
 	}
 }

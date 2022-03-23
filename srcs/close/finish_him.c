@@ -1,4 +1,5 @@
 #include <cub3d.h>
+
 void free_data(t_game *game, t_data *data)
 {
 	if (data->name)
@@ -25,6 +26,9 @@ void check_data_leaks(t_game *game)
 		free_block(&game->resources.wall, game);
 	if (&game->resources.door)
 		free_block(&game->resources.door, game);
+
+	if (&game->resources.pov)
+		free_data(game, &game->resources.pov);
 	if (&game->resources.canvas)
 		free_data(game, &game->resources.canvas);
 }
