@@ -35,6 +35,27 @@ typedef struct s_buttons
 	int	function;
 }	t_buttons;
 
+typedef struct	s_data {
+	char	*name;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
+
+typedef struct s_texture{
+	int	line_height;
+	int start_line;
+	int end_line;
+	int texture_x;
+	int texture_y;
+	double texture_pos;
+	double step;
+	t_data *data;
+
+} t_texture;
+
 typedef struct s_rays{
 	t_int_vec	map_pos;
 	t_vec		ray_dir;
@@ -49,14 +70,6 @@ typedef struct s_rays{
 	int			step_y;
 }	t_rays;
 
-typedef struct	s_data {
-	char	*name;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
 
 typedef struct	s_player {
 	t_vec		pos;
@@ -95,12 +108,12 @@ void	init_game(t_game *game);
 void	load_imgs(t_game *game);
 
 // PARSE
-int	parse_resources(t_game *game, char *file);
+int		parse_resources(t_game *game, char *file);
 
 // COLOR
 int		get_pixel(t_data *data, t_vec point);
-int    get_color_shade(int color, double qnt_shade);
-int    create_rgb(int r, int g, int b);
+int		get_color_shade(int color, double qnt_shade);
+int		create_rgb(int r, int g, int b);
 
 // DRAW
 void	clean_map(t_game *game);
@@ -118,12 +131,38 @@ void	game_update(t_game *game);
 void	player_render(t_game *game);
 void	player_update(t_game *game);
 
+// WATCH MOVES
+void	watch_walk(t_game *game);
+void	watch_rotate(t_game *game);
+void	watch_strafe(t_game *game);
+void	watch_functions(t_game *game);
+
+// WATCH UTILS
+void	change_plane(t_game *game, float rot_speed);
+void	change_direction(t_game *game, float rot_speed);
+
+
 // MAP
 int		render_map(t_game *game);
 int		update_map(int key_code, t_game *game);
 
 // RAYS
 void	raycasting(t_game *game);
+
+
+// RENDER ENGINE
+void	render_engine(t_rays *values, t_game *game);
+
+// RENDER ENGINE UTILS
+t_data	*get_direction(t_block *block, t_rays *values);
+t_data	*get_texture(t_game *game, t_rays *values);
+void	set_perp_wall(t_rays *values, t_game *game);
+int		solve_mirroring(int texture, t_rays *values);
+double	wall_fabs(float condit, float mult, t_rays *values, t_game *game);
+
+
+
+
 
 // MOVES
 void	kill_window(t_game *game);
@@ -134,6 +173,6 @@ void	look_left(t_game *game);
 void	look_right(t_game *game);
 
 // UTILS
-int matrix_len(char **matrix);
+int		matrix_len(char **matrix);
 
 #endif

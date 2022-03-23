@@ -1,6 +1,6 @@
 #include <cub3d.h>
 
-static void 	reset_values(t_rays *values, t_player *player)
+static void	reset_values(t_rays *values, t_player *player)
 {
 	double multiplier = 2 * values->rays / (double)screenWidth - 1;
 	t_vec camera_pixel = player->plane;
@@ -61,82 +61,6 @@ static void	dda(t_rays *values, t_game *game)
 	}
 }
 
-t_data	*get_direction(t_block *block, t_rays *values)
-{
-	if (values->hit_side == 0 && values->ray_dir.x > 0)
-		return (&block->ea);
-	if (values->hit_side == 0 && values->ray_dir.x < 0)
-		return (&block->we);
-	if (values->hit_side == 1 && values->ray_dir.y > 0)
-		return (&block->so);
-	if (values->hit_side == 1 && values->ray_dir.y < 0)
-		return (&block->no);
-	return ((t_data *)0);
-}
-
-t_data	*get_texture(t_game *game, t_rays *values)
-{
-	if (game->map[values->map_pos.y][values->map_pos.x] == WALL)
-		return (get_direction(&game->resources.wall, values));
-	if (game->map[values->map_pos.y][values->map_pos.x] == DOOR)
-		return (get_direction(&game->resources.door, values));
-	return ((t_data *)0);
-}
-
-
-static void	render3d(t_rays *values, t_game *game)
-{
-	if (values->hit_side == 0)
-		values->perp_wall = (fabs(values->map_pos.x - game->player.pos.x + ((1 - values->step_x) / 2)) / values->ray_dir.x);
-	else
-		values->perp_wall = (fabs(values->map_pos.y - game->player.pos.y + ((1 - values->step_y) / 2)) / values->ray_dir.y);
-	int line_height = abs(screenHeight / values->perp_wall);
-	int	start_line = -line_height / 2 + screenHeight / 2;
-	if(start_line < 0)
-		start_line = 0;
-	int	end_line = line_height / 2 + screenHeight / 2;
-	if(end_line >= screenHeight)
-		end_line = screenHeight - 1;
-	double wall_x;	
-	if (values->hit_side == 0)
-	{
-		if (values->ray_dir.x > 0)
-			wall_x = fabs(game->player.pos.y + values->perp_wall  * values->ray_dir.y);
-		else
-			wall_x = fabs(game->player.pos.y - values->perp_wall  * values->ray_dir.y);
-	}
-	else
-	{
-		if (values->ray_dir.y > 0)
-			wall_x = fabs(game->player.pos.x + values->perp_wall  * values->ray_dir.x);
-		else
-			wall_x = fabs(game->player.pos.x - values->perp_wall  * values->ray_dir.x);
-	}
-	wall_x -= floor(wall_x);
-	int texture_x = (int)(wall_x * (double)BLOCK_SIZE);
-
-// resolve o espalhamento da imagem
-	if(values->hit_side == 0 && values->ray_dir.x < 0)
-		texture_x = 64 - texture_x - 1;
-    if(values->hit_side == 1 && values->ray_dir.y > 0) 
-		texture_x = 64 - texture_x - 1;
-	
-	double step = 1.0 * 64 / line_height;
-	
-	double texture_pos = (start_line - screenHeight /2 + line_height / 2) * step;
-	int color;
-	t_data *texture = get_texture(game, values);
-	for (int y = start_line; y < end_line; y++)
-	{
-		int texture_y = (int)texture_pos & (64 - 1);
-		texture_pos += step;
-		color = get_pixel(texture, (t_vec){.x = texture_x, .y = texture_y});
-		if (values->hit_side == 1)
-			color = get_color_shade(color, 0.6);
-		draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, .y = y}, color);
-	}
-}
-
 void	raycasting(t_game *game)
 {
 	t_rays values;
@@ -151,7 +75,8 @@ void	raycasting(t_game *game)
 		// algoritmo DDA
 		dda(&values, game);
 		// renderização
-		render3d(&values, game);
+		render_engine(&values, game);
+		// rend(&values, game);
 		values.rays++;
 	}
 }
