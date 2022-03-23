@@ -1,38 +1,5 @@
 #include <cub3d.h>
 
-int	check_surrounded(char **map, int x, int y)
-{
-	int	tmp_x;
-	int	tmp_y;
-
-	tmp_x = x;
-	tmp_y = y;
-	while (map[y][x] && map[y][x] != WALL)
-		x++;
-	if (map[y][x] != WALL)
-		return (0);
-	x = tmp_x;
-	while (x >= 0 && map[y][x] != WALL)
-		x--;
-	if (x < 0)
-		x = 0;
-	if (map[y][x] != WALL)
-		return (0);
-	x = tmp_x;
-	while (map[y] && map[y][x] != WALL)
-		y++;
-	if (map[y] == 0 || map[y][x] != WALL)
-		return (0);
-	y = tmp_y;
-	while (y >= 0 && map[y][x] != WALL)
-		y--;
-	if (y < 0)
-		y = 0;
-	if (map[y][x] != WALL)
-		return (0);
-	return (1);
-}
-
 int	is_surrounded(t_game *game)
 {
 	int	x;
@@ -63,7 +30,7 @@ int	advance_to_map(int fd)
 	line = get_next_line(fd);
 	while (line && line[0] != 'C')
 	{
-		free(line);	
+		free(line);
 		line = get_next_line(fd);
 	}
 	if (line)
@@ -73,11 +40,11 @@ int	advance_to_map(int fd)
 	return (0);
 }
 
-char **get_map(int fd, char *line)
+char	**get_map(int fd, char *line)
 {
-	int i;
-	char *map_str;
-	char **map_arr;
+	int		i;
+	char	*map_str;
+	char	**map_arr;
 
 	map_str = ft_strdup("");
 	while (line)
@@ -99,14 +66,13 @@ char **get_map(int fd, char *line)
 	}
 	map_arr = ft_split(map_str, '\n');
 	free(map_str);
-	close (fd);
 	return (map_arr);
-}	
+}
 
 int	parse_map(t_game *game, char *file)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -119,6 +85,7 @@ int	parse_map(t_game *game, char *file)
 	game->map = get_map(fd, line);
 	if (!game->map)
 		close_exit(fd, "this map have invalid caracters!");
+	close (fd);
 	if (!is_surrounded(game))
 		finish_him(game, 1);
 	return (0);

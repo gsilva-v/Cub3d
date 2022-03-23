@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 17:22:24 by gabriel           #+#    #+#             */
-/*   Updated: 2021/09/10 16:49:25 by gabriel          ###   ########.fr       */
+/*   Updated: 2022/03/23 18:19:26 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	lenint(int n)
 		len = 0;
 	else
 		len = 1;
-	while (n != 0 )
+	while (n != 0)
 	{
 		len++;
 		n = n / 10;

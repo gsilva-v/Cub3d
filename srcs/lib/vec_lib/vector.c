@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 08:02:52 by user42            #+#    #+#             */
-/*   Updated: 2021/09/26 17:48:57 by user42           ###   ########.fr       */
+/*   Updated: 2022/03/23 18:13:44 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vec	*new_vec(float x, float y, float z)
 {
-	t_vec *vec;
+	t_vec	*vec;
 
 	vec = (t_vec *) malloc(sizeof(t_vec));
 	vec->x = x;

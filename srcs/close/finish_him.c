@@ -1,6 +1,6 @@
 #include <cub3d.h>
 
-void free_data(t_game *game, t_data *data)
+void	free_data(t_game *game, t_data *data)
 {
 	if (data->name)
 		free(data->name);
@@ -20,20 +20,19 @@ void	free_block(t_block *block, t_game *game)
 		free_data(game, &block->no);
 }
 
-void check_data_leaks(t_game *game)
+void	check_data_leaks(t_game *game)
 {
 	if (&game->resources.wall)
 		free_block(&game->resources.wall, game);
 	if (&game->resources.door)
 		free_block(&game->resources.door, game);
-
 	if (&game->resources.pov)
 		free_data(game, &game->resources.pov);
 	if (&game->resources.canvas)
 		free_data(game, &game->resources.canvas);
 }
 
-void finish_him(t_game *game, int exit_code)
+void	finish_him(t_game *game, int exit_code)
 {
 	if (game->map)
 		free_matrix(game->map);

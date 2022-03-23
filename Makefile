@@ -32,7 +32,7 @@ SRCS += $(addprefix $(PATH_DRAW), draw_pixel draw_map)
 SRCS += $(addprefix $(PATH_GAME), update render run)
 SRCS += $(addprefix $(PATH_PLAYER), update render watch watch_utils)
 SRCS += $(addprefix $(PATH_INIT), init_game load_imgs start_orientation)
-SRCS += $(addprefix $(PATH_PARSE), parse_map parse_resources)
+SRCS += $(addprefix $(PATH_PARSE), parse_map parse_map_utils parse_resources parse_resources_utils)
 SRCS += $(addprefix $(PATH_RAYS), rays rays_render_engine rays_render_utils color)
 SRCS += $(addprefix $(PATH_UTILS), gnl matrix_len free_matrix)
   

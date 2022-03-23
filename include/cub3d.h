@@ -118,6 +118,16 @@ void	player_east(t_game *game, int x, int y);
 int		parse_map(t_game *game, char *file);
 int		parse_resources(t_game *game, char *file);
 
+// PARSE UTILS
+int		check_horizontal_wall(char **map, int x, int y);
+int		check_vertical_wall(char **map, int x, int y);
+int		check_surrounded(char **map, int x, int y);
+int		set_color_background(t_game *game, char **config);
+int		my_access(char **config);
+int		set_config(t_game *game, char **config);
+int		check_config(t_resource *res);
+
+
 // COLOR
 int		get_pixel(t_data *data, t_vec point);
 int		get_color_shade(int color, double qnt_shade);
