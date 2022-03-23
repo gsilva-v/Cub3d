@@ -38,8 +38,8 @@ typedef struct s_buttons
 
 typedef struct	s_data {
 	char	*name;
-	void	*img;
 	char	*addr;
+	void	*img;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -54,8 +54,7 @@ typedef struct s_texture{
 	double texture_pos;
 	double step;
 	t_data *data;
-
-} t_texture;
+}	t_texture;
 
 typedef struct s_rays{
 	t_int_vec	map_pos;
@@ -162,18 +161,13 @@ int		solve_mirroring(int texture, t_rays *values);
 double	wall_fabs(float condit, float mult, t_rays *values, t_game *game);
 
 
-
-
-
-// MOVES
+// CLOSE
+void	close_exit(int fd, char *s);
+void	finish_him(t_game *game, int exit_code);
 void	kill_window(t_game *game);
-void	set_colisions(t_game *game);
-void	move_forward(t_game *game);
-void	move_back(t_game *game);
-void	look_left(t_game *game);
-void	look_right(t_game *game);
 
 // UTILS
 int		matrix_len(char **matrix);
+void	free_matrix(char **matrix);
 
 #endif

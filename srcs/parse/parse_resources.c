@@ -2,6 +2,8 @@
 
 int	set_config(t_game *game, char **config)
 {
+	char **rgb;
+
 	if ((ft_strncmp(config[0], "C", 1)) && (ft_strncmp(config[0], "F", 1)))
 	{
 		int fd = open(config[1], O_RDONLY);
@@ -20,13 +22,17 @@ int	set_config(t_game *game, char **config)
 	{
 		if (!config[1])
 			return (1);
-		char **rgb = ft_split(config[1], ',');
+		rgb = ft_split(config[1], ',');
 		if (matrix_len(rgb) != 3)
+		{
+			free_matrix(rgb);
 			return (1);
+		}
 		if (!ft_strncmp(config[0], "C", -1))
 			game->resources.ceil_color = create_rgb(ft_atoi(rgb[0]),ft_atoi(rgb[1]), ft_atoi(rgb[2])); 
 		if (!ft_strncmp(config[0], "F", -1))
 			game->resources.floor_color = create_rgb(ft_atoi(rgb[0]),ft_atoi(rgb[1]), ft_atoi(rgb[2])); 
+		free_matrix(rgb);
 	}
 	return (0);
 }
@@ -48,6 +54,7 @@ int	parse_resources(t_game *game, char *file)
 	char *line;
 	char **config;
 
+	char *temp;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (1);
@@ -56,24 +63,31 @@ int	parse_resources(t_game *game, char *file)
 	{
 		config = ft_split(line, ' ');
 		if (config && config[0] && config[1])
-			config[1] = ft_strtrim(config[1], "\n");
+		{
+			temp = ft_strdup(config[1]);
+			free(config[1]);
+			config[1] = ft_strtrim(temp, "\n");
+			free(temp);
+		}
 		if(line[0] != '\n' && set_config(game, config))
 		{
 			free(line);
+			free_matrix(config);
 			close(fd);
 			return(1);
 		}
 		if (line[0] == 'C')
 		{
 			free(line);	
+			free_matrix(config);
 			break ;
 		}
 		free(line);	
+		free_matrix(config);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	if (check_config(&game->resources))
 		return (1);
 	return (0);
-
 }

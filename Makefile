@@ -9,7 +9,7 @@ RM = rm -rf
 
 PATH_SRCS = ./srcs/
 PATH_MAIN = $(PATH_SRCS)main/
-PATH_CLOSE = $(PATH_SRCS)close_game/
+PATH_CLOSE = $(PATH_SRCS)close/
 PATH_DRAW = $(PATH_SRCS)draw/
 PATH_INIT = $(PATH_SRCS)init/
 PATH_RENDMAP = $(PATH_SRCS)render_map/
@@ -27,14 +27,14 @@ PATH_LIBFT = $(PATH_LIBS)libft/
 PATH_OBJS = ./objs/
 
 SRCS += $(addprefix $(PATH_MAIN), main)
-SRCS += $(addprefix $(PATH_CLOSE), kill_window)
+SRCS += $(addprefix $(PATH_CLOSE), kill_window close_fd_exit finish_him)
 SRCS += $(addprefix $(PATH_DRAW), draw_pixel draw_map)
 SRCS += $(addprefix $(PATH_GAME), update render run)
 SRCS += $(addprefix $(PATH_PLAYER), update render watch watch_utils)
 SRCS += $(addprefix $(PATH_INIT), init_game load_imgs)
 SRCS += $(addprefix $(PATH_PARSE), parse_map parse_resources)
 SRCS += $(addprefix $(PATH_RAYS), rays rays_render_engine rays_render_utils color)
-SRCS += $(addprefix $(PATH_UTILS), gnl matrix_len)
+SRCS += $(addprefix $(PATH_UTILS), gnl matrix_len free_matrix)
   
 SRC = $(addsuffix .c, $(SRCS))
 
@@ -49,7 +49,7 @@ $(NAME): $(OBJS)
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 		@mkdir -p  $(PATH_OBJS)
-		@mkdir -p  $(PATH_OBJS)close_game/
+		@mkdir -p  $(PATH_OBJS)close/
 		@mkdir -p  $(PATH_OBJS)main/
 		@mkdir -p  $(PATH_OBJS)init/
 		@mkdir -p  $(PATH_OBJS)draw/
@@ -65,12 +65,16 @@ clean:
 	$(RM) ./objs
 
 fclean: clean
+	@make fclean -C $(PATH_LIBFT)
+	@make fclean -C $(PATH_VEC)
 	$(RM) $(NAME)
 
 re: fclean all
 
 run: re
 	./cub3d ./maps/simple_map.cub 
+
 runv: re
-	valgrind ./cub3d ./maps/simple_map.cub 
+	valgrind --leak-check=full --show-leak-kinds=all ./cub3d ./maps/simple_map.cub 
+
 .PHONY: all clean fclean re

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 09:05:40 by gabriel           #+#    #+#             */
-/*   Updated: 2021/09/10 17:09:01 by gabriel          ###   ########.fr       */
+/*   Updated: 2022/03/23 13:58:20 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, const char *s2)
 {
 	char	*new;
 	int		n;
@@ -34,5 +34,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		s++;
 	}
 	new[n + s] = '\0';
+	free(s1);
 	return (new);
 }

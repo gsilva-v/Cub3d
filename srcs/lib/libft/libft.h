@@ -6,7 +6,7 @@
 /*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 15:07:13 by gabriel           #+#    #+#             */
-/*   Updated: 2022/03/22 13:38:32 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:57:55 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_itoa(int n);
 char	**ft_split(const char *s, char c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strjoin(char *s1, const char *s2);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
@@ -64,5 +64,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int	ft_char_in_set(char c, char const *set);
+int		ft_char_in_set(char c, char const *set);
 #endif
