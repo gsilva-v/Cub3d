@@ -1,16 +1,16 @@
 #include <cub3d.h>
 
 
-int	valid_direction(t_game *game, int x, int y)
-{
-	if (x < 0 || y < 0)
-		return (0);
-	if (game->walk[y] == 0 || game->walk[y][x] == -1)
-		return (0);
-	if (game->map[y][x] != WALL)
-		return (0);
-	return (1);
-}
+// int	valid_direction(t_game *game, int x, int y)
+// {
+// 	if (x < 0 || y < 0)
+// 		return (0);
+// 	if (game->walk[y] == 0 || game->walk[y][x] == -1)
+// 		return (0);
+// 	if (game->map[y][x] != WALL)
+// 		return (0);
+// 	return (1);
+// }
 
 int	check_surrounded(char **map, int x, int y)
 {
@@ -33,7 +33,7 @@ int	check_surrounded(char **map, int x, int y)
 	x = tmp_x;
 	while (map[y] && map[y][x] != WALL)
 		y++;
-	if (map[y][x] != WALL)
+	if (map[y] == 0 || map[y][x] != WALL)
 		return (0);
 	y = tmp_y;
 	while (y >= 0 && map[y][x] != WALL)

@@ -22,6 +22,7 @@
 # define WALL '1'
 # define DOOR '2'
 # define VALID_BLOCK "012 \nWENS"
+# define HAS_INSIDE "ESWN02"
 
 typedef struct s_buttons
 {
