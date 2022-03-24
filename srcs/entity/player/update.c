@@ -3,7 +3,7 @@
 void	player_update(t_game *game)
 {
 	static float	movespeed;
-	
+
 	if (!movespeed)
 		movespeed = game->player.movespeed;
 	if (game->buttons.acelerate)

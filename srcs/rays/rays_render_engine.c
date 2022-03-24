@@ -34,7 +34,6 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 	int	index;
 	int	color;
 	int	color2;
-	int	dist;
 
 	index = text->start_line;
 	while (index < text->end_line)
@@ -45,13 +44,12 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		.y = text->texture_y});
 		if (values->hit_side == 1)
 			color = get_color_shade(color, 0.6);
-		color2 = get_pixel(&game->resources.pov, (t_vec){.x = values->rays, .y = index});
-		dist = distance((t_vec){.x = values->rays, .y = index}, (t_vec){.x = screenWidth / 2, .y = screenHeight / 2});
-		if (dist < 400 && game->buttons.light)
-			color = get_color_shade(color, 1 + (((2.f * dist) / 400 - 2.f) * -1));
+		color2 = get_pixel(&game->resources.pov, (t_vec){.x = values->rays, \
+		.y = index});
+		color = lamp(values->rays, index, game, color);
 		if (color2 != 0xff00ff)
-			draw_pixel(&game->resources.canvas, \
-			(t_vec){.x = values->rays, .y = index}, color2);
+			draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, \
+			.y = index}, color2);
 		else
 			draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, \
 		.y = index}, color);
@@ -63,7 +61,7 @@ static void	render_last_set(t_texture *text, t_rays *values, t_game *game)
 {
 	text->texture_x = set_texture_x(values, game);
 	text->step = 1.0 * 64 / text->line_height;
-	text->texture_pos = (text->start_line - screenHeight / 2 + \
+	text->texture_pos = (text->start_line - SCREENHEIGHT / 2 + \
 	text->line_height / 2) * text->step;
 	text->data = get_texture(game, values);
 	render_3d(text, values, game);
@@ -74,12 +72,12 @@ void	render_engine(t_rays *values, t_game *game)
 	t_texture	text;
 
 	set_perp_wall(values, game);
-	text.line_height = abs(screenHeight / values->perp_wall);
-	text.start_line = -text.line_height / 2 + screenHeight / 2;
+	text.line_height = abs(SCREENHEIGHT / values->perp_wall);
+	text.start_line = -text.line_height / 2 + SCREENHEIGHT / 2;
 	if (text.start_line < 0)
 		text.start_line = 0;
-	text.end_line = text.line_height / 2 + screenHeight / 2;
-	if (text.end_line >= screenHeight)
-		text.end_line = screenHeight - 1;
+	text.end_line = text.line_height / 2 + SCREENHEIGHT / 2;
+	if (text.end_line >= SCREENHEIGHT)
+		text.end_line = SCREENHEIGHT - 1;
 	render_last_set(&text, values, game);
 }

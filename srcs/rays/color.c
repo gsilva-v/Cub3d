@@ -5,7 +5,7 @@ int	create_rgb(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void	shift_color (int *a, int *b, int *c)
+void	shift_color(int *a, int *b, int *c)
 {
 	int	d;
 
@@ -14,6 +14,7 @@ void	shift_color (int *a, int *b, int *c)
 	*c += d / 2;
 	*a = 255;
 }
+
 int	get_color_shade(int color, double qnt_shade)
 {
 	int	r;

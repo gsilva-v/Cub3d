@@ -40,3 +40,17 @@ int	solve_mirroring(int texture, t_rays *values)
 		texture = 64 - texture - 1;
 	return (texture);
 }
+
+int	lamp(int x, int y, t_game *game, int color)
+{
+	float	dist;
+	t_vec	mid_screen;
+	t_vec	point;
+
+	point = (t_vec){.x = x, .y = y};
+	mid_screen = (t_vec){.x = SCREENWIDTH / 2, .y = SCREENHEIGHT / 2};
+	dist = distance(point, mid_screen);
+	if (dist < 400 && game->buttons.light)
+		color = get_color_shade(color, 1 + (((2.f * dist) / 400 - 2.f) * -1));
+	return (color);
+}

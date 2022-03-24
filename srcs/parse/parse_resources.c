@@ -2,20 +2,42 @@
 
 void	set_name_text(t_game *game, char **config)
 {
-	if (!ft_strncmp(config[0], "NO", -1))
+	if (config && ft_strncmp(config[1], ".", 1))
+		return ;
+	if (!ft_strncmp(config[0], "NO", -1) && config[1])
 		game->resources.wall.no.name = ft_strdup(config[1]);
-	if (!ft_strncmp(config[0], "SO", -1))
+	if (!ft_strncmp(config[0], "SO", -1) && config[1])
 		game->resources.wall.so.name = ft_strdup(config[1]);
-	if (!ft_strncmp(config[0], "WE", -1))
+	if (!ft_strncmp(config[0], "WE", -1) && config[1])
 		game->resources.wall.we.name = ft_strdup(config[1]);
-	if (!ft_strncmp(config[0], "EA", -1))
+	if (!ft_strncmp(config[0], "EA", -1) && config[1])
 		game->resources.wall.ea.name = ft_strdup(config[1]);
+}
+
+int	check_first_index(char *config)
+{
+	if (!ft_strncmp(config, "NO", -1))
+		return (1);
+	if (!ft_strncmp(config, "SO", -1))
+		return (1);
+	if (!ft_strncmp(config, "WE", -1))
+		return (1);
+	if (!ft_strncmp(config, "EA", -1))
+		return (1);
+	if (!ft_strncmp(config, "C", -1))
+		return (1);
+	if (!ft_strncmp(config, "F", -1))
+		return (1);
+	if (!ft_strncmp(config, "\n", -1))
+		return (1);
+	return (0);
 }
 
 char	**parse_config(char *line)
 {
 	char	**config;
 	char	*temp;
+	int		valid;
 
 	config = ft_split(line, ' ');
 	if (config && config[0] && config[1])
@@ -25,7 +47,8 @@ char	**parse_config(char *line)
 		config[1] = ft_strtrim(temp, "\n");
 		free(temp);
 	}
-	if (config)
+	valid = valid_conf(config);
+	if (config && valid)
 		return (config);
 	free(line);
 	return (NULL);
@@ -37,12 +60,12 @@ char	*get_resources(char *line, t_game *game, int fd)
 
 	config = parse_config(line);
 	if (!config)
-		finish_him(game, 1);
+		show_error(game, 1, "this file have any misconfiguration");
 	if (line[0] != '\n' && set_config(game, config))
 	{
 		close(fd);
 		free(line);
-		finish_him(game, 1);
+		show_error(game, 1, "this file have any misconfiguration");
 	}
 	if (line[0] == 'C')
 	{
@@ -64,14 +87,16 @@ int	parse_resources(t_game *game, char *file)
 
 	game->resources.ceil_color = -1;
 	game->resources.floor_color = -1;
+	if (!check_ext(file, ".cub"))
+		show_error(game, 1, "invalid extension file");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (1);
+		show_error(game, 1, "cannot open file map");
 	line = get_next_line(fd);
 	while (line)
 		line = get_resources(line, game, fd);
 	close(fd);
 	if (check_config(&game->resources))
-		finish_him(game, 1);
+		show_error(game, 1, "this file have any misconfiguration");
 	return (0);
 }

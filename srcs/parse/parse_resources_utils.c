@@ -29,10 +29,7 @@ int	my_access(char **config)
 
 	fd = open(config[1], O_RDONLY);
 	if (fd == -1)
-	{
-		free_matrix(config);
-		return (1);
-	}
+		return (-1);
 	return (fd);
 }
 
@@ -70,4 +67,21 @@ int	check_config(t_resource *res)
 	if (res->ceil_color == -1 || res->floor_color == -1)
 		return (1);
 	return (0);
+}
+
+int	valid_conf(char **config)
+{
+	int	valid;
+
+	if (config)
+	{
+		if (!check_first_index(config[0]))
+			return (0);
+		if (config[1] && !ft_strncmp(config[1], ".", 1))
+		{
+			if (!check_ext(config, ".xpm"))
+				return (0);
+		}
+	}
+	return (1);
 }

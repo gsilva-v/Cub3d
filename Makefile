@@ -27,14 +27,14 @@ PATH_LIBFT = $(PATH_LIBS)libft/
 PATH_OBJS = ./objs/
 
 SRCS += $(addprefix $(PATH_MAIN), main)
-SRCS += $(addprefix $(PATH_CLOSE), kill_window close_fd_exit finish_him)
+SRCS += $(addprefix $(PATH_CLOSE), kill_window error_manage close_fd_exit finish_him)
 SRCS += $(addprefix $(PATH_DRAW), draw_pixel draw_map)
 SRCS += $(addprefix $(PATH_GAME), update render run)
 SRCS += $(addprefix $(PATH_PLAYER), update render watch watch_utils)
 SRCS += $(addprefix $(PATH_INIT), init_game load_imgs start_orientation)
 SRCS += $(addprefix $(PATH_PARSE), parse_map parse_map_utils parse_resources parse_resources_utils)
 SRCS += $(addprefix $(PATH_RAYS), rays rays_render_engine rays_render_utils color)
-SRCS += $(addprefix $(PATH_UTILS), gnl matrix_len free_matrix distance)
+SRCS += $(addprefix $(PATH_UTILS), gnl matrix_len free_matrix distance check_ext)
   
 SRC = $(addsuffix .c, $(SRCS))
 
@@ -65,8 +65,8 @@ clean:
 	$(RM) ./objs
 
 fclean: clean
-	@make fclean -C $(PATH_LIBFT)
-	@make fclean -C $(PATH_VEC)
+	# @make fclean -C $(PATH_LIBFT)
+	# @make fclean -C $(PATH_VEC)
 	$(RM) $(NAME)
 
 re: fclean all

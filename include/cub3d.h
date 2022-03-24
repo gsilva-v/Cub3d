@@ -16,8 +16,8 @@
 # define BLOCK_SIZE 64
 # define ESC 0xff1b
 # define PI 3.141592653589f
-# define screenHeight 700
-# define screenWidth 1200
+# define SCREENHEIGHT 700
+# define SCREENWIDTH 1200
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
@@ -38,7 +38,7 @@ typedef struct s_buttons
 	int	light;
 }	t_buttons;
 
-typedef struct	s_data {
+typedef struct s_data{
 	char	*name;
 	char	*addr;
 	void	*img;
@@ -48,14 +48,14 @@ typedef struct	s_data {
 }	t_data;
 
 typedef struct s_texture{
-	int	line_height;
-	int start_line;
-	int end_line;
-	int texture_x;
-	int texture_y;
-	double texture_pos;
-	double step;
-	t_data *data;
+	int		line_height;
+	int		start_line;
+	int		end_line;
+	int		texture_x;
+	int		texture_y;
+	double	texture_pos;
+	double	step;
+	t_data	*data;
 }	t_texture;
 
 typedef struct s_rays{
@@ -72,13 +72,12 @@ typedef struct s_rays{
 	int			step_y;
 }	t_rays;
 
-
-typedef struct	s_player {
-	t_vec		pos;
-	t_vec		plane;
-	t_vec		direction;
-	float		movespeed;
-} t_player;
+typedef struct s_player{
+	t_vec	pos;
+	t_vec	plane;
+	t_vec	direction;
+	float	movespeed;
+}	t_player;
 
 typedef struct s_block{
 	t_data	no;//norte cima
@@ -86,8 +85,6 @@ typedef struct s_block{
 	t_data	we;//oeste <- esquerda
 	t_data	ea;//leste -> direita
 }	t_block;
-
-
 
 typedef struct s_resource {
 	t_data	pov;
@@ -101,10 +98,10 @@ typedef struct s_resource {
 typedef struct s_game{
 	t_player	player;
 	t_buttons	buttons;
-	t_resource resources;
-	void	*mlx;
-	void	*win;
-	char	**map;
+	t_resource	resources;
+	void		*mlx;
+	void		*win;
+	char		**map;
 }	t_game;
 
 // INIT
@@ -126,12 +123,11 @@ int		check_horizontal_wall(char **map, int x, int y);
 int		check_vertical_wall(char **map, int x, int y);
 int		check_surrounded(char **map, int x, int y);
 void	set_name_text(t_game *game, char **config);
-
 int		set_color_background(t_game *game, char **config);
 int		my_access(char **config);
+int		valid_conf(char **config);
 int		set_config(t_game *game, char **config);
 int		check_config(t_resource *res);
-
 
 // COLOR
 int		get_pixel(t_data *data, t_vec point);
@@ -164,14 +160,12 @@ void	watch_functions(t_game *game);
 void	change_plane(t_game *game, float rot_speed);
 void	change_direction(t_game *game, float rot_speed);
 
-
 // MAP
 int		render_map(t_game *game);
 int		update_map(int key_code, t_game *game);
 
 // RAYS
 void	raycasting(t_game *game);
-
 
 // RENDER ENGINE
 void	render_engine(t_rays *values, t_game *game);
@@ -182,15 +176,18 @@ t_data	*get_texture(t_game *game, t_rays *values);
 void	set_perp_wall(t_rays *values, t_game *game);
 int		solve_mirroring(int texture, t_rays *values);
 double	wall_fabs(float condit, float mult, t_rays *values, t_game *game);
-
+int		lamp(int x, int y, t_game *game, int color);
 
 // CLOSE
 void	close_exit(int fd, char *s);
 void	finish_him(t_game *game, int exit_code);
 void	kill_window(t_game *game);
+void	show_error(t_game *game, int exit_code, char *s);
 
 // UTILS
 int		matrix_len(char **matrix);
 void	free_matrix(char **matrix);
 int		distance(t_vec a, t_vec b);
+int		check_ext(char *file, char *ext);
+
 #endif

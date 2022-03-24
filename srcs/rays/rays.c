@@ -5,7 +5,7 @@ static void	reset_values(t_rays *values, t_player *player)
 	double	multiplier;
 	t_vec	camera_pixel;
 
-	multiplier = 2 * values->rays / (double)screenWidth - 1;
+	multiplier = 2 * values->rays / (double)SCREENWIDTH - 1;
 	camera_pixel = player->plane;
 	vec_scale(&camera_pixel, multiplier);
 	values->ray_dir = player->direction;
@@ -68,7 +68,7 @@ void	raycasting(t_game *game)
 	t_rays	values;
 
 	values.rays = 0;
-	while (values.rays < screenWidth)
+	while (values.rays < SCREENWIDTH)
 	{
 		// reset values
 		reset_values(&values, &game->player);

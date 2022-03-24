@@ -1,29 +1,28 @@
 #include <cub3d.h>
 
-void	load_block(t_game *game, t_block *block)
+int	open_xpm_file(t_data *data, t_game *game)
 {
 	int	trash;
 
-	block->no.img = mlx_xpm_file_to_image(game->mlx, block->no.name, \
+	data->img = mlx_xpm_file_to_image(game->mlx, data->name, \
 	&trash, &trash);
-	block->no.addr = mlx_get_data_addr(block->no.img, \
-	&block->no.bits_per_pixel, &block->no.line_length, &block->no.endian);
+	if (!data->img)
+		return (-1);
+	data->addr = mlx_get_data_addr(data->img, \
+	&data->bits_per_pixel, &data->line_length, &data->endian);
+	return (0);
+}
 
-	block->so.img = mlx_xpm_file_to_image(game->mlx, block->so.name, \
-	&trash, &trash);
-	block->so.addr = mlx_get_data_addr(block->so.img, \
-	&block->so.bits_per_pixel, &block->so.line_length, &block->so.endian);
-	
-	block->we.img = mlx_xpm_file_to_image(game->mlx, block->we.name, \
-	&trash, &trash);
-	block->we.addr = mlx_get_data_addr(block->we.img, \
-	&block->we.bits_per_pixel, &block->we.line_length, &block->we.endian);
-
-	block->ea.img = mlx_xpm_file_to_image(game->mlx, block->ea.name, \
-	&trash, &trash);
-	block->ea.addr = mlx_get_data_addr(block->ea.img, \
-	&block->ea.bits_per_pixel, &block->ea.line_length, &block->ea.endian);
-
+void	load_block(t_game *game, t_block *block)
+{
+	if (open_xpm_file(&block->no, game))
+		show_error(game, 1, "cannot open this image");
+	if (open_xpm_file(&block->so, game))
+		show_error(game, 1, "cannot open this image");
+	if (open_xpm_file(&block->we, game))
+		show_error(game, 1, "cannot open this image");
+	if (open_xpm_file(&block->ea, game))
+		show_error(game, 1, "cannot open this image");
 }
 
 void	load_imgs(t_game *game)
@@ -32,7 +31,7 @@ void	load_imgs(t_game *game)
 	t_resource	*r;
 
 	r = &game->resources;
-	r->canvas.img = mlx_new_image(game->mlx, screenWidth, screenHeight);
+	r->canvas.img = mlx_new_image(game->mlx, SCREENWIDTH, SCREENHEIGHT);
 	r->canvas.addr = mlx_get_data_addr(r->canvas.img, \
 	&r->canvas.bits_per_pixel, &r->canvas.line_length, &r->canvas.endian);
 	r->pov.img = mlx_xpm_file_to_image(game->mlx, "./imgs/pov.xpm", \
@@ -44,5 +43,4 @@ void	load_imgs(t_game *game)
 	r->door = r->wall;
 // G A M B I A R R A
 	// load_block(game, &r->door);
-	
 }

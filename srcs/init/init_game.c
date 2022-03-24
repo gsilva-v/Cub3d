@@ -32,5 +32,5 @@ void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	init_player(game);
 	game->player.movespeed = 0.1f;
-	game->win = mlx_new_window(game->mlx, screenWidth, screenHeight, "RAY");
+	game->win = mlx_new_window(game->mlx, SCREENWIDTH, SCREENHEIGHT, "RAY");
 }
