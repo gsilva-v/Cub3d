@@ -65,8 +65,8 @@ clean:
 	$(RM) ./objs
 
 fclean: clean
-	# @make fclean -C $(PATH_LIBFT)
-	# @make fclean -C $(PATH_VEC)
+	@make fclean -C $(PATH_LIBFT)
+	@make fclean -C $(PATH_VEC)
 	$(RM) $(NAME)
 
 re: fclean all

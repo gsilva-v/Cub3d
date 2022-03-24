@@ -6,7 +6,7 @@
 /*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 08:25:49 by user42            #+#    #+#             */
-/*   Updated: 2022/03/23 18:18:18 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/03/24 09:27:40 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ void	vec_normalize(t_vec *v);
 t_vec	*vec_init(t_vec *vec, float x, float y, float z);
 t_vec	*new_vec(float x, float y, float z);
 void	vec_magnitude(t_vec *v);
-void	vec_rotate(t_vec *vec, float angle);
-void	vec_rotatex(t_vec *vec, float angle);
-void	vec_rotatey(t_vec *vec, float angle);
-void	vec_rotatez(t_vec *vec, float angle);
 float	vec_dot_product(t_vec *vec1, t_vec *vec2);
 void	change_value(t_vec *vec, float x, float y, float z);
 

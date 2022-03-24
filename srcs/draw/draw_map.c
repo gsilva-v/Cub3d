@@ -2,22 +2,27 @@
 
 void	clean_map(t_game *game)
 {
-	int col = 0, line = 0;
-	int	color;
+	int	col;
+	int	line;
+	int	c;
 
+	col = 0;
+	line = 0;
 	while (line < SCREENHEIGHT)
 	{
 		col = 0;
 		while (col < SCREENWIDTH)
 		{
-			color = get_pixel(&game->resources.pov, (t_vec){.x = col, .y = line});
-			if (color != 0xff00ff)
+			c = get_pixel(&game->resources.pov, (t_vec){.x = col, .y = line});
+			if (c != 0xff00ff)
 				draw_pixel(&game->resources.canvas, \
-				(t_vec){.x = col, .y = line}, color);
-			else if (line < SCREENHEIGHT  / 2)
-				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, game->resources.ceil_color);
+				(t_vec){.x = col, .y = line}, c);
+			else if (line < SCREENHEIGHT / 2)
+				draw_pixel(&game->resources.canvas, (t_vec){.x = col, \
+				.y = line}, game->resources.ceil_color);
 			else
-				draw_pixel(&game->resources.canvas, (t_vec){.x = col, .y = line }, game->resources.floor_color);
+				draw_pixel(&game->resources.canvas, (t_vec){.x = col, \
+				.y = line}, game->resources.floor_color);
 			col++;
 		}
 		line++;

@@ -1,10 +1,10 @@
-SRCS = vector.c
+SRCS = vector.c vec_basic.c vec_matrix.c
 
 OBJS = $(SRCS:.c=.o)
 
 NAME = libvec.a
 
-CFLAGS		= -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 
 CC = clang
 

@@ -128,6 +128,8 @@ int		my_access(char **config);
 int		valid_conf(char **config);
 int		set_config(t_game *game, char **config);
 int		check_config(t_resource *res);
+int		check_first_index(char *config);
+
 
 // COLOR
 int		get_pixel(t_data *data, t_vec point);

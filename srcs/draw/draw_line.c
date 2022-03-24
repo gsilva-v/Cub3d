@@ -2,33 +2,32 @@
 
 int	take_step(float dx, float dy)
 {
-    if (dx < 0)
-        dx *= -1;
-    if (dy < 0)
-        dy *= -1;
-    if (dx > dy)
+	if (dx < 0)
+		dx *= -1;
+	if (dy < 0)
+		dy *= -1;
+	if (dx > dy)
 		return (dx);
 	return (dy);
 }
 
-void draw_line(t_vec vec1, t_vec vec2, int color, t_game *game)
+void	draw_line(t_vec vec1, t_vec vec2, int color, t_game *game)
 {
-    double		dx, dy, x, y;
-    int			steps;
-	t_vec		point;
+	t_vec	d;
+	t_vec	point;
+	int		steps;
 
-    dx = vec2.x-vec1.x;
-    dy = vec2.y-vec1.y;
-    x = vec1.x;
-    y = vec1.y;
-    steps = take_step(dx, dy);
-    dx = (double) (dx / steps);
-    dy = (double) (dy / steps);
-    while (steps--)
-    {
-		point = (t_vec){.x = x, .y = y};
+	d.x = vec2.x - vec1.x;
+	d.y = vec2.y - vec1.y;
+	point.x = vec1.x;
+	point.y = vec1.y;
+	steps = take_step(d.x, d.y);
+	d.x = (double)(d.x / steps);
+	d.y = (double)(d.y / steps);
+	while (steps--)
+	{
 		draw_pixel(&game->resources.canvas, point, color);
-        x += dx;
-        y += dy;
-    }
+		point.x += d.x;
+		point.y += d.y;
+	}
 }

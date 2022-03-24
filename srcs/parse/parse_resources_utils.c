@@ -79,7 +79,7 @@ int	valid_conf(char **config)
 			return (0);
 		if (config[1] && !ft_strncmp(config[1], ".", 1))
 		{
-			if (!check_ext(config, ".xpm"))
+			if (!check_ext(config[1], ".xpm"))
 				return (0);
 		}
 	}
