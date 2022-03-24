@@ -23,6 +23,11 @@
 # define DOOR '2'
 # define VALID_BLOCK "012 \nWENS"
 # define HAS_INSIDE "ESWN02"
+# define WRONG_ARG  "Invalid arguments, try ./cub3d ./maps/simple_map.cub"
+# define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"
+# define WTOUT_PLYR "this map dont have a initial point for player"
+# define DBLE_PLYR "This map have 2 or more initial points to player"
+# define POV "./imgs/pov.xpm"
 
 typedef struct s_buttons
 {

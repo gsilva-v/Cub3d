@@ -34,7 +34,7 @@ void	load_imgs(t_game *game)
 	r->canvas.img = mlx_new_image(game->mlx, SCREENWIDTH, SCREENHEIGHT);
 	r->canvas.addr = mlx_get_data_addr(r->canvas.img, \
 	&r->canvas.bits_per_pixel, &r->canvas.line_length, &r->canvas.endian);
-	r->pov.img = mlx_xpm_file_to_image(game->mlx, "./imgs/pov.xpm", \
+	r->pov.img = mlx_xpm_file_to_image(game->mlx, POV, \
 	&trash, &trash);
 	r->pov.addr = mlx_get_data_addr(r->pov.img, &r->pov.bits_per_pixel, \
 	&r->pov.line_length, &r->pov.endian);

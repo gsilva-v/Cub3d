@@ -78,20 +78,20 @@ int	parse_map(t_game *game, char *file)
 	if (fd == -1)
 		show_error(game, 1, "cannot open file map");
 	if (advance_to_map(fd))
-		close_exit(fd, "invalid file!");
+		close_exit(fd, INV_CFG);
 	line = get_next_line(fd);
 	if (ft_strncmp(line, "\n", -1))
 	{
 		free(line);
-		show_error(game, 1, "invalid file");
+		show_error(game, 1, INV_CFG);
 	}
 	if (!line)
-		close_exit(fd, "this file don't have a map!");
+		close_exit(fd, "This file don't have a map!");
 	game->map = get_map(fd, line);
 	if (!game->map)
-		close_exit(fd, "this map have invalid caracters!");
+		close_exit(fd, "This map have invalid caracters!");
 	close (fd);
 	if (!is_surrounded(game))
-		show_error(game, 1, "this map is not surrouded");
+		show_error(game, 1, "This map have a hole for space");
 	return (0);
 }

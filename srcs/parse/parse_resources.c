@@ -60,12 +60,12 @@ char	*get_resources(char *line, t_game *game, int fd)
 
 	config = parse_config(line);
 	if (!config)
-		show_error(game, 1, "this file have any misconfiguration");
+		show_error(game, 1, INV_CFG);
 	if (line[0] != '\n' && set_config(game, config))
 	{
 		close(fd);
 		free(line);
-		show_error(game, 1, "this file have any misconfiguration");
+		show_error(game, 1, INV_CFG);
 	}
 	if (line[0] == 'C')
 	{
@@ -84,7 +84,7 @@ int	parse_resources(t_game *game, char *file)
 	int		fd;
 	char	*line;
 	char	**config;
-
+	
 	game->resources.ceil_color = -1;
 	game->resources.floor_color = -1;
 	if (!check_ext(file, ".cub"))
@@ -97,6 +97,6 @@ int	parse_resources(t_game *game, char *file)
 		line = get_resources(line, game, fd);
 	close(fd);
 	if (check_config(&game->resources))
-		show_error(game, 1, "this file have any misconfiguration");
+		show_error(game, 1, INV_CFG);
 	return (0);
 }

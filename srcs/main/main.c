@@ -6,10 +6,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("Error: invalid arguments, try ./cub3d ./maps/simple_map.cub\n");
+		printf("Error: %s\n", WRONG_ARG);
 		exit(1);
 	}
 	ft_bzero(&game, sizeof(game));
+	game.player.pos.x = -1.0f;
+	game.player.pos.y = -1.0f;
 	if (parse_resources(&game, argv[1]))
 		return (1);
 	if (parse_map(&game, argv[1]))

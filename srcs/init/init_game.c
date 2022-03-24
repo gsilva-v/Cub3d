@@ -23,6 +23,8 @@ void	init_player(t_game *game)
 		}
 		y++;
 	}
+	if (game->player.pos.x == -1.0f || game->player.pos.y == -1.0f)
+		show_error(game, 1, WTOUT_PLYR);
 	game->player.pos.x += 0.5f;
 	game->player.pos.y += 0.5f;
 }
