@@ -39,8 +39,14 @@ void	load_imgs(t_game *game)
 	r->pov.addr = mlx_get_data_addr(r->pov.img, &r->pov.bits_per_pixel, \
 	&r->pov.line_length, &r->pov.endian);
 	load_block(game, &r->wall);
+
+	r->door.so.name = "./imgs/door.xpm";
+	r->door.no.name = "./imgs/door.xpm";
+	r->door.we.name = "./imgs/door.xpm";
+	r->door.ea.name = "./imgs/door.xpm";
+	load_block(game, &r->door);
+
 // G A M B I A R R A
-	r->door = r->wall;
 // G A M B I A R R A
 	// load_block(game, &r->door);
 }

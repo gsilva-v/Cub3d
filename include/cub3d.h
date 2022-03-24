@@ -98,6 +98,7 @@ typedef struct s_resource {
 typedef struct s_game{
 	t_player	player;
 	t_buttons	buttons;
+	char		*buffer;
 	t_resource	resources;
 	void		*mlx;
 	void		*win;
@@ -168,6 +169,7 @@ int		update_map(int key_code, t_game *game);
 
 // RAYS
 void	raycasting(t_game *game);
+void	dda(t_rays *values, t_game *game);
 
 // RENDER ENGINE
 void	render_engine(t_rays *values, t_game *game);

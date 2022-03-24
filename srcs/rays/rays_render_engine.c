@@ -29,11 +29,22 @@ static int	set_texture_x(t_rays *values, t_game *game)
 	return (texture_x);
 }
 
+int	is_full(char *c, int size)
+{
+	while (size)
+	{
+		size--;
+		if (c[size] == 0)
+			return (0);
+	}
+	return (1);
+}
+
 static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 {
 	int	index;
 	int	color;
-	int	color2;
+	int	is_visible;
 
 	index = text->start_line;
 	while (index < text->end_line)
@@ -42,18 +53,36 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		text->texture_pos += text->step;
 		color = get_pixel(text->data, (t_vec){.x = text->texture_x, \
 		.y = text->texture_y});
+		is_visible = 0;
+		if (color != 0xff00ff)
+			is_visible = 1;
 		if (values->hit_side == 1)
 			color = get_color_shade(color, 0.6);
-		color2 = get_pixel(&game->resources.pov, (t_vec){.x = values->rays, \
-		.y = index});
 		color = lamp(values->rays, index, game, color);
-		if (color2 != 0xff00ff)
+		if (is_visible && game->buffer[index] == 0)
+		{
 			draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, \
-			.y = index}, color2);
-		else
-			draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, \
-		.y = index}, color);
+			.y = index}, color);
+			game->buffer[index] = 1;
+		}
 		index++;
+	}
+	if (game->map[values->map_pos.y][values->map_pos.x] != WALL && !is_full(game->buffer, SCREENHEIGHT))
+	{
+		if (values->dst_x < values->dst_y)
+		{
+			values->dst_x += values->dlt_x;
+			values->map_pos.x += values->step_x;
+			values->hit_side = 0; //parede vertical
+		}
+		else
+		{
+			values->dst_y += values->dlt_y;
+			values->map_pos.y += values->step_y;
+			values->hit_side = 1; //parede horizontal
+		}
+		dda(values, game);
+		render_engine(values, game);
 	}
 }
 

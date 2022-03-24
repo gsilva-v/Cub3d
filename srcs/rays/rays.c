@@ -44,7 +44,7 @@ static void	check_dist(t_rays *values, t_player *player)
 	}
 }
 
-static void	dda(t_rays *values, t_game *game)
+void	dda(t_rays *values, t_game *game)
 {
 	while (game->map[values->map_pos.y][values->map_pos.x] == FLOOR)
 	{
@@ -77,6 +77,7 @@ void	raycasting(t_game *game)
 		// algoritmo DDA
 		dda(&values, game);
 		// renderização
+		ft_memset(game->buffer, 0, SCREENHEIGHT);
 		render_engine(&values, game);
 		values.rays++;
 	}
