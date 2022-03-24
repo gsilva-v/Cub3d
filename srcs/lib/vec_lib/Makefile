@@ -6,7 +6,7 @@ NAME = libvec.a
 
 CFLAGS = -g -Wall -Werror -Wextra
 
-CC = clang
+CC = gcc
 
 RM = rm -f
 

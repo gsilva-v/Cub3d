@@ -56,6 +56,7 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		is_visible = 0;
 		if (color != 0xff00ff)
 			is_visible = 1;
+		color = get_color_shade(color, 0.6);
 		if (values->hit_side == 1)
 			color = get_color_shade(color, 0.6);
 		color = lamp(values->rays, index, game, color);
