@@ -3,6 +3,6 @@
 void	close_exit(int fd, char *s)
 {
 	close(fd);
-	printf("%s\n", s);
+	printf("Error\n%s\n", s);
 	exit(1);
 }

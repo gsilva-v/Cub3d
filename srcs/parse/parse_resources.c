@@ -1,17 +1,27 @@
 #include <cub3d.h>
 
-void	set_name_text(t_game *game, char **config)
+int	set_name_text(t_game *game, char **config)
 {
-	if (config && ft_strncmp(config[1], ".", 1))
-		return ;
+	t_block		*wall;
+
+	wall = &game->resources.wall;
+	if (!ft_strncmp(config[0], "NO", -1) && wall->no.name)
+		return (1);
+	if (!ft_strncmp(config[0], "SO", -1) && wall->so.name)
+		return (1);
+	if (!ft_strncmp(config[0], "WE", -1) && wall->we.name)
+		return (1);
+	if (!ft_strncmp(config[0], "EA", -1) && wall->ea.name)
+		return (1);
 	if (!ft_strncmp(config[0], "NO", -1) && config[1])
-		game->resources.wall.no.name = ft_strdup(config[1]);
+		wall->no.name = ft_strdup(config[1]);
 	if (!ft_strncmp(config[0], "SO", -1) && config[1])
-		game->resources.wall.so.name = ft_strdup(config[1]);
+		wall->so.name = ft_strdup(config[1]);
 	if (!ft_strncmp(config[0], "WE", -1) && config[1])
-		game->resources.wall.we.name = ft_strdup(config[1]);
+		wall->we.name = ft_strdup(config[1]);
 	if (!ft_strncmp(config[0], "EA", -1) && config[1])
-		game->resources.wall.ea.name = ft_strdup(config[1]);
+		wall->ea.name = ft_strdup(config[1]);
+	return (0);
 }
 
 int	check_first_index(char *config)
@@ -33,13 +43,36 @@ int	check_first_index(char *config)
 	return (0);
 }
 
+void	change_char(char *s, char c, char f, int jump)
+{
+	int	first;
+	int	index;
+
+	index = 0;
+	first = 1;
+	if (!jump)
+		first = 0;
+	while (s[index])
+	{
+		if (s[index] == c && first == 0)
+			s[index] = f;
+		else if (s[index] == c)
+			first = 0;
+		index++;
+	}
+}
+
 char	**parse_config(char *line)
 {
 	char	**config;
 	char	*temp;
 	int		valid;
 
+	if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
+		change_char(line, ' ', 1, 1);
 	config = ft_split(line, ' ');
+	if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
+		change_char(config[1], 1, ' ', 0);
 	if (config && config[0] && config[1])
 	{
 		temp = ft_strdup(config[1]);
@@ -51,13 +84,23 @@ char	**parse_config(char *line)
 	if (config && valid)
 		return (config);
 	free(line);
+	free_matrix(config);
 	return (NULL);
 }
 
 char	*get_resources(char *line, t_game *game, int fd)
 {
 	char	**config;
+	char	*tmp;
 
+	tmp = ft_strtrim(line, " ");
+	if (tmp[0] == '1')
+	{
+		free(tmp);
+		free(line);
+		return (NULL);
+	}
+	free(tmp);
 	config = parse_config(line);
 	if (!config)
 		show_error(game, 1, INV_CFG);
@@ -66,12 +109,6 @@ char	*get_resources(char *line, t_game *game, int fd)
 		close(fd);
 		free(line);
 		show_error(game, 1, INV_CFG);
-	}
-	if (line[0] == 'C')
-	{
-		free(line);
-		free_matrix(config);
-		return (NULL);
 	}
 	free(line);
 	free_matrix(config);

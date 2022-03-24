@@ -128,7 +128,7 @@ int		parse_resources(t_game *game, char *file);
 int		check_horizontal_wall(char **map, int x, int y);
 int		check_vertical_wall(char **map, int x, int y);
 int		check_surrounded(char **map, int x, int y);
-void	set_name_text(t_game *game, char **config);
+int		set_name_text(t_game *game, char **config);
 int		set_color_background(t_game *game, char **config);
 int		my_access(char **config);
 int		valid_conf(char **config);
