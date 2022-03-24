@@ -41,6 +41,8 @@ int	comma_in_view(char *s, int index)
 		else if (s[index] == ',')
 			return (1);
 	}
+	if (index == 0)
+		return (1);
 	index = tmp;
 	while (s[index])
 	{
