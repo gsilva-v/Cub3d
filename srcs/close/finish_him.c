@@ -1,5 +1,11 @@
 #include <cub3d.h>
 
+void	show_error(t_game *game, int exit_code, char *s)
+{
+	printf("Error\n%s\n", s);
+	finish_him(game, exit_code);
+}
+
 void	free_data(t_game *game, t_data *data)
 {
 	if (data->name)
@@ -24,8 +30,8 @@ void	check_data_leaks(t_game *game)
 {
 	if (&game->resources.wall)
 		free_block(&game->resources.wall, game);
-	// if (&game->resources.door)
-	// 	free_block(&game->resources.door, game);
+	if (&game->resources.door)
+		free_block(&game->resources.door, game);
 	if (&game->resources.pov)
 		free_data(game, &game->resources.pov);
 	if (&game->resources.canvas)
@@ -39,5 +45,7 @@ void	finish_him(t_game *game, int exit_code)
 	check_data_leaks(game);
 	if (game->mlx && game->win)
 		kill_window(game);
+	if (game->buffer)
+		free(game->buffer);
 	exit(exit_code);
 }

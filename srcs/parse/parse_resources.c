@@ -1,49 +1,16 @@
 #include <cub3d.h>
 
-int	set_name_text(t_game *game, char **config)
+static int	check_config(t_resource *res)
 {
-	t_block		*wall;
-
-	wall = &game->resources.wall;
-	if (!ft_strncmp(config[0], "NO", -1) && wall->no.name)
+	if (!res->wall.ea.name || !res->wall.we.name)
 		return (1);
-	if (!ft_strncmp(config[0], "SO", -1) && wall->so.name)
+	if (!res->wall.no.name || !res->wall.so.name)
 		return (1);
-	if (!ft_strncmp(config[0], "WE", -1) && wall->we.name)
-		return (1);
-	if (!ft_strncmp(config[0], "EA", -1) && wall->ea.name)
-		return (1);
-	if (!ft_strncmp(config[0], "NO", -1) && config[1])
-		wall->no.name = ft_strdup(config[1]);
-	if (!ft_strncmp(config[0], "SO", -1) && config[1])
-		wall->so.name = ft_strdup(config[1]);
-	if (!ft_strncmp(config[0], "WE", -1) && config[1])
-		wall->we.name = ft_strdup(config[1]);
-	if (!ft_strncmp(config[0], "EA", -1) && config[1])
-		wall->ea.name = ft_strdup(config[1]);
-	return (0);
-}
-
-int	check_first_index(char *config)
-{
-	if (!ft_strncmp(config, "NO", -1))
-		return (1);
-	if (!ft_strncmp(config, "SO", -1))
-		return (1);
-	if (!ft_strncmp(config, "WE", -1))
-		return (1);
-	if (!ft_strncmp(config, "EA", -1))
-		return (1);
-	if (!ft_strncmp(config, "C", -1))
-		return (1);
-	if (!ft_strncmp(config, "F", -1))
-		return (1);
-	if (!ft_strncmp(config, "\n", -1))
+	if (res->ceil_color == -1 || res->floor_color == -1)
 		return (1);
 	return (0);
 }
-
-void	change_char(char *s, char c, char f, int jump)
+static void	change_char(char *s, char c, char f, int jump)
 {
 	int	first;
 	int	index;
@@ -62,7 +29,7 @@ void	change_char(char *s, char c, char f, int jump)
 	}
 }
 
-char	**parse_config(char *line)
+static char	**parse_config(char *line)
 {
 	char	**config;
 	char	*temp;
@@ -88,7 +55,7 @@ char	**parse_config(char *line)
 	return (NULL);
 }
 
-char	*get_resources(char *line, t_game *game, int fd)
+static char	*get_resources(char *line, t_game *game, int fd)
 {
 	char	**config;
 	char	*tmp;

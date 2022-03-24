@@ -6,7 +6,7 @@
 # include <errno.h>
 # include <limits.h>
 
-# define BUFFER_SIZE 20
+# define BUFFER_SIZE 1
 
 /*
 	@param fd		File Descriptor

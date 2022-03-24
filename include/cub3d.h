@@ -124,18 +124,16 @@ void	player_east(t_game *game, int x, int y);
 int		parse_map(t_game *game, char *file);
 int		parse_resources(t_game *game, char *file);
 
-// PARSE UTILS
+// PARSE MAP UTILS
 int		check_horizontal_wall(char **map, int x, int y);
 int		check_vertical_wall(char **map, int x, int y);
 int		check_surrounded(char **map, int x, int y);
-int		set_name_text(t_game *game, char **config);
-int		set_color_background(t_game *game, char **config);
-int		my_access(char **config);
+
+// PARSE RESOURCE UTILS
+int		check_config(t_resource *res);
 int		valid_conf(char **config);
 int		set_config(t_game *game, char **config);
-int		check_config(t_resource *res);
-int		check_first_index(char *config);
-
+int		set_color_background(t_game *game, char **config);
 
 // COLOR
 int		get_pixel(t_data *data, t_vec point);
@@ -144,10 +142,7 @@ int		create_rgb(int r, int g, int b);
 
 // DRAW
 void	clean_map(t_game *game);
-void	draw_line(t_vec vec1, t_vec vec2, int color, t_game *game);
 void	draw_pixel(t_data *data, t_vec vec, int color);
-void	draw_square(t_data *canvas, t_vec point, int size, int color);
-void	draw_map(t_game *game);
 
 // GAME ENTITY
 int		game_render(t_game *game);
@@ -188,7 +183,6 @@ double	wall_fabs(float condit, float mult, t_rays *values, t_game *game);
 int		lamp(int x, int y, t_game *game, int color);
 
 // CLOSE
-void	close_exit(int fd, char *s);
 void	finish_him(t_game *game, int exit_code);
 void	kill_window(t_game *game);
 void	show_error(t_game *game, int exit_code, char *s);

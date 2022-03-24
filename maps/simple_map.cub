@@ -1,16 +1,15 @@
+NO                  ./imgs/wall.xpm
 C                           10                   ,                                    255                        , 2          
 
-SO                     /home/flda-sil/Documents/Estudos/Raycasting/Cub3d/imgs/wall.xpm
-
-
-
-NO                    /home/flda-sil/Documents/Estudos/Raycasting/Cub3d/imgs/wall.xpm
+SO                   ./imgs/wall.xpm
 
 
 
 
 
-EA                       /home/flda-sil/Documents/Estudos/Raycasting/Cub3d/imgs/wall.xpm
+
+
+EA                     ./imgs/wall.xpm
 
 
 
@@ -18,7 +17,7 @@ EA                       /home/flda-sil/Documents/Estudos/Raycasting/Cub3d/imgs/
 F 100,100,100
 
 
-WE                      /home/flda-sil/Documents/Estudos/Raycasting/Cub3d/imgs/wall.xpm
+WE                    ./imgs/wall.xpm
 
 
 

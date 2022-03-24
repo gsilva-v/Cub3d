@@ -23,7 +23,6 @@ int	is_surrounded(t_game *game)
 	return (1);
 }
 
-
 char	*advance_to_map(int fd)
 {
 	char	*tmp;
@@ -36,7 +35,7 @@ char	*advance_to_map(int fd)
 		if (tmp[0] == '1')
 		{
 			free(tmp);
-			break;
+			break ;
 		}
 		free(tmp);
 		free(line);
@@ -81,21 +80,19 @@ int	parse_map(t_game *game, char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		show_error(game, 1, "cannot open file map");
+		show_error(game, 1, "Cannot open file map");
 	line = advance_to_map(fd);
 	if (!line)
-		close_exit(fd, INV_CFG);
-/* 	if (ft_strncmp(line, "\n", -1))
 	{
-		free(line);
-		close (fd);
+		close(fd);
 		show_error(game, 1, INV_CFG);
-	} */
-	/* if (!line)
-		close_exit(fd, "This file don't have a map!"); */
+	}
 	game->map = get_map(fd, line);
 	if (!game->map)
-		close_exit(fd, "This map have invalid caracters!");
+	{
+		close(fd);
+		show_error(game, 1, "This map have invalid caracters!");
+	}
 	close (fd);
 	if (!is_surrounded(game))
 		show_error(game, 1, "This map have a hole for space");
