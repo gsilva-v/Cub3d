@@ -45,12 +45,12 @@ int	comma_in_view(char *s, int index)
 	while (s[index])
 	{
 		if (s[index] != ' ' && s[index] != ',')
-			break;
+			return (0);
 		else if (s[index] == ',')
 			return (1);
 		index++;
 	}
-	return (0);
+	return (1);
 }
 
 char	**get_rgb(char **config)
