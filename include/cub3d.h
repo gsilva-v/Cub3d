@@ -130,7 +130,6 @@ int		check_vertical_wall(char **map, int x, int y);
 int		check_surrounded(char **map, int x, int y);
 
 // PARSE RESOURCE UTILS
-int		check_config(t_resource *res);
 int		valid_conf(char **config);
 int		set_config(t_game *game, char **config);
 int		set_color_background(t_game *game, char **config);
