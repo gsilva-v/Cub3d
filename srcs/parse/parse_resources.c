@@ -84,7 +84,7 @@ int	parse_resources(t_game *game, char *file)
 	int		fd;
 	char	*line;
 	char	**config;
-	
+
 	game->resources.ceil_color = -1;
 	game->resources.floor_color = -1;
 	if (!check_ext(file, ".cub"))

@@ -53,5 +53,6 @@ void	game_run(t_game *game)
 	mlx_loop_hook(game->mlx, &game_render, game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, press_key, game);
 	mlx_hook(game->win, KeyRelease, KeyReleaseMask, release_key, game);
+	mlx_hook(game->win, 17, 0L, red_cross, game);
 	mlx_loop(game->mlx);
 }

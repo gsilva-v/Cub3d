@@ -45,8 +45,4 @@ void	load_imgs(t_game *game)
 	r->door.we.name = "./imgs/door.xpm";
 	r->door.ea.name = "./imgs/door.xpm";
 	load_block(game, &r->door);
-
-// G A M B I A R R A
-// G A M B I A R R A
-	// load_block(game, &r->door);
 }

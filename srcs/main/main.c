@@ -6,7 +6,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("Error: %s\n", WRONG_ARG);
+		printf("Error\n%s\n", WRONG_ARG);
 		exit(1);
 	}
 	ft_bzero(&game, sizeof(game));

@@ -192,6 +192,8 @@ void	close_exit(int fd, char *s);
 void	finish_him(t_game *game, int exit_code);
 void	kill_window(t_game *game);
 void	show_error(t_game *game, int exit_code, char *s);
+int		red_cross(t_game *game);
+
 
 // UTILS
 int		matrix_len(char **matrix);

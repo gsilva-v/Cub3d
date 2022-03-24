@@ -17,7 +17,8 @@ void	clean_map(t_game *game)
 			if (c != 0xff00ff)
 				draw_pixel(&game->resources.canvas, \
 				(t_vec){.x = col, .y = line}, c);
-			else  */if (line < SCREENHEIGHT / 2)
+			else  */
+			if (line < SCREENHEIGHT / 2)
 				draw_pixel(&game->resources.canvas, (t_vec){.x = col, \
 				.y = line}, game->resources.ceil_color);
 			else

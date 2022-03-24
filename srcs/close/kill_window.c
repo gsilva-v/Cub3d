@@ -1,5 +1,10 @@
 #include <cub3d.h>
 
+int	red_cross(t_game *game)
+{
+	finish_him(game, 0);
+}
+
 void	kill_window(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);

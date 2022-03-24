@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 
 CC = gcc
 INCLUDE = -I ./include/
@@ -72,9 +72,9 @@ fclean: clean
 re: fclean all
 
 run: re
-	./cub3d ./maps/simple_map.cub 
+	./cub3D ./maps/simple_map.cub 
 
 runv: re
-	valgrind --leak-check=full --show-leak-kinds=all ./cub3d ./maps/simple_map.cub 
+	valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./maps/simple_map.cub 
 
 .PHONY: all clean fclean re
