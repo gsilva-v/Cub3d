@@ -83,6 +83,7 @@ int	parse_map(t_game *game, char *file)
 	if (ft_strncmp(line, "\n", -1))
 	{
 		free(line);
+		close (fd);
 		show_error(game, 1, INV_CFG);
 	}
 	if (!line)

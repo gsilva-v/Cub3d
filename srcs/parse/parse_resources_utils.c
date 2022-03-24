@@ -29,8 +29,9 @@ int	my_access(char **config)
 
 	fd = open(config[1], O_RDONLY);
 	if (fd == -1)
-		return (-1);
-	return (fd);
+		return (1);
+	close(fd);
+	return (0);
 }
 
 int	set_config(t_game *game, char **config)
@@ -45,8 +46,7 @@ int	set_config(t_game *game, char **config)
 	}
 	if ((ft_strncmp(config[0], "C", 1)) && (ft_strncmp(config[0], "F", 1)))
 	{
-		fd = my_access(config);
-		if (fd == -1)
+		if (my_access(config))
 			return (1);
 	}
 	set_name_text(game, config);
