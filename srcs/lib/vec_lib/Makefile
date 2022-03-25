@@ -12,13 +12,17 @@ RM = rm -f
 
 all: $(NAME)
 
+%.o:%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): 	$(OBJS)
-	ar rc $(NAME) $(OBJS)
+	@ar rc $(NAME) $(OBJS)
+
+
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean : clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all

@@ -4,7 +4,6 @@ static void	clean_map(t_game *game)
 {
 	int	col;
 	int	line;
-	int	c;
 
 	col = 0;
 	line = 0;
@@ -27,13 +26,10 @@ static void	clean_map(t_game *game)
 
 int	game_render(t_game *game)
 {
-	int	color;
-	int	y;
-	int	x;
-
 	clean_map(game);
 	game_update(game);
 	player_render(game);
 	mlx_put_image_to_window(game->mlx, game->win, \
 	game->resources.canvas.img, 0, 0);
+	return (0);
 }

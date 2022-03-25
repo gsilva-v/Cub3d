@@ -82,7 +82,7 @@ void	render_engine(t_rays *values, t_game *game)
 	t_texture	text;
 
 	set_perp_wall(values, game);
-	text.line_height = abs(SCREENHEIGHT / values->perp_wall);
+	text.line_height = (int)fabs(SCREENHEIGHT / values->perp_wall);
 	text.start_line = -text.line_height / 2 + SCREENHEIGHT / 2;
 	if (text.start_line < 0)
 		text.start_line = 0;

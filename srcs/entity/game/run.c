@@ -22,6 +22,7 @@ int	press_key(int key_code, t_game *game)
 		game->buttons.acelerate = 1;
 	if (key_code == 'f')
 		game->buttons.light = 1;
+	return (0);
 }
 
 int	release_key(int key_code, t_game *game)
@@ -46,6 +47,7 @@ int	release_key(int key_code, t_game *game)
 		game->buttons.acelerate = 0;
 	if (key_code == 'f')
 		game->buttons.light = 0;
+	return (0);
 }
 
 void	game_run(t_game *game)

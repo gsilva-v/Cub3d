@@ -2,19 +2,20 @@ NAME = cub3D
 
 CC = gcc
 INCLUDE = -I ./include/
-CFLAGS = -g $(INCLUDE)
+CFLAGS = -g -Wall -Werror -Wextra $(INCLUDE)
 MLX_FLAGS = -lmlx_Linux -lXext -lX11
 
 RM = rm -rf
 
 PATH_SRCS = ./srcs/
-PATH_MAIN = $(PATH_SRCS)main/
 PATH_CLOSE = $(PATH_SRCS)close/
 PATH_DRAW = $(PATH_SRCS)draw/
 PATH_INIT = $(PATH_SRCS)init/
+PATH_MAIN = $(PATH_SRCS)main/
+PATH_PARSE = $(PATH_SRCS)parse/
 PATH_RAYS = $(PATH_SRCS)rays/
 PATH_UTILS = $(PATH_SRCS)utils/
-PATH_PARSE = $(PATH_SRCS)parse/
+
 PATH_ENTITY = $(PATH_SRCS)entity/
 PATH_GAME = $(PATH_ENTITY)game/
 PATH_PLAYER = $(PATH_ENTITY)player/
@@ -42,31 +43,31 @@ OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRC))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C $(PATH_LIBFT)
-	make -C $(PATH_VEC)
-	$(CC) $(CFLAGS) ./objs/*/*.o ./objs/*/*/*.o -o $(NAME) $(MLX_FLAGS) -lm -L$(PATH_VEC) -lvec -L$(PATH_LIBFT) -lft
+	@make --no-print-directory -C $(PATH_LIBFT)
+	@make --no-print-directory -C $(PATH_VEC)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX_FLAGS) -lm -L$(PATH_VEC) -lvec -L$(PATH_LIBFT) -lft
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 		@mkdir -p  $(PATH_OBJS)
 		@mkdir -p  $(PATH_OBJS)close/
-		@mkdir -p  $(PATH_OBJS)main/
-		@mkdir -p  $(PATH_OBJS)init/
 		@mkdir -p  $(PATH_OBJS)draw/
 		@mkdir -p  $(PATH_OBJS)entity/
 		@mkdir -p  $(PATH_OBJS)entity/game
 		@mkdir -p  $(PATH_OBJS)entity/player
+		@mkdir -p  $(PATH_OBJS)init/
+		@mkdir -p  $(PATH_OBJS)main/
 		@mkdir -p  $(PATH_OBJS)parse/
 		@mkdir -p  $(PATH_OBJS)rays/
 		@mkdir -p  $(PATH_OBJS)utils/
-		$(CC) $(CFLAGS) -c $< -o $@ $(MLX_FLAGS) -lm
+		@$(CC) $(CFLAGS) -c $< -o $@ $(MLX_FLAGS) -lm
 
 clean:
-	$(RM) ./objs
+	@$(RM) ./objs
 
 fclean: clean
-	@make fclean -C $(PATH_LIBFT)
-	@make fclean -C $(PATH_VEC)
-	$(RM) $(NAME)
+	@make --no-print-directory fclean -C $(PATH_LIBFT)
+	@make --no-print-directory fclean -C $(PATH_VEC)
+	@$(RM) $(NAME)
 
 re: fclean all
 

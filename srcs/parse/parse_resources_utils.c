@@ -56,9 +56,6 @@ static int	my_access(char **config)
 
 int	set_config(t_game *game, char **config)
 {
-	int		fd;
-	char	**rgb;
-
 	if (!config[1])
 	{
 		free_matrix(config);
@@ -81,8 +78,6 @@ int	set_config(t_game *game, char **config)
 
 int	valid_conf(char **config)
 {
-	int	valid;
-
 	if (config)
 	{
 		if (config[0][0] != '\n' && matrix_len(config) != 2)
