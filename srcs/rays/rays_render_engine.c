@@ -64,7 +64,7 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		}
 		index++;
 	}
-	// check_transparence(game, values);
+	check_transparence(game, values);
 }
 
 static void	render_last_set(t_texture *text, t_rays *values, t_game *game)
