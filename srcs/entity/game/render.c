@@ -28,7 +28,6 @@ int	game_render(t_game *game)
 {
 	game->elapsed_time = passed_time(game->last_time);
 	game->last_time = current_time();
-	printf("%f\n", game->elapsed_time);
 	if (game->is_on_focus)
 		mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);
 	clean_map(game);
