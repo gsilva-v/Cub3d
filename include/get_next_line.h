@@ -3,8 +3,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <errno.h>
-# include <limits.h>
 
 # define BUFFER_SIZE 1
 
@@ -30,7 +28,7 @@ typedef struct s_buffer
 	@brief		Will get the next line from the "fd" and return it.
 	@return		The next line, or 0 on any error.
 */
-char			*get_next_line(int fd);
+char	*get_next_line(int fd);
 
 /*
 	@param data		buffer's content where the line will be.
@@ -40,7 +38,7 @@ char			*get_next_line(int fd);
 	@return 		returns the line's size.
 	
 */
-size_t			get_line_size(char	*data);
+size_t	get_line_size(char	*data);
 
 /*
 	@param line		Where the content will be append.
@@ -51,7 +49,7 @@ size_t			get_line_size(char	*data);
 					from data to line or -1 if the last character copied
 					wasn't "\n".
 */
-int				append_line(char *line, char *data);
+int		append_line(char *line, char *data);
 
 /*
 	@param	buffer		A struct that contains basic informations
@@ -64,6 +62,6 @@ int				append_line(char *line, char *data);
 						be concatenated to "buffer->line" until "\\n" or "\\0", and the 
 						process "2*" will be repeted.
 */
-void			get_line(t_buffer *buffer);
+void	get_line(t_buffer *buffer);
 
 #endif

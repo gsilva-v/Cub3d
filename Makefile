@@ -12,7 +12,6 @@ PATH_MAIN = $(PATH_SRCS)main/
 PATH_CLOSE = $(PATH_SRCS)close/
 PATH_DRAW = $(PATH_SRCS)draw/
 PATH_INIT = $(PATH_SRCS)init/
-PATH_RENDMAP = $(PATH_SRCS)render_map/
 PATH_RAYS = $(PATH_SRCS)rays/
 PATH_UTILS = $(PATH_SRCS)utils/
 PATH_PARSE = $(PATH_SRCS)parse/

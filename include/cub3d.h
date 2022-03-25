@@ -4,10 +4,7 @@
 # include <mlx.h>
 # include <X11/X.h>
 # include <stdio.h>
-# include <stdlib.h>
 # include <math.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <fcntl.h>
 # include <get_next_line.h>
 # include "../srcs/lib/vec_lib/vec.h"
@@ -28,6 +25,9 @@
 # define WTOUT_PLYR "this map dont have a initial point for player"
 # define DBLE_PLYR "This map have 2 or more initial points to player"
 # define POV "./imgs/pov.xpm"
+# define LEFT_ARROW 65361
+# define RIGHT_ARROW 65363
+# define SHIFT 65505
 
 typedef struct s_buttons
 {
@@ -85,10 +85,10 @@ typedef struct s_player{
 }	t_player;
 
 typedef struct s_block{
-	t_data	no;//norte cima
-	t_data	so;//sul baixo
-	t_data	we;//oeste <- esquerda
-	t_data	ea;//leste -> direita
+	t_data	no;
+	t_data	so;
+	t_data	we;
+	t_data	ea;
 }	t_block;
 
 typedef struct s_resource {
@@ -127,7 +127,6 @@ int		parse_resources(t_game *game, char *file);
 // PARSE MAP UTILS
 int		check_horizontal_wall(char **map, int x, int y);
 int		check_vertical_wall(char **map, int x, int y);
-int		check_surrounded(char **map, int x, int y);
 
 // PARSE RESOURCE UTILS
 int		valid_conf(char **config);
@@ -135,12 +134,12 @@ int		set_config(t_game *game, char **config);
 int		set_color_background(t_game *game, char **config);
 
 // COLOR
-int		get_pixel(t_data *data, t_vec point);
-int		get_color_shade(int color, double qnt_shade);
 int		create_rgb(int r, int g, int b);
+int		get_pixel(t_data *data, t_vec point);
+int		lamp(int x, int y, t_game *game, int color);
+int		reshade(int main_color, int have_reshade);
 
 // DRAW
-void	clean_map(t_game *game);
 void	draw_pixel(t_data *data, t_vec vec, int color);
 
 // GAME ENTITY
@@ -163,7 +162,6 @@ void	change_plane(t_game *game, float rot_speed);
 void	change_direction(t_game *game, float rot_speed);
 
 // MAP
-int		render_map(t_game *game);
 int		update_map(int key_code, t_game *game);
 
 // RAYS
@@ -174,19 +172,15 @@ void	dda(t_rays *values, t_game *game);
 void	render_engine(t_rays *values, t_game *game);
 
 // RENDER ENGINE UTILS
-t_data	*get_direction(t_block *block, t_rays *values);
 t_data	*get_texture(t_game *game, t_rays *values);
 void	set_perp_wall(t_rays *values, t_game *game);
-int		solve_mirroring(int texture, t_rays *values);
-double	wall_fabs(float condit, float mult, t_rays *values, t_game *game);
-int		lamp(int x, int y, t_game *game, int color);
+void	check_transparence(t_game *game, t_rays *values);
 
 // CLOSE
 void	finish_him(t_game *game, int exit_code);
 void	kill_window(t_game *game);
 void	show_error(t_game *game, int exit_code, char *s);
 int		red_cross(t_game *game);
-
 
 // UTILS
 int		matrix_len(char **matrix);
