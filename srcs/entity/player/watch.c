@@ -13,12 +13,19 @@ void	watch_rotate(t_game *game)
 void	watch_walk(t_game *game)
 {
 	t_vec	velocity;
+	float	movespeed;
 
+
+	movespeed = game->player.movespeed * game->elapsed_time;
 	velocity = game->player.direction;
 	if (game->buttons.up)
-		vec_scale(&velocity, game->player.movespeed);
+	{
+		// printf("%f\n", movespeed);
+		// exit(0);
+		vec_scale(&velocity, movespeed);
+	}
 	else if (game->buttons.down)
-		vec_scale(&velocity, -game->player.movespeed);
+		vec_scale(&velocity, -movespeed);
 	else
 		vec_scale(&velocity, 0);
 	if (game->map[(int)game->player.pos.y][(int)(game->player.pos.x + \

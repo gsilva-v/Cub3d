@@ -83,5 +83,6 @@ void	game_run(t_game *game)
 	mlx_hook(game->win, FocusOut, FocusChangeMask, leave_window, game);
 	mlx_hook(game->win, MotionNotify, PointerMotionMask, rotate, game);
 	mlx_hook(game->win, 17, 0L, red_cross, game);
+	game->last_time = current_time();
 	mlx_loop(game->mlx);
 }

@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
+# include <sys/time.h>
 # include <get_next_line.h>
 # include "../srcs/lib/vec_lib/vec.h"
 # include "../srcs/lib/libft/libft.h"
@@ -110,7 +111,14 @@ typedef struct s_game{
 	void		*mlx;
 	void		*win;
 	char		**map;
+	double		last_time;
+	double		elapsed_time;
 }	t_game;
+
+// TIME
+double	passed_time(long time_started);
+long	current_time(void);
+
 
 // INIT
 void	init_game(t_game *game);
