@@ -71,7 +71,14 @@ int	rotate(int x, int y, t_game *game)
 	};
 	move = x - middle_screen.x;
 	if (x != middle_screen.x)
-		game->player.rotate_cam = move / 5 * 0.08f; 
+		game->player.rotate_cam = move * 0.08f; 
+	// if (move > 0)
+	// 	game->player.rotate_cam = PI;
+	// else if (move < 0)
+	// 	game->player.rotate_cam = -PI;
+	// else
+	// 	game->player.rotate_cam = 0;
+
 }
 
 void	game_run(t_game *game)
