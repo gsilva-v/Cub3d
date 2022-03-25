@@ -2,20 +2,11 @@
 
 void	watch_rotate(t_game *game)
 {
-	float	rot_speed;
-
-	if (game->buttons.rotate_right)
-		rot_speed = 0.1f;
-	else if (game->buttons.rotate_left)
-		rot_speed = -0.1f;
-	else
-		rot_speed = 0;
-	if (game->buttons.rotate_left && game->buttons.rotate_right)
-		rot_speed = 0;
-	if (rot_speed)
+	if (game->player.rotate_cam)
 	{
-		change_direction(game, rot_speed);
-		change_plane(game, rot_speed);
+		change_direction(game, game->player.rotate_cam);
+		change_plane(game, game->player.rotate_cam);
+		game->player.rotate_cam = 0;
 	}
 }
 

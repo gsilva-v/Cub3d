@@ -18,7 +18,7 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
-# define VALID_BLOCK "012 \nWENS"
+# define VALID_BLOCK "01 \nWENS"
 # define HAS_INSIDE "ESWN02"
 # define WRONG_ARG  "Invalid arguments, try ./cub3d ./maps/simple_map.cub"
 # define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"
@@ -81,7 +81,6 @@ typedef struct s_player{
 	t_vec	pos;
 	t_vec	plane;
 	t_vec	direction;
-	float	rotate_cam;
 	float	movespeed;
 }	t_player;
 
@@ -105,7 +104,6 @@ typedef struct s_game{
 	t_player	player;
 	t_buttons	buttons;
 	char		*buffer;
-	int			is_on_focus;
 	t_resource	resources;
 	void		*mlx;
 	void		*win;

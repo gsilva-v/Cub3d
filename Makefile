@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = gcc
 INCLUDE = -I ./include/
-CFLAGS = -g -Wall -Werror -Wextra $(INCLUDE)
+CFLAGS = -g  $(INCLUDE)
 MLX_FLAGS = -lmlx_Linux -lXext -lX11
 
 RM = rm -rf
@@ -40,6 +40,7 @@ SRCS += $(addprefix $(PATH_UTILS), gnl matrix_len free_matrix distance check_ext
 SRC = $(addsuffix .c, $(SRCS))
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRC))
+
 
 all: $(NAME)
 

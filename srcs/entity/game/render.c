@@ -26,6 +26,8 @@ static void	clean_map(t_game *game)
 
 int	game_render(t_game *game)
 {
+	if (game->is_on_focus)
+		mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);
 	clean_map(game);
 	game_update(game);
 	player_render(game);
