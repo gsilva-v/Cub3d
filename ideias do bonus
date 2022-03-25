@@ -1,11 +1,11 @@
-tirar a porta do mandatorio
+tirar a porta do mandatorio - feito
 
 obrigatorio:
+movimentar com o mouse - feito
 minimapa
-sprites
 porta fechar
-movimentar com o mouse
-
+sprites
+refazer o makefile
 
 extras:
 teto e chão com sprites
