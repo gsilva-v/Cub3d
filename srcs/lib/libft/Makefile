@@ -55,6 +55,7 @@ all: $(NAME)
 
 %.o:%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo -n "\033[1;32m█\033[0m"
 
 $(NAME): $(OBJM)
 	@ar -rcs $(NAME) $(OBJM)

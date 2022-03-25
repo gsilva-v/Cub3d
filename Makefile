@@ -25,6 +25,7 @@ PATH_VEC = $(PATH_LIBS)vec_lib/
 PATH_LIBFT = $(PATH_LIBS)libft/
 
 PATH_OBJS = ./objs/
+OBJ_PATH = ./objs/
 
 SRCS += $(addprefix $(PATH_CLOSE), kill_window finish_him)
 SRCS += $(addprefix $(PATH_DRAW), draw_pixel)
@@ -42,26 +43,37 @@ OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRC))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJ_PATH) $(OBJS)
+	@echo " 100% complete"
+	@echo -n "libft     : "
 	@make --no-print-directory -C $(PATH_LIBFT)
+	@echo " 100% complete"
+	@echo -n "vector lib     : "
 	@make --no-print-directory -C $(PATH_VEC)
+	@echo " 100% complete"
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX_FLAGS) -lm -L$(PATH_VEC) -lvec -L$(PATH_LIBFT) -lft
 
-$(PATH_OBJS)%.o: $(PATH_SRCS)%.c
-		@mkdir -p  $(PATH_OBJS)
-		@mkdir -p  $(PATH_OBJS)close/
-		@mkdir -p  $(PATH_OBJS)draw/
-		@mkdir -p  $(PATH_OBJS)entity/
-		@mkdir -p  $(PATH_OBJS)entity/game
-		@mkdir -p  $(PATH_OBJS)entity/player
-		@mkdir -p  $(PATH_OBJS)init/
-		@mkdir -p  $(PATH_OBJS)main/
-		@mkdir -p  $(PATH_OBJS)parse/
-		@mkdir -p  $(PATH_OBJS)rays/
-		@mkdir -p  $(PATH_OBJS)utils/
-		@$(CC) $(CFLAGS) -c $< -o $@ $(MLX_FLAGS) -lm
+$(OBJ_PATH):
+	@echo -n "Cub3D : "
+	@mkdir -p  $(PATH_OBJS)
+	@mkdir -p  $(PATH_OBJS)close/
+	@mkdir -p  $(PATH_OBJS)draw/
+	@mkdir -p  $(PATH_OBJS)entity/
+	@mkdir -p  $(PATH_OBJS)entity/game
+	@mkdir -p  $(PATH_OBJS)entity/player
+	@mkdir -p  $(PATH_OBJS)init/
+	@mkdir -p  $(PATH_OBJS)main/
+	@mkdir -p  $(PATH_OBJS)parse/
+	@mkdir -p  $(PATH_OBJS)rays/
+	@mkdir -p  $(PATH_OBJS)utils/
+	@echo -n "\033[1;32m█\033[0m"
 
-clean:
+$(PATH_OBJS)%.o: $(PATH_SRCS)%.c
+	@$(CC) $(CFLAGS) -c $< -o $@ $(MLX_FLAGS) -lm
+	@echo -n "\033[1;32m█\033[0m"
+
+clean:	
+	@echo "Deleted data!"
 	@$(RM) ./objs
 
 fclean: clean
