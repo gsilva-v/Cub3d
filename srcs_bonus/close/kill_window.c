@@ -3,6 +3,7 @@
 int	red_cross(t_game *game)
 {
 	finish_him(game, 0);
+	return (1);
 }
 
 void	kill_window(t_game *game)

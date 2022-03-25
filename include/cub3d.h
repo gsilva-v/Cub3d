@@ -18,7 +18,7 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
-# define VALID_BLOCK "012 \nWENS"
+# define VALID_BLOCK "01 \nWENS"
 # define HAS_INSIDE "ESWN02"
 # define WRONG_ARG  "Invalid arguments, try ./cub3d ./maps/simple_map.cub"
 # define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"

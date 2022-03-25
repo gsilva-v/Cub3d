@@ -1,6 +1,7 @@
 NAME = libft.a
 CFLAGS= -Wall -Werror -Wextra
 CC= gcc
+
 SRCS = 	ft_memset.c\
        	ft_bzero.c\
 	ft_isalpha.c\
@@ -46,24 +47,27 @@ BSRC = ft_lstnew.c\
        ft_lstiter.c\
        ft_lstmap.c
 
-
 OBJM = $(SRCS:%.c=%.o)
 
 BOBJ = $(BSRC:%.c=%.o)
 
 all: $(NAME)
 
+%.o:%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo -n "\033[1;32m█\033[0m"
+
 $(NAME): $(OBJM)
-	ar -rcs $(NAME) $(OBJM)
+	@ar -rcs $(NAME) $(OBJM)
 
 bonus: $(BOBJ)
-	ar -rcs $(NAME) $(BOBJ)
+	@ar -rcs $(NAME) $(BOBJ)
 
 clean:
-	rm -rf $(OBJM) $(BOBJ)
+	@rm -rf $(OBJM) $(BOBJ)
 
 fclean: clean 
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

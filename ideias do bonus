@@ -1,1 +1,29 @@
+tirar a porta do mandatorio
+
+obrigatorio:
+minimapa
+sprites
+porta fechar
+movimentar com o mouse
+
+
+extras:
+teto e chão com sprites
 luz poder acender segurando o botao ou com clique rapido
+transparencia
+inimigos
+coletaveis
+hud com arma
+melhorar a lanterna
+talvez bateria na lanterna
+sistema de tiros
+
+menu de configurações{
+	horientado pelo mouse e pelas setas
+	configação de resume game
+	configação de sense
+	configação de save
+	configação de load
+	configação de exit
+	talvez fps
+} 

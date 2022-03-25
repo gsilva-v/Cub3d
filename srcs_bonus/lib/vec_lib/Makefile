@@ -12,13 +12,18 @@ RM = rm -f
 
 all: $(NAME)
 
+%.o:%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo -n "\033[1;32m█\033[0m"
 
 $(NAME): 	$(OBJS)
-	ar rc $(NAME) $(OBJS)
+	@ar rc $(NAME) $(OBJS)
+
+
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean : clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
