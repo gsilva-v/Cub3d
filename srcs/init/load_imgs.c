@@ -54,7 +54,7 @@ void	load_imgs(t_game *game)
 	&r->canvas.bits_per_pixel, &r->canvas.line_length, &r->canvas.endian);
 
 
-	r->map.img = mlx_new_image(game->mlx, get_higher_len(game->map) * 10, matrix_len(game->map) * 10);
+	r->map.img = mlx_new_image(game->mlx, get_higher_len(game->map) * MAP_BLOCK_SIZE, matrix_len(game->map) * MAP_BLOCK_SIZE);
 	r->map.addr = mlx_get_data_addr(r->map.img, \
 	&r->map.bits_per_pixel, &r->map.line_length, &r->map.endian);
 	draw_map(game);

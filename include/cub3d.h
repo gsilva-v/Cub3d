@@ -12,6 +12,9 @@
 # include "../srcs/lib/libft/libft.h"
 
 # define BLOCK_SIZE 64
+# define MAP_BLOCK_SIZE 10
+# define MAP_WIDTH 100
+# define MAP_HEIGHT 100
 # define ESC 0xff1b
 # define PI 3.141592653589f
 # define SCREENHEIGHT 430

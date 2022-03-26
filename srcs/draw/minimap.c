@@ -33,13 +33,13 @@ void	draw_map(t_game *game)
 		{
 		
 			if (game->map[line][col] == WALL)
-				draw_square(&game->resources.map, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0xFFFFFF);
+				draw_square(&game->resources.map, (t_vec){.x = col * MAP_BLOCK_SIZE, .y = line * MAP_BLOCK_SIZE}, MAP_BLOCK_SIZE - 1, 0xFFFFFF);
 			else if (game->map[line][col] == DOOR)
-				draw_square(&game->resources.map, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0xFF00FF);
+				draw_square(&game->resources.map, (t_vec){.x = col * MAP_BLOCK_SIZE, .y = line * MAP_BLOCK_SIZE}, MAP_BLOCK_SIZE - 1, 0xFF00FF);
 			else if (game->map[line][col] == FLOOR)
-				draw_square(&game->resources.map, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0);
+				draw_square(&game->resources.map, (t_vec){.x = col * MAP_BLOCK_SIZE, .y = line * MAP_BLOCK_SIZE}, MAP_BLOCK_SIZE - 1, 0);
 			else if (game->map[line][col] == OPEN_DOOR)
-				draw_square(&game->resources.map, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0x00ff00);
+				draw_square(&game->resources.map, (t_vec){.x = col * MAP_BLOCK_SIZE, .y = line * MAP_BLOCK_SIZE}, MAP_BLOCK_SIZE - 1, 0x00ff00);
 			col++;
 		}
 		line++;

@@ -30,12 +30,12 @@ void	watch_walk(t_game *game)
 	{
 		if (velocity.x > 0)
 		{
-			if (game->player.pos.x * 10 >= 100 / 2 && game->map_offset.x + velocity.x * 10 + 100 < get_higher_len(game->map) * 10)
-				game->map_offset.x += velocity.x * 10;
+			if (game->player.pos.x * MAP_BLOCK_SIZE >= MAP_WIDTH / 2 && game->map_offset.x + velocity.x * MAP_BLOCK_SIZE + MAP_WIDTH < get_higher_len(game->map) * MAP_BLOCK_SIZE)
+				game->map_offset.x += velocity.x * MAP_BLOCK_SIZE;
 		}else if (velocity.x < 0)
 		{
-			if (game->map_offset.x + velocity.x * 10 >= 0)
-				game->map_offset.x += velocity.x * 10;
+			if (game->map_offset.x + velocity.x * MAP_BLOCK_SIZE >= 0)
+				game->map_offset.x += velocity.x * MAP_BLOCK_SIZE;
 		}
 		
 		game->player.pos.x += velocity.x;
@@ -45,16 +45,14 @@ void	watch_walk(t_game *game)
 	{
 		if (velocity.y > 0)
 		{
-			if (game->player.pos.y * 10 >= 100 / 2 && game->map_offset.y + velocity.y * 10 + 100 < matrix_len(game->map) * 10)
-				game->map_offset.y += velocity.y * 10;
+			if (game->player.pos.y * MAP_BLOCK_SIZE >= MAP_HEIGHT / 2 && game->map_offset.y + velocity.y * MAP_BLOCK_SIZE + MAP_HEIGHT < matrix_len(game->map) * MAP_BLOCK_SIZE)
+				game->map_offset.y += velocity.y * MAP_BLOCK_SIZE;
 		}
 		else if (velocity.y < 0)
 		{
-			if (game->map_offset.y + velocity.y * 10 >= 0)
-				game->map_offset.y += velocity.y * 10;
+			if (game->map_offset.y + velocity.y * MAP_BLOCK_SIZE >= 0)
+				game->map_offset.y += velocity.y * MAP_BLOCK_SIZE;
 		}
-
-		
 		game->player.pos.y += velocity.y;
 	}
 }
@@ -81,12 +79,12 @@ void	watch_strafe(t_game *game)
 	{
 		if (strafe_velocity.x > 0)
 		{
-			if (game->player.pos.x * 10 >= 100 / 2 && game->map_offset.x + strafe_velocity.x * 10 + 100 < get_higher_len(game->map) * 10)
-				game->map_offset.x += strafe_velocity.x * 10;
+			if (game->player.pos.x * MAP_BLOCK_SIZE >= MAP_WIDTH / 2 && game->map_offset.x + strafe_velocity.x * MAP_BLOCK_SIZE + MAP_WIDTH < get_higher_len(game->map) * MAP_BLOCK_SIZE)
+				game->map_offset.x += strafe_velocity.x * MAP_BLOCK_SIZE;
 		}else if (strafe_velocity.x < 0)
 		{
-			if (game->map_offset.x + strafe_velocity.x * 10 >= 0)
-				game->map_offset.x += strafe_velocity.x * 10;
+			if (game->map_offset.x + strafe_velocity.x * MAP_BLOCK_SIZE >= 0)
+				game->map_offset.x += strafe_velocity.x * MAP_BLOCK_SIZE;
 		}
 		
 		game->player.pos.x += strafe_velocity.x;
@@ -96,16 +94,14 @@ void	watch_strafe(t_game *game)
 	{
 		if (strafe_velocity.y > 0)
 		{
-			if (game->player.pos.y * 10 >= 100 / 2 && game->map_offset.y + strafe_velocity.y * 10 + 100 < matrix_len(game->map) * 10)
-				game->map_offset.y += strafe_velocity.y * 10;
+			if (game->player.pos.y * MAP_BLOCK_SIZE >= MAP_HEIGHT / 2 && game->map_offset.y + strafe_velocity.y * MAP_BLOCK_SIZE + MAP_HEIGHT < matrix_len(game->map) * MAP_BLOCK_SIZE)
+				game->map_offset.y += strafe_velocity.y * MAP_BLOCK_SIZE;
 		}
 		else if (strafe_velocity.y < 0)
 		{
-			if (game->map_offset.y + strafe_velocity.y * 10 >= 0)
-				game->map_offset.y += strafe_velocity.y * 10;
+			if (game->map_offset.y + strafe_velocity.y * MAP_BLOCK_SIZE >= 0)
+				game->map_offset.y += strafe_velocity.y * MAP_BLOCK_SIZE;
 		}
-
-		
 		game->player.pos.y += strafe_velocity.y;
 	}
 
