@@ -25,11 +25,11 @@ void	watch_walk(t_game *game)
 		vec_scale(&velocity, -movespeed);
 	else
 		vec_scale(&velocity, 0);
-	if (game->map[(int)game->player.pos.y][(int)(game->player.pos.x + \
-	velocity.x * 1.6f)] == FLOOR)
+	if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + \
+	velocity.x * 1.6f)], "03"))
 		game->player.pos.x += velocity.x;
-	if (game->map[(int)(game->player.pos.y + velocity.y * \
-	1.6f)][(int)game->player.pos.x] == FLOOR)
+	if (ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y * \
+	1.6f)][(int)game->player.pos.x], "03"))
 		game->player.pos.y += velocity.y;
 }
 
@@ -50,12 +50,13 @@ void	watch_strafe(t_game *game)
 		vec_scale(&strafe_velocity, -game->player.movespeed * game->elapsed_time);
 	else
 		vec_scale(&strafe_velocity, 0);
-	if (game->map[(int)game->player.pos.y][(int)(game->player.pos.x + \
-	strafe_velocity.x * 1.6f)] == FLOOR)
+	if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + \
+	strafe_velocity.x * 1.6f)], "03"))
 		game->player.pos.x += strafe_velocity.x;
-	if (game->map[(int)(game->player.pos.y + strafe_velocity.y * \
-	1.6f)][(int)game->player.pos.x] == FLOOR)
+	if (ft_char_in_set(game->map[(int)(game->player.pos.y + strafe_velocity.y * \
+	1.6f)][(int)game->player.pos.x], "03"))
 		game->player.pos.y += strafe_velocity.y;
+
 }
 
 void	watch_functions(t_game *game)
@@ -68,6 +69,19 @@ void	watch_functions(t_game *game)
 		pos.x += game->player.direction.x * 0.8;
 		pos.y += game->player.direction.y * 0.8;
 		if (game->map[(int)pos.y][(int)pos.x] == DOOR)
-			game->map[(int)pos.y][(int)pos.x] = FLOOR;
+		{
+			game->map[(int)pos.y][(int)pos.x] = OPEN_DOOR;
+			game->buttons.function = 0;
+		}
+		else if (game->map[(int)pos.y][(int)pos.x] == OPEN_DOOR)
+		{
+			game->map[(int)pos.y][(int)pos.x] = DOOR;
+			game->buttons.function = 0;
+		}
 	}
+	system("clear");
+	for (int i = 0; game->map[i]; i++)
+		printf("%s\n", game->map[i]);
+
+
 }

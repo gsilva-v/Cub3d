@@ -19,8 +19,9 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
-# define VALID_BLOCK "012 \nWENS"
-# define HAS_INSIDE "ESWN02"
+# define OPEN_DOOR '3'
+# define VALID_BLOCK "0123 \nWENS"
+# define HAS_INSIDE "ESWN023"
 # define WRONG_ARG  "Invalid arguments, try ./cub3d ./maps/simple_map.cub"
 # define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"
 # define WTOUT_PLYR "this map dont have a initial point for player"
@@ -98,6 +99,7 @@ typedef struct s_resource {
 	t_data	canvas;
 	t_block	wall;
 	t_block	door;
+	t_block	open_door;
 	int		ceil_color;
 	int		floor_color;
 }	t_resource;

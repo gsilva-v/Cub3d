@@ -44,4 +44,9 @@ void	load_imgs(t_game *game)
 	r->door.we.name = ft_strdup("./imgs/door.xpm");
 	r->door.ea.name = ft_strdup("./imgs/door.xpm");
 	load_block(game, &r->door);
+	r->open_door.so.name = ft_strdup("./imgs/so_redbrick.xpm");
+	r->open_door.no.name = ft_strdup("./imgs/no_redbrick.xpm");
+	r->open_door.we.name = ft_strdup("./imgs/we_redbrick.xpm");
+	r->open_door.ea.name = ft_strdup("./imgs/ea_redbrick.xpm");
+	load_block(game, &r->open_door);
 }

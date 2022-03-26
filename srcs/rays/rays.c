@@ -46,7 +46,8 @@ static void	check_dist(t_rays *values, t_player *player)
 
 void	dda(t_rays *values, t_game *game)
 {
-	while (game->map[values->map_pos.y][values->map_pos.x] == FLOOR)
+	int hit = 0;
+	while (hit == 0)
 	{
 		if (values->dst_x < values->dst_y)
 		{
@@ -60,6 +61,8 @@ void	dda(t_rays *values, t_game *game)
 			values->map_pos.y += values->step_y;
 			values->hit_side = 1; //parede horizontal
 		}
+		if (game->map[values->map_pos.y][values->map_pos.x] != FLOOR)
+			hit = 1;
 	}
 }
 

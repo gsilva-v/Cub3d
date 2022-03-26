@@ -19,6 +19,8 @@ t_data	*get_texture(t_game *game, t_rays *values)
 		return (get_direction(&game->resources.wall, values));
 	if (game->map[values->map_pos.y][values->map_pos.x] == DOOR)
 		return (get_direction(&game->resources.door, values));
+	if (game->map[values->map_pos.y][values->map_pos.x] == OPEN_DOOR)
+		return (get_direction(&game->resources.open_door, values));
 	return ((t_data *)0);
 }
 
