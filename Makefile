@@ -28,7 +28,7 @@ PATH_OBJS = ./objs/
 OBJ_PATH = ./objs/
 
 SRCS += $(addprefix $(PATH_CLOSE), kill_window finish_him)
-SRCS += $(addprefix $(PATH_DRAW), draw_pixel)
+SRCS += $(addprefix $(PATH_DRAW), draw_pixel minimap)
 SRCS += $(addprefix $(PATH_GAME), update render run)
 SRCS += $(addprefix $(PATH_PLAYER), update render watch watch_utils)
 SRCS += $(addprefix $(PATH_INIT), init_game load_imgs start_orientation)

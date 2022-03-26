@@ -121,6 +121,11 @@ typedef struct s_game{
 double	passed_time(long time_started);
 long	current_time(void);
 
+// MINIMAP
+void	minimap(t_game *game);
+
+
+
 
 // INIT
 void	init_game(t_game *game);
