@@ -27,10 +27,36 @@ void	watch_walk(t_game *game)
 		vec_scale(&velocity, 0);
 	if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + \
 	velocity.x * 1.6f)], "03"))
+	{
+		if (velocity.x > 0)
+		{
+			if (game->player.pos.x * 10 >= 100 / 2 && game->map_offset.x + velocity.x * 10 + 100 < get_higher_len(game->map) * 10)
+				game->map_offset.x += velocity.x * 10;
+		}else if (velocity.x < 0)
+		{
+			if (game->map_offset.x + velocity.x * 10 >= 0)
+				game->map_offset.x += velocity.x * 10;
+		}
+		
 		game->player.pos.x += velocity.x;
+	}
 	if (ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y * \
 	1.6f)][(int)game->player.pos.x], "03"))
+	{
+		if (velocity.y > 0)
+		{
+			if (game->player.pos.y * 10 >= 100 / 2 && game->map_offset.y + velocity.y * 10 + 100 < matrix_len(game->map) * 10)
+				game->map_offset.y += velocity.y * 10;
+		}
+		else if (velocity.y < 0)
+		{
+			if (game->map_offset.y + velocity.y * 10 >= 0)
+				game->map_offset.y += velocity.y * 10;
+		}
+
+		
 		game->player.pos.y += velocity.y;
+	}
 }
 
 void	watch_strafe(t_game *game)
@@ -52,10 +78,36 @@ void	watch_strafe(t_game *game)
 		vec_scale(&strafe_velocity, 0);
 	if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + \
 	strafe_velocity.x * 1.6f)], "03"))
+	{
+		if (strafe_velocity.x > 0)
+		{
+			if (game->player.pos.x * 10 >= 100 / 2 && game->map_offset.x + strafe_velocity.x * 10 + 100 < get_higher_len(game->map) * 10)
+				game->map_offset.x += strafe_velocity.x * 10;
+		}else if (strafe_velocity.x < 0)
+		{
+			if (game->map_offset.x + strafe_velocity.x * 10 >= 0)
+				game->map_offset.x += strafe_velocity.x * 10;
+		}
+		
 		game->player.pos.x += strafe_velocity.x;
+	}
 	if (ft_char_in_set(game->map[(int)(game->player.pos.y + strafe_velocity.y * \
 	1.6f)][(int)game->player.pos.x], "03"))
+	{
+		if (strafe_velocity.y > 0)
+		{
+			if (game->player.pos.y * 10 >= 100 / 2 && game->map_offset.y + strafe_velocity.y * 10 + 100 < matrix_len(game->map) * 10)
+				game->map_offset.y += strafe_velocity.y * 10;
+		}
+		else if (strafe_velocity.y < 0)
+		{
+			if (game->map_offset.y + strafe_velocity.y * 10 >= 0)
+				game->map_offset.y += strafe_velocity.y * 10;
+		}
+
+		
 		game->player.pos.y += strafe_velocity.y;
+	}
 
 }
 

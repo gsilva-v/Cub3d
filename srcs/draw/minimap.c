@@ -33,24 +33,42 @@ void	draw_map(t_game *game)
 		{
 		
 			if (game->map[line][col] == WALL)
-				draw_square(&game->resources.canvas, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0xFFFFFF);
+				draw_square(&game->resources.map, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0xFFFFFF);
 			else if (game->map[line][col] == DOOR)
-				draw_square(&game->resources.canvas, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0xFF00FF);
+				draw_square(&game->resources.map, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0xFF00FF);
 			else if (game->map[line][col] == FLOOR)
-				draw_square(&game->resources.canvas, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0);
+				draw_square(&game->resources.map, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0);
 			else if (game->map[line][col] == OPEN_DOOR)
-				draw_square(&game->resources.canvas, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0x00ff00);
+				draw_square(&game->resources.map, (t_vec){.x = col * 10, .y = line * 10}, 10 - 1, 0x00ff00);
 			col++;
 		}
 		line++;
 	}
-	draw_square(&game->resources.canvas, (t_vec){.x = game->player.pos.x * 10, .y = game->player.pos.y * 10}, 5, 0x0000ff);
-	
 }
 
 
 void	minimap(t_game *game)
 {
+	int col;
+	int line;
+	int	y;
+	int	x;
 
-	draw_map(game);
+	y = 0;
+	line = game->map_offset.y;
+	while (line < game->map_offset.y + 100)
+	{
+		x = 0;
+		col = game->map_offset.x;
+		while(col < game->map_offset.x + 100)
+		{
+			int	color = get_pixel(&game->resources.map, (t_vec){.x = col, .y = line});
+			draw_pixel(&game->resources.canvas, (t_vec){.x = x, .y = y}, color);
+			col++;
+			x++;
+		}
+		y++;
+		line++;
+	}
+	draw_square(&game->resources.canvas, (t_vec){.x = game->player.pos.x * 10 - game->map_offset.x, .y = game->player.pos.y * 10 - game->map_offset.y}, 5, 0x0000ff);
 }

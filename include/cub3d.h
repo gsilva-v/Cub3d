@@ -97,6 +97,7 @@ typedef struct s_block{
 typedef struct s_resource {
 	t_data	pov;
 	t_data	canvas;
+	t_data	map;
 	t_block	wall;
 	t_block	door;
 	t_block	open_door;
@@ -110,6 +111,7 @@ typedef struct s_game{
 	char		*buffer;
 	int			is_on_focus;
 	t_resource	resources;
+	t_vec		map_offset;
 	void		*mlx;
 	void		*win;
 	char		**map;
