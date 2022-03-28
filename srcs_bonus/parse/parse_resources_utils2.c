@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 static char	**check_range_rgb(char **rgb)
 {

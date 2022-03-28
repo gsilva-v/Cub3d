@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 void	draw_pixel(t_data *data, t_vec point, int color)
 {

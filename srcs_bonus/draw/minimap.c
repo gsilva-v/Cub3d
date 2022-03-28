@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 void	draw_square(t_data *canvas, t_vec point, int size, int color)
 {

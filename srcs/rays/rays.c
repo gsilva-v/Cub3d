@@ -46,8 +46,7 @@ static void	check_dist(t_rays *values, t_player *player)
 
 void	dda(t_rays *values, t_game *game)
 {
-	int hit = 0;
-	while (hit == 0)
+	while (game->map[values->map_pos.y][values->map_pos.x] == FLOOR)
 	{
 		if (values->dst_x < values->dst_y)
 		{
@@ -61,8 +60,6 @@ void	dda(t_rays *values, t_game *game)
 			values->map_pos.y += values->step_y;
 			values->hit_side = 1; //parede horizontal
 		}
-		if (game->map[values->map_pos.y][values->map_pos.x] != FLOOR)
-			hit = 1;
 	}
 }
 
@@ -71,49 +68,6 @@ void	raycasting(t_game *game)
 	t_rays	values;
 
 	values.rays = 0;
-
-	/* for (int y = 0; y < SCREENHEIGHT; y++)
-	{
-		//Direction menos plane
-		t_vec	rayDir0 = game->player.direction;
-		vec_sub(&rayDir0, &game->player.plane);
-		//Direction mais plane
-		t_vec	rayDir1 = game->player.direction;
-		vec_sum(&rayDir1, &game->player.plane);
-
-		//ponto atual do y comparado com o meio da tela
-		int point = y - SCREENHEIGHT / 2;
-
-		//posiçaõ vertical da camera
-		float	posZ = 0.5 * SCREENHEIGHT;
-
-		float	rowDistance = posZ / point;
-
-
-		t_vec	floorStep = {
-			.x = (rowDistance * (rayDir1.x - rayDir0.x) / SCREENWIDTH),
-			.y = (rowDistance * (rayDir1.y - rayDir0.y) / SCREENWIDTH)
-		};
-
-		t_vec	floor = {
-			.x = (game->player.pos.x + rowDistance * rayDir0.x),
-			.y = (game->player.pos.y + rowDistance * rayDir0.y)
-		};
-		for (int x = 0; x < SCREENWIDTH; x++)
-		{
-			t_int_vec	cell = {
-				.x = (int)floor.x,
-				.y = (int)floor.y
-			};
-			vec_sum(&floor, &floorStep);
-
-			t_int_vec	texture_position = {
-				.x = (int) (BLOCK_SIZE * (floor.x - cell.x)) & (BLOCK_SIZE - 1),
-				.y = (int) (BLOCK_SIZE * (floor.y - cell.y)) & (BLOCK_SIZE - 1)
-			}
-
-		}
-	} */
 	while (values.rays < SCREENWIDTH)
 	{
 		// reset values

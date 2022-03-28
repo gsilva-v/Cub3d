@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 void	init_player(t_game *game)
 {
@@ -33,7 +33,7 @@ void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	init_player(game);
-	game->player.movespeed = 0.1f;
+	game->player.movespeed = 3.0f;
 	game->buffer = ft_calloc(1, SCREENHEIGHT);
 	game->win = mlx_new_window(game->mlx, SCREENWIDTH, SCREENHEIGHT, "RAY");
 }

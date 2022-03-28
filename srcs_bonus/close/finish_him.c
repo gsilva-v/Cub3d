@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 void	show_error(t_game *game, int exit_code, char *s)
 {
@@ -32,6 +32,8 @@ void	check_data_leaks(t_game *game)
 		free_block(&game->resources.wall, game);
 	if (&game->resources.door)
 		free_block(&game->resources.door, game);
+	if (&game->resources.open_door)
+		free_block(&game->resources.open_door, game);
 	if (&game->resources.pov)
 		free_data(game, &game->resources.pov);
 	if (&game->resources.canvas)

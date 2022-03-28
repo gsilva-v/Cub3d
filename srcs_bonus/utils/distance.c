@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 int	distance(t_vec a, t_vec b)
 {

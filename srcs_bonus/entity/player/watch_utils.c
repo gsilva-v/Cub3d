@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 void	change_direction(t_game *game, float rot_speed)
 {

@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 int	create_rgb(int r, int g, int b)
 {

@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 static int	set_name_text(t_game *game, char **config)
 {

@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 int	check_horizontal_wall(char **map, int x, int y)
 {

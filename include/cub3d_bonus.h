@@ -1,25 +1,30 @@
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <mlx.h>
 # include <X11/X.h>
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
+# include <sys/time.h>
 # include <get_next_line.h>
 # include "../srcs/lib/vec_lib/vec.h"
 # include "../srcs/lib/libft/libft.h"
 
 # define BLOCK_SIZE 64
+# define MAP_BLOCK_SIZE 10
+# define MAP_WIDTH 100
+# define MAP_HEIGHT 100
 # define ESC 0xff1b
 # define PI 3.141592653589f
-# define SCREENHEIGHT 700
-# define SCREENWIDTH 1200
+# define SCREENHEIGHT 430
+# define SCREENWIDTH 700
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
-# define VALID_BLOCK "01 \nWENS"
-# define HAS_INSIDE "ESWN02"
+# define OPEN_DOOR '3'
+# define VALID_BLOCK "0123 \nWENS"
+# define HAS_INSIDE "ESWN023"
 # define WRONG_ARG  "Invalid arguments, try ./cub3d ./maps/simple_map.cub"
 # define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"
 # define WTOUT_PLYR "this map dont have a initial point for player"
@@ -81,6 +86,7 @@ typedef struct s_player{
 	t_vec	pos;
 	t_vec	plane;
 	t_vec	direction;
+	float	rotate_cam;
 	float	movespeed;
 }	t_player;
 
@@ -94,8 +100,10 @@ typedef struct s_block{
 typedef struct s_resource {
 	t_data	pov;
 	t_data	canvas;
+	t_data	map;
 	t_block	wall;
 	t_block	door;
+	t_block	open_door;
 	int		ceil_color;
 	int		floor_color;
 }	t_resource;
@@ -104,11 +112,25 @@ typedef struct s_game{
 	t_player	player;
 	t_buttons	buttons;
 	char		*buffer;
+	int			is_on_focus;
 	t_resource	resources;
+	t_vec		map_offset;
 	void		*mlx;
 	void		*win;
 	char		**map;
+	double		last_time;
+	double		elapsed_time;
 }	t_game;
+
+// TIME
+double	passed_time(long time_started);
+long	current_time(void);
+
+// MINIMAP
+void	minimap(t_game *game);
+
+
+
 
 // INIT
 void	init_game(t_game *game);

@@ -1,4 +1,5 @@
 NAME = cub3D
+NAME_BONUS = cub3D_bonus
 
 CC = gcc
 INCLUDE = -I ./include/
@@ -7,6 +8,7 @@ MLX_FLAGS = -lmlx_Linux -lXext -lX11
 
 RM = rm -rf
 
+# MANDATORY MACROS
 PATH_SRCS = ./srcs/
 PATH_CLOSE = $(PATH_SRCS)close/
 PATH_DRAW = $(PATH_SRCS)draw/
@@ -28,7 +30,7 @@ PATH_OBJS = ./objs/
 OBJ_PATH = ./objs/
 
 SRCS += $(addprefix $(PATH_CLOSE), kill_window finish_him)
-SRCS += $(addprefix $(PATH_DRAW), draw_pixel minimap)
+SRCS += $(addprefix $(PATH_DRAW), draw_pixel)
 SRCS += $(addprefix $(PATH_GAME), update render run)
 SRCS += $(addprefix $(PATH_PLAYER), update render watch watch_utils)
 SRCS += $(addprefix $(PATH_INIT), init_game load_imgs start_orientation)
@@ -41,7 +43,42 @@ SRC = $(addsuffix .c, $(SRCS))
 
 OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRC))
 
+# BONUS MACROS 
+PATH_SRCS_B = ./srcs_bonus/
+PATH_CLOSE_B = $(PATH_SRCS_B)close/
+PATH_DRAW_B = $(PATH_SRCS_B)draw/
+PATH_INIT_B = $(PATH_SRCS_B)init/
+PATH_MAIN_B = $(PATH_SRCS_B)main/
+PATH_PARSE_B = $(PATH_SRCS_B)parse/
+PATH_RAYS_B = $(PATH_SRCS_B)rays/
+PATH_UTILS_B = $(PATH_SRCS_B)utils/
 
+PATH_ENTITY_B = $(PATH_SRCS_B)entity/
+PATH_GAME_B = $(PATH_ENTITY_B)game/
+PATH_PLAYER_B = $(PATH_ENTITY_B)player/
+
+PATH_LIBS_B = $(PATH_SRCS_B)lib/
+PATH_VEC_B = $(PATH_LIBS_B)vec_lib/
+PATH_LIBFT_B = $(PATH_LIBS_B)libft/
+
+PATH_OBJS_B = ./objs_bonus/
+OBJ_PATH_B = ./objs_bonus/
+
+SRCS_B += $(addprefix $(PATH_CLOSE_B), kill_window finish_him)
+SRCS_B += $(addprefix $(PATH_DRAW_B), draw_pixel minimap)
+SRCS_B += $(addprefix $(PATH_GAME_B), update render run)
+SRCS_B += $(addprefix $(PATH_PLAYER_B), update render watch watch_utils)
+SRCS_B += $(addprefix $(PATH_INIT_B), init_game load_imgs start_orientation)
+SRCS_B += $(addprefix $(PATH_MAIN_B), main)
+SRCS_B += $(addprefix $(PATH_PARSE_B), parse_map parse_map_utils parse_resources parse_resources_utils  parse_resources_utils2)
+SRCS_B += $(addprefix $(PATH_RAYS_B), rays rays_render_engine rays_render_utils color)
+SRCS_B += $(addprefix $(PATH_UTILS_B), gnl matrix_len free_matrix distance check_ext)
+  
+SRC_B = $(addsuffix .c, $(SRCS_B))
+
+OBJS_BONUS = $(patsubst $(PATH_SRCS_B)%.c, $(PATH_OBJS_B)%.o, $(SRC_B))
+
+# MANDATORY COMPILATION
 all: $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJS)
@@ -73,14 +110,48 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(MLX_FLAGS) -lm
 	@echo -n "\033[1;32m█\033[0m"
 
+# BONUS COMPILATION
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJ_PATH_B) $(OBJS_BONUS)
+	@echo " 100% complete"
+	@echo -n "libft     : "
+	@make --no-print-directory -C $(PATH_LIBFT_B)
+	@echo " 100% complete"
+	@echo -n "vector lib     : "
+	@make --no-print-directory -C $(PATH_VEC_B)
+	@echo " 100% complete"
+	@$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME_BONUS) $(MLX_FLAGS) -lm -L$(PATH_VEC_B) -lvec -L$(PATH_LIBFT_B) -lft
+
+$(OBJ_PATH_B):
+	@echo -n "Cub3D : "
+	@mkdir -p  $(PATH_OBJS_B)
+	@mkdir -p  $(PATH_OBJS_B)close/
+	@mkdir -p  $(PATH_OBJS_B)draw/
+	@mkdir -p  $(PATH_OBJS_B)entity/
+	@mkdir -p  $(PATH_OBJS_B)entity/game
+	@mkdir -p  $(PATH_OBJS_B)entity/player
+	@mkdir -p  $(PATH_OBJS_B)init/
+	@mkdir -p  $(PATH_OBJS_B)main/
+	@mkdir -p  $(PATH_OBJS_B)parse/
+	@mkdir -p  $(PATH_OBJS_B)rays/
+	@mkdir -p  $(PATH_OBJS_B)utils/
+	@echo -n "\033[1;32m█\033[0m"
+
+$(PATH_OBJS_B)%.o: $(PATH_SRCS_B)%.c
+	@$(CC) $(CFLAGS) -c $< -o $@ $(MLX_FLAGS) -lm
+	@echo -n "\033[1;32m█\033[0m"
+
 clean:	
 	@echo "Deleted data!"
 	@$(RM) ./objs
+	@$(RM) ./objs_bonus
 
 fclean: clean
 	@make --no-print-directory fclean -C $(PATH_LIBFT)
 	@make --no-print-directory fclean -C $(PATH_VEC)
 	@$(RM) $(NAME)
+	@$(RM) $(NAME_BONUS)
 
 re: fclean all
 

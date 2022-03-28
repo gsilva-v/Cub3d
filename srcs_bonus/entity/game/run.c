@@ -1,4 +1,4 @@
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 int	press_key(int key_code, t_game *game)
 {
@@ -50,11 +50,46 @@ int	release_key(int key_code, t_game *game)
 	return (0);
 }
 
+int	enter_window(t_game *game)
+{
+	game->is_on_focus = 1;
+}
+
+int	leave_window(t_game *game)
+{
+	game->is_on_focus = 0;
+}
+
+int	rotate(int x, int y, t_game *game)
+{
+	int		move;
+	t_int_vec	middle_screen;
+
+	middle_screen = (t_int_vec){
+		.x = SCREENWIDTH / 2,
+		.y = SCREENHEIGHT / 2
+	};
+	move = x - middle_screen.x;
+	if (x != middle_screen.x)
+		game->player.rotate_cam = move * 0.08f; 
+	// if (move > 0)
+	// 	game->player.rotate_cam = PI;
+	// else if (move < 0)
+	// 	game->player.rotate_cam = -PI;
+	// else
+	// 	game->player.rotate_cam = 0;
+
+}
+
 void	game_run(t_game *game)
 {
 	mlx_loop_hook(game->mlx, &game_render, game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, press_key, game);
 	mlx_hook(game->win, KeyRelease, KeyReleaseMask, release_key, game);
+	mlx_hook(game->win, FocusIn, FocusChangeMask, enter_window, game);
+	mlx_hook(game->win, FocusOut, FocusChangeMask, leave_window, game);
+	mlx_hook(game->win, MotionNotify, PointerMotionMask, rotate, game);
 	mlx_hook(game->win, 17, 0L, red_cross, game);
+	game->last_time = current_time();
 	mlx_loop(game->mlx);
 }
