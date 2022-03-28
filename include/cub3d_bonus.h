@@ -33,6 +33,9 @@
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 # define SHIFT 65505
+# define UDIV 1
+# define VDIV 1
+# define VMOVE 0.0
 
 typedef struct s_buttons
 {
@@ -111,6 +114,22 @@ typedef struct s_resource {
 	int		floor_color;
 }	t_resource;
 
+typedef struct s_sprite{
+	t_vec pos;
+	double inv_delta;
+	t_vec transform;
+	int sprite_screen;
+	int	v_move_screen;
+	int sprite_h;
+	int sprite_w;
+	t_int_vec draw_start;
+	t_int_vec draw_end;
+	int stripe;
+	t_int_vec text;
+} t_sprite;
+
+
+
 typedef struct s_game{
 	t_player	player;
 	t_buttons	buttons;
@@ -134,6 +153,11 @@ long	current_time(void);
 void	minimap(t_game *game);
 int	get_higher_len(char **matrix);
 void	draw_map(t_game *game);
+void	get_and_draw(t_game *game, t_vec canvas_pos, t_vec text_pos, \
+t_data * text);
+
+// SPRITE
+void draw_sprite(t_game *game, t_vec pos, t_data *text);
 
 //  MOUSE
 int	enter_window(t_game *game);

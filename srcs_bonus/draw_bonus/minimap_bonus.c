@@ -46,20 +46,21 @@ void	draw_map(t_game *game)
 	}
 }
 
-void	get_and_draw(t_game *game, t_int_vec aux, int line, int col)
+void	get_and_draw(t_game *game, t_vec canvas_pos, t_vec text_pos, \
+t_data * text)
 {
 	int	color;
 
-	color = get_pixel(&game->resources.map, (t_vec){.x = col, .y = line});
-	draw_pixel(&game->resources.canvas, (t_vec){.x = aux.x, \
-	.y = aux.y}, color);
+	color = get_pixel(text, text_pos);
+	if (color != 0xff00ff)
+		draw_pixel(&game->resources.canvas, canvas_pos, color);
 }
 
 void	minimap(t_game *game)
 {
 	int			col;
 	int			line;
-	t_int_vec	aux;
+	t_vec	aux;
 
 	aux.y = 0;
 	line = game->map_offset.y;
@@ -69,7 +70,8 @@ void	minimap(t_game *game)
 		col = game->map_offset.x;
 		while (col < game->map_offset.x + 100)
 		{
-			get_and_draw(game, aux, line, col);
+			get_and_draw(game, aux, (t_vec){.x = col, .y = line}, \
+			&game->resources.map);
 			col++;
 			aux.x++;
 		}
