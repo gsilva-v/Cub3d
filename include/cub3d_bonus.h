@@ -12,7 +12,7 @@
 # include "../libs/libft/libft.h"
 
 # define BLOCK_SIZE 64
-# define MAP_BLOCK_SIZE 10
+# define MBS 10
 # define MAP_WIDTH 100
 # define MAP_HEIGHT 100
 # define ESC 0xff1b
@@ -128,8 +128,15 @@ long	current_time(void);
 
 // MINIMAP
 void	minimap(t_game *game);
+int	get_higher_len(char **matrix);
+void	draw_map(t_game *game);
 
-
+//  MOUSE
+int	enter_window(t_game *game);
+int	leave_window(t_game *game);
+int	rotate(int x, int y, t_game *game);
+void	move_cam_x(t_game *game, t_vec velocity);
+void	move_cam_y(t_game *game, t_vec velocity);
 
 
 // INIT
