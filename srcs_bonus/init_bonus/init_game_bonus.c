@@ -35,5 +35,6 @@ void	init_game(t_game *game)
 	init_player(game);
 	game->player.movespeed = 3.0f;
 	game->buffer = ft_calloc(1, SCREENHEIGHT);
+	game->z_buffer = ft_calloc(sizeof(float), SCREENWIDTH);
 	game->win = mlx_new_window(game->mlx, SCREENWIDTH, SCREENHEIGHT, "RAY");
 }

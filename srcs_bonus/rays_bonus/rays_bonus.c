@@ -114,6 +114,9 @@ void	raycasting(t_game *game)
 
 		}
 	} */
+
+
+
 	while (values.rays < SCREENWIDTH)
 	{
 		// reset values
@@ -125,6 +128,61 @@ void	raycasting(t_game *game)
 		// renderização
 		ft_memset(game->buffer, 0, SCREENHEIGHT);
 		render_engine(&values, game);
+		game->z_buffer[values.rays] = values.perp_wall;
 		values.rays++;
+	}
+
+	float	sprite_x = 10.0;
+	float	sprite_y = 3.0;
+	double	spriteX = sprite_x - game->player.pos.x;
+	double	spriteY = sprite_y - game->player.pos.y;
+
+
+	double invDet = 1.0 / (game->player.plane.x * game->player.direction.y - game->player.direction.x * game->player.plane.y);
+
+	double	transformX = invDet * (game->player.direction.y * spriteX - game->player.direction.x * spriteY);
+	double	transformY = invDet * (-game->player.plane.y * spriteX + game->player.plane.x * spriteY);
+
+	int	spriteScreenX = (int)((SCREENWIDTH/2) * (1 + transformX / transformY));
+
+	#define uDiv 1
+	#define vDiv 1
+	#define vMove 0.0
+	int	vMoveScreen = (int)(vMove / transformY);
+
+
+	int	spriteHeight = abs(((int)(SCREENHEIGHT / (transformY)))) / vDiv;
+
+	int	drawStartY = -spriteHeight / 2 + SCREENHEIGHT / 2 + vMoveScreen;
+	if (drawStartY < 0)
+		drawStartY = 0;
+	int	drawEndY = spriteHeight / 2 + SCREENHEIGHT / 2 + vMoveScreen;
+	if (drawEndY >= SCREENHEIGHT)
+		drawEndY = SCREENHEIGHT - 1;
+
+
+	int	spriteWidth = abs((int)(SCREENHEIGHT / (transformY))) / uDiv;
+	int	drawStartX = -spriteWidth / 2 + spriteScreenX;
+	if (drawStartX < 0)
+		drawStartX = 0;
+	int	drawEndX = spriteWidth / 2 + spriteScreenX;
+	if (drawEndX >= SCREENWIDTH)
+		drawEndX = SCREENWIDTH;
+
+	for (int stripe = drawStartX; stripe < drawEndX; stripe++)
+	{
+		int	texX = ((int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * game->resources.enemy.width / spriteWidth)) / 256;
+		printf("tranform y: %f, z_buffer[%d] %f\n", transformY, stripe, fabs(game->z_buffer[stripe]));
+		if(transformY > 0 && stripe > 0 && stripe < SCREENWIDTH && transformY < fabs(game->z_buffer[stripe]))
+		{
+			for (int y = drawStartY; y < drawEndY; y++)
+			{
+				int	d = (y - vMoveScreen) * 256 - SCREENHEIGHT * 127 + spriteHeight * 128;
+				int	texY = ((d * game->resources.enemy.height) / spriteHeight) / 256;
+				int	color = get_pixel(&game->resources.enemy, (t_vec){.x = texX, .y = texY});
+				if (color != 0xff00ff)
+					draw_pixel(&game->resources.canvas, (t_vec){.y = y, .x = stripe}, color);
+			}
+		}
 	}
 }

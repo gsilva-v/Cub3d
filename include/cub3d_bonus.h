@@ -53,6 +53,8 @@ typedef struct s_data{
 	char	*addr;
 	void	*img;
 	int		bits_per_pixel;
+	int		width;
+	int		height;
 	int		line_length;
 	int		endian;
 }	t_data;
@@ -99,6 +101,7 @@ typedef struct s_block{
 
 typedef struct s_resource {
 	t_data	pov;
+	t_data	enemy;
 	t_data	canvas;
 	t_data	map;
 	t_block	wall;
@@ -112,6 +115,7 @@ typedef struct s_game{
 	t_player	player;
 	t_buttons	buttons;
 	char		*buffer;
+	float		*z_buffer;
 	int			is_on_focus;
 	t_resource	resources;
 	t_vec		map_offset;

@@ -63,6 +63,13 @@ void	load_imgs(t_game *game)
 	&trash, &trash);
 	r->pov.addr = mlx_get_data_addr(r->pov.img, &r->pov.bits_per_pixel, \
 	&r->pov.line_length, &r->pov.endian);
+
+	r->enemy.img = mlx_xpm_file_to_image(game->mlx, "./imgs/enemy.xpm", \
+	&r->enemy.width, &r->enemy.height);
+	r->enemy.addr = mlx_get_data_addr(r->enemy.img, &r->enemy.bits_per_pixel, \
+	&r->enemy.line_length, &r->enemy.endian);
+
+
 	load_block(game, &r->wall);
 	r->door.so.name = ft_strdup("./imgs/closed_door.xpm");
 	r->door.no.name = ft_strdup("./imgs/closed_door.xpm");
