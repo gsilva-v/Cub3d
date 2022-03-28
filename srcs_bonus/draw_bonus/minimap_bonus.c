@@ -79,6 +79,6 @@ void	minimap(t_game *game)
 		line++;
 	}
 	draw_square(&game->resources.canvas, (t_vec){.x = game->player.pos.x * 10 \
-	- game->map_offset.x, .y = game->player.pos.y * 10 - game->map_offset.y}, \
+	- game->map_offset.x - 2.5f, .y = game->player.pos.y * 10 - game->map_offset.y - 2.5f}, \
 	5, 0x0000ff);
 }
