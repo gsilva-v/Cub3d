@@ -45,19 +45,19 @@ OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRC))
 
 # BONUS MACROS 
 PATH_SRCS_B = ./srcs_bonus/
-PATH_CLOSE_B = $(PATH_SRCS_B)close/
-PATH_DRAW_B = $(PATH_SRCS_B)draw/
-PATH_INIT_B = $(PATH_SRCS_B)init/
-PATH_MAIN_B = $(PATH_SRCS_B)main/
-PATH_PARSE_B = $(PATH_SRCS_B)parse/
-PATH_RAYS_B = $(PATH_SRCS_B)rays/
-PATH_UTILS_B = $(PATH_SRCS_B)utils/
+PATH_CLOSE_B = $(PATH_SRCS_B)close_bonus/
+PATH_DRAW_B = $(PATH_SRCS_B)draw_bonus/
+PATH_INIT_B = $(PATH_SRCS_B)init_bonus/
+PATH_MAIN_B = $(PATH_SRCS_B)main_bonus/
+PATH_PARSE_B = $(PATH_SRCS_B)parse_bonus/
+PATH_RAYS_B = $(PATH_SRCS_B)rays_bonus/
+PATH_UTILS_B = $(PATH_SRCS_B)utils_bonus/
 
-PATH_ENTITY_B = $(PATH_SRCS_B)entity/
-PATH_GAME_B = $(PATH_ENTITY_B)game/
-PATH_PLAYER_B = $(PATH_ENTITY_B)player/
+PATH_ENTITY_B = $(PATH_SRCS_B)entity_bonus/
+PATH_GAME_B = $(PATH_ENTITY_B)game_bonus/
+PATH_PLAYER_B = $(PATH_ENTITY_B)player_bonus/
 
-PATH_LIBS_B = $(PATH_SRCS_B)lib/
+PATH_LIBS_B = $(PATH_SRCS_B)lib_bonus/
 PATH_VEC_B = $(PATH_LIBS_B)vec_lib/
 PATH_LIBFT_B = $(PATH_LIBS_B)libft/
 
@@ -126,16 +126,16 @@ $(NAME_BONUS): $(OBJ_PATH_B) $(OBJS_BONUS)
 $(OBJ_PATH_B):
 	@echo -n "Cub3D : "
 	@mkdir -p  $(PATH_OBJS_B)
-	@mkdir -p  $(PATH_OBJS_B)close/
-	@mkdir -p  $(PATH_OBJS_B)draw/
-	@mkdir -p  $(PATH_OBJS_B)entity/
-	@mkdir -p  $(PATH_OBJS_B)entity/game
-	@mkdir -p  $(PATH_OBJS_B)entity/player
-	@mkdir -p  $(PATH_OBJS_B)init/
-	@mkdir -p  $(PATH_OBJS_B)main/
-	@mkdir -p  $(PATH_OBJS_B)parse/
-	@mkdir -p  $(PATH_OBJS_B)rays/
-	@mkdir -p  $(PATH_OBJS_B)utils/
+	@mkdir -p  $(PATH_OBJS_B)close_bonus/
+	@mkdir -p  $(PATH_OBJS_B)draw_bonus/
+	@mkdir -p  $(PATH_OBJS_B)entity_bonus/
+	@mkdir -p  $(PATH_OBJS_B)entity_bonus/game_bonus
+	@mkdir -p  $(PATH_OBJS_B)entity_bonus/player_bonus
+	@mkdir -p  $(PATH_OBJS_B)init_bonus/
+	@mkdir -p  $(PATH_OBJS_B)main_bonus/
+	@mkdir -p  $(PATH_OBJS_B)parse_bonus/
+	@mkdir -p  $(PATH_OBJS_B)rays_bonus/
+	@mkdir -p  $(PATH_OBJS_B)utils_bonus/
 	@echo -n "\033[1;32m█\033[0m"
 
 $(PATH_OBJS_B)%.o: $(PATH_SRCS_B)%.c
@@ -150,6 +150,8 @@ clean:
 fclean: clean
 	@make --no-print-directory fclean -C $(PATH_LIBFT)
 	@make --no-print-directory fclean -C $(PATH_VEC)
+	@make --no-print-directory fclean -C $(PATH_LIBFT_B)
+	@make --no-print-directory fclean -C $(PATH_VEC_B)
 	@$(RM) $(NAME)
 	@$(RM) $(NAME_BONUS)
 
