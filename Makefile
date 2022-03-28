@@ -7,6 +7,9 @@ CFLAGS = -g  $(INCLUDE)
 MLX_FLAGS = -lmlx_Linux -lXext -lX11
 
 RM = rm -rf
+PATH_LIBS = ./libs/
+PATH_VEC = $(PATH_LIBS)vec_lib/
+PATH_LIBFT = $(PATH_LIBS)libft/
 
 # MANDATORY MACROS
 PATH_SRCS = ./srcs/
@@ -22,9 +25,6 @@ PATH_ENTITY = $(PATH_SRCS)entity/
 PATH_GAME = $(PATH_ENTITY)game/
 PATH_PLAYER = $(PATH_ENTITY)player/
 
-PATH_LIBS = $(PATH_SRCS)lib/
-PATH_VEC = $(PATH_LIBS)vec_lib/
-PATH_LIBFT = $(PATH_LIBS)libft/
 
 PATH_OBJS = ./objs/
 OBJ_PATH = ./objs/
@@ -57,22 +57,18 @@ PATH_ENTITY_B = $(PATH_SRCS_B)entity_bonus/
 PATH_GAME_B = $(PATH_ENTITY_B)game_bonus/
 PATH_PLAYER_B = $(PATH_ENTITY_B)player_bonus/
 
-PATH_LIBS_B = $(PATH_SRCS_B)lib_bonus/
-PATH_VEC_B = $(PATH_LIBS_B)vec_lib/
-PATH_LIBFT_B = $(PATH_LIBS_B)libft/
-
 PATH_OBJS_B = ./objs_bonus/
 OBJ_PATH_B = ./objs_bonus/
 
-SRCS_B += $(addprefix $(PATH_CLOSE_B), kill_window finish_him)
-SRCS_B += $(addprefix $(PATH_DRAW_B), draw_pixel minimap)
-SRCS_B += $(addprefix $(PATH_GAME_B), update render run)
-SRCS_B += $(addprefix $(PATH_PLAYER_B), update render watch watch_utils)
-SRCS_B += $(addprefix $(PATH_INIT_B), init_game load_imgs start_orientation)
-SRCS_B += $(addprefix $(PATH_MAIN_B), main)
-SRCS_B += $(addprefix $(PATH_PARSE_B), parse_map parse_map_utils parse_resources parse_resources_utils  parse_resources_utils2)
-SRCS_B += $(addprefix $(PATH_RAYS_B), rays rays_render_engine rays_render_utils color)
-SRCS_B += $(addprefix $(PATH_UTILS_B), gnl matrix_len free_matrix distance check_ext)
+SRCS_B += $(addprefix $(PATH_CLOSE_B), kill_window_bonus finish_him_bonus)
+SRCS_B += $(addprefix $(PATH_DRAW_B), draw_pixel_bonus minimap_bonus)
+SRCS_B += $(addprefix $(PATH_GAME_B), update_bonus render_bonus run_bonus)
+SRCS_B += $(addprefix $(PATH_PLAYER_B), update_bonus render_bonus watch_bonus watch_utils_bonus)
+SRCS_B += $(addprefix $(PATH_INIT_B), init_game_bonus load_imgs_bonus start_orientation_bonus)
+SRCS_B += $(addprefix $(PATH_MAIN_B), main_bonus)
+SRCS_B += $(addprefix $(PATH_PARSE_B), parse_map_bonus parse_map_utils_bonus parse_resources_bonus parse_resources_utils_bonus parse_resources_utils2_bonus)
+SRCS_B += $(addprefix $(PATH_RAYS_B), rays_bonus rays_render_engine_bonus rays_render_utils_bonus color_bonus)
+SRCS_B += $(addprefix $(PATH_UTILS_B), gnl_bonus matrix_len_bonus free_matrix_bonus distance_bonus check_ext_bonus)
   
 SRC_B = $(addsuffix .c, $(SRCS_B))
 
@@ -116,12 +112,12 @@ bonus: $(NAME_BONUS)
 $(NAME_BONUS): $(OBJ_PATH_B) $(OBJS_BONUS)
 	@echo " 100% complete"
 	@echo -n "libft     : "
-	@make --no-print-directory -C $(PATH_LIBFT_B)
+	@make --no-print-directory -C $(PATH_LIBFT)
 	@echo " 100% complete"
 	@echo -n "vector lib     : "
-	@make --no-print-directory -C $(PATH_VEC_B)
+	@make --no-print-directory -C $(PATH_VEC)
 	@echo " 100% complete"
-	@$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME_BONUS) $(MLX_FLAGS) -lm -L$(PATH_VEC_B) -lvec -L$(PATH_LIBFT_B) -lft
+	@$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME_BONUS) $(MLX_FLAGS) -lm -L$(PATH_VEC) -lvec -L$(PATH_LIBFT) -lft
 
 $(OBJ_PATH_B):
 	@echo -n "Cub3D : "
@@ -150,8 +146,6 @@ clean:
 fclean: clean
 	@make --no-print-directory fclean -C $(PATH_LIBFT)
 	@make --no-print-directory fclean -C $(PATH_VEC)
-	@make --no-print-directory fclean -C $(PATH_LIBFT_B)
-	@make --no-print-directory fclean -C $(PATH_VEC_B)
 	@$(RM) $(NAME)
 	@$(RM) $(NAME_BONUS)
 

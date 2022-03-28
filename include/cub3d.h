@@ -7,8 +7,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <get_next_line.h>
-# include "../srcs/lib/vec_lib/vec.h"
-# include "../srcs/lib/libft/libft.h"
+# include "../libs/vec_lib/vec.h"
+# include "../libs/libft/libft.h"
 
 # define BLOCK_SIZE 64
 # define ESC 0xff1b
