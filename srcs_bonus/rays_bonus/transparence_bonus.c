@@ -38,12 +38,15 @@ static void	horizontal_transparence(t_game *game, t_rays *values)
 	}
 }
 
-void	check_transparence(t_game *game, t_rays *values)
+void	check_open_wall(t_game *game, t_rays *values)
 {
-	if (values->hit_side == 0)//vertical
-		vertical_transparence(game, values);
-	else if (values->hit_side == 1)//horizontal
-		horizontal_transparence(game, values);
-	dda(values, game);
-	render_engine(values, game);
+	if (game->map[values->map_pos.y][values->map_pos.x] == OPEN_DOOR)
+	{
+		if (values->hit_side == 0)//vertical
+			vertical_transparence(game, values);
+		else if (values->hit_side == 1)//horizontal
+			horizontal_transparence(game, values);
+		dda(values, game);
+		render_engine(values, game);
+	}
 }

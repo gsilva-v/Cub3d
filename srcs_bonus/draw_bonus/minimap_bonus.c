@@ -50,9 +50,7 @@ void	get_and_draw(t_game *game, t_vec canv_pos, t_vec t_pos, t_data *text)
 {
 	int	color;
 
-
 	color = get_pixel(text, t_pos);
-	// printf("%d\n", color);
 	if (color != 0xff00ff)
 		draw_pixel(&game->resources.canvas, canv_pos, color);
 }

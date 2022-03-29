@@ -221,7 +221,7 @@ int		update_map(int key_code, t_game *game);
 // RAYS
 void	raycasting(t_game *game);
 void	dda(t_rays *values, t_game *game);
-void	check_transparence(t_game *game, t_rays *values);
+void	check_open_wall(t_game *game, t_rays *values);
 
 // RENDER ENGINE
 void	render_engine(t_rays *values, t_game *game);
