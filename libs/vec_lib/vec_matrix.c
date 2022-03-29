@@ -15,5 +15,5 @@ void	vec_scale(t_vec *v1, float scale)
 
 void	vec_magnitude(t_vec *v)
 {
-	v->magnitude = sqrt((v->x * v->x) + (v->y * v->y) + (v->z * v->z));
+	v->magnitude = sqrt((v->x * v->x) + (v->y * v->y));
 }

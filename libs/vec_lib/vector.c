@@ -31,7 +31,7 @@ void	vec_normalize(t_vec *v)
 
 float	vec_dot_product(t_vec *vec1, t_vec *vec2)
 {
-	return (vec1->x * vec2->x + vec1->y * vec2->y + vec1->z * vec2->z);
+	return (vec1->x * vec2->x + vec1->y * vec2->y);
 }
 
 void	change_value(t_vec *vec, float x, float y, float z)
