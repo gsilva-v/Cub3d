@@ -15,6 +15,8 @@ static t_data	*get_direction(t_block *block, t_rays *values)
 
 t_data	*get_texture(t_game *game, t_rays *values)
 {
+	if (game->is_open_door)
+		return (get_direction(&game->resources.open_door, values));
 	if (game->map[values->map_pos.y][values->map_pos.x] == WALL)
 		return (get_direction(&game->resources.wall, values));
 	if (game->map[values->map_pos.y][values->map_pos.x] == DOOR)
@@ -32,37 +34,4 @@ void	set_perp_wall(t_rays *values, t_game *game)
 	else
 		values->perp_wall = (fabs(values->map_pos.y - game->player.pos.y + \
 		((1 - values->step_y) / 2)) / values->ray_dir.y);
-}
-
-static int	is_full(char *c, int size)
-{
-	while (size)
-	{
-		size--;
-		if (c[size] == 0)
-			return (0);
-	}
-	return (1);
-}
-
-void	check_transparence(t_game *game, t_rays *values)
-{
-	if (game->map[values->map_pos.y][values->map_pos.x] \
-	!= WALL && !is_full(game->buffer, SCREENHEIGHT))
-	{
-		if (values->dst_x < values->dst_y)
-		{
-			values->dst_x += values->dlt_x;
-			values->map_pos.x += values->step_x;
-			values->hit_side = 0; //parede vertical
-		}
-		else
-		{
-			values->dst_y += values->dlt_y;
-			values->map_pos.y += values->step_y;
-			values->hit_side = 1; //parede horizontal
-		}
-		dda(values, game);
-		render_engine(values, game);
-	}
 }

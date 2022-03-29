@@ -32,8 +32,6 @@ int	get_collum_len(int player_x, int player_y, char **map)
 	index = 0;
 	while (map[player_y + index][player_x] != WALL)
 		index++;
-
-	printf("y index: %d\n", index);
 	return (index);
 }
 
@@ -45,7 +43,6 @@ int	get_next_wall_x(int player_x, int player_y, char **map)
 	index = 0;
 	while (map[player_y ][player_x + index] != WALL)
 		index++;
-	printf("x index: %d\n", index);
 	return (index);
 }
 
@@ -136,14 +133,16 @@ void	watch_functions(t_game *game)
 	if (game->buttons.function)
 	{
 		pos = game->player.pos;
-		pos.x += game->player.direction.x * 0.8;
-		pos.y += game->player.direction.y * 0.8;
-		if (game->map[(int)pos.y][(int)pos.x] == DOOR)
+		pos.x += game->player.direction.x * 1.3f;
+		pos.y += game->player.direction.y * 1.3f;
+		if (game->map[(int)pos.y][(int)game->player.pos.x] == DOOR \
+			|| game->map[(int)game->player.pos.y][(int)pos.x] == DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = OPEN_DOOR;
 			game->buttons.function = 0;
 		}
-		else if (game->map[(int)pos.y][(int)pos.x] == OPEN_DOOR)
+		else if (game->map[(int)pos.y][(int)game->player.pos.x] == OPEN_DOOR \
+			|| game->map[(int)game->player.pos.y][(int)pos.x] == OPEN_DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = DOOR;
 			game->buttons.function = 0;

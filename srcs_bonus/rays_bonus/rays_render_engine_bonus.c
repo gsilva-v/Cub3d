@@ -64,7 +64,8 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		}
 		index++;
 	}
-	check_transparence(game, values);
+	if (game->map[values->map_pos.y][values->map_pos.x] == OPEN_DOOR)
+		check_transparence(game, values);
 }
 
 static void	render_last_set(t_texture *text, t_rays *values, t_game *game)
