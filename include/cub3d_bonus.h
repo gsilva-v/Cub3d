@@ -115,20 +115,18 @@ typedef struct s_resource {
 }	t_resource;
 
 typedef struct s_sprite{
-	t_vec pos;
-	double inv_delta;
-	t_vec transform;
-	int sprite_screen;
-	int	v_move_screen;
-	int sprite_h;
-	int sprite_w;
-	t_int_vec draw_start;
-	t_int_vec draw_end;
-	int stripe;
-	t_int_vec text;
-} t_sprite;
-
-
+	t_vec		pos;
+	double		inv_delta;
+	t_vec		transform;
+	int			sprite_screen;
+	int			v_move_screen;
+	int			sprite_h;
+	int			sprite_w;
+	t_int_vec	draw_start;
+	t_int_vec	draw_end;
+	int			stripe;
+	t_int_vec	text;
+}	t_sprite;
 
 typedef struct s_game{
 	t_player	player;
@@ -151,21 +149,19 @@ long	current_time(void);
 
 // MINIMAP
 void	minimap(t_game *game);
-int	get_higher_len(char **matrix);
+int		get_higher_len(char **matrix);
 void	draw_map(t_game *game);
-void	get_and_draw(t_game *game, t_vec canvas_pos, t_vec text_pos, \
-t_data * text);
+void	get_and_draw(t_game *game, t_vec canv_pos, t_vec t_pos, t_data *text);
 
 // SPRITE
-void draw_sprite(t_game *game, t_vec pos, t_data *text);
+void	draw_sprite(t_game *game, t_vec pos, t_data *text);
 
 //  MOUSE
-int	enter_window(t_game *game);
-int	leave_window(t_game *game);
-int	rotate(int x, int y, t_game *game);
+int		enter_window(t_game *game);
+int		leave_window(t_game *game);
+int		rotate(int x, int y, t_game *game);
 void	move_cam_x(t_game *game, t_vec velocity);
 void	move_cam_y(t_game *game, t_vec velocity);
-
 
 // INIT
 void	init_game(t_game *game);

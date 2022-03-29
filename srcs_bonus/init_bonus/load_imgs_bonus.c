@@ -43,6 +43,29 @@ int	get_higher_len(char **matrix)
 	return (size);
 }
 
+
+void	clean_minimap(t_game *game)
+{
+	int	col;
+	int	line;
+
+	col = 0;
+	line = 0;
+	while (line < matrix_len(game->map) * MBS)
+	{
+		col = 0;
+		while (col < get_higher_len(game->map) * MBS)
+		{
+			draw_pixel(&game->resources.map, (t_vec){.x = col, \
+				.y = line}, 0x0);
+			col++;
+		}
+		line++;
+	}
+}
+
+
+
 void	load_imgs(t_game *game)
 {
 	int			trash;
@@ -57,12 +80,13 @@ void	load_imgs(t_game *game)
 	r->map.img = mlx_new_image(game->mlx, get_higher_len(game->map) * MBS, matrix_len(game->map) * MBS);
 	r->map.addr = mlx_get_data_addr(r->map.img, \
 	&r->map.bits_per_pixel, &r->map.line_length, &r->map.endian);
+	clean_minimap(game);
 	draw_map(game);
 
-	r->pov.img = mlx_xpm_file_to_image(game->mlx, POV, \
-	&trash, &trash);
-	r->pov.addr = mlx_get_data_addr(r->pov.img, &r->pov.bits_per_pixel, \
-	&r->pov.line_length, &r->pov.endian);
+	// r->pov.img = mlx_xpm_file_to_image(game->mlx, POV, \
+	// &trash, &trash);
+	// r->pov.addr = mlx_get_data_addr(r->pov.img, &r->pov.bits_per_pixel, \
+	// &r->pov.line_length, &r->pov.endian);
 
 	r->enemy.img = mlx_xpm_file_to_image(game->mlx, "./imgs/enemy.xpm", \
 	&r->enemy.width, &r->enemy.height);

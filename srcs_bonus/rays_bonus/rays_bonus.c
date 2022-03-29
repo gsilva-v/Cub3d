@@ -50,7 +50,9 @@ static void	check_dist(t_rays *values, t_player *player)
 
 void	dda(t_rays *values, t_game *game)
 {
-	int hit = 0;
+	int	hit;
+
+	hit = 0;
 	while (hit == 0)
 	{
 		if (values->dst_x < values->dst_y)
@@ -70,27 +72,32 @@ void	dda(t_rays *values, t_game *game)
 	}
 }
 
+
+// GERAR NUMERO ALEATORIO PARA OS SPRITES
+// float x = (float)rand()/(float)(RAND_MAX/a);
+
+
 void	raycasting(t_game *game)
 {
 	t_rays	values;
 
 	values.rays = 0;
 
-	t_vec enemy_direction = game->player.pos;
-	vec_sub(&enemy_direction, &sprite_pos);
-	vec_magnitude(&enemy_direction);
-	vec_normalize(&enemy_direction);
+	// t_vec enemy_direction = game->player.pos;
+	// vec_sub(&enemy_direction, &sprite_pos);
+	// vec_magnitude(&enemy_direction);
+	// vec_normalize(&enemy_direction);
 
-	vec_scale(&enemy_direction, 1);
-	vec_scale(&enemy_direction, game->elapsed_time);
+	// vec_scale(&enemy_direction, 1);
+	// vec_scale(&enemy_direction, game->elapsed_time);
 
-	if (ft_char_in_set(game->map[(int)sprite_pos.y][(int)
-			(sprite_pos.x + enemy_direction.x * 1.6f)], "03"))
-		sprite_pos.x += enemy_direction.x;
+	// if (ft_char_in_set(game->map[(int)sprite_pos.y][(int)
+	// 		(sprite_pos.x + enemy_direction.x * 1.6f)], "03"))
+	// 	sprite_pos.x += enemy_direction.x;
 		
-	if (ft_char_in_set(game->map[(int)(sprite_pos.y + enemy_direction.y * \
-	1.6f)][(int)sprite_pos.x], "03"))
-		sprite_pos.y += enemy_direction.y;
+	// if (ft_char_in_set(game->map[(int)(sprite_pos.y + enemy_direction.y * \
+	// 1.6f)][(int)sprite_pos.x], "03"))
+	// 	sprite_pos.y += enemy_direction.y;
 
 
 	while (values.rays < SCREENWIDTH)

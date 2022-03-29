@@ -96,7 +96,7 @@ int	set_color_background(t_game *game, char **cfg)
 	c = create_rgb(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	free_matrix(rgb);
 	if ((!ft_strncmp(cfg[0], "C", -1) && game->resources.ceil_color != -1)
-		||( !ft_strncmp(cfg[0], "F", -1) && game->resources.floor_color != -1))
+		|| (!ft_strncmp(cfg[0], "F", -1) && game->resources.floor_color != -1))
 	{
 		free_matrix(cfg);
 		return (1);
