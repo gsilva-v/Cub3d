@@ -1,6 +1,9 @@
 #include <cub3d_bonus.h>
 
 
+
+
+
 int get_previous_wall_x(t_game *game)
 {
 	int	index;
@@ -23,8 +26,6 @@ int get_previous_wall_y(t_game *game)
 
 }
 
-
-
 int	get_next_wall_y(t_game *game)
 {
 	int index;
@@ -46,6 +47,29 @@ int	get_next_wall_x(t_game *game)
 	return (index);
 }
 
+void handle_previous_wall(t_game *game, t_vec map_pos, t_vec velocity)
+{
+	if (map_pos.x > get_previous_wall_x(game) && game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)] \
+	&& ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
+		move_cam_x(game, velocity);
+	
+	if (map_pos.y > get_previous_wall_y(game) && game->map[(int)(game->player.pos.y + velocity.y * 1.6f)] && \
+	game->map[(int)(game->player.pos.y + velocity.y * 1.6f)][(int)game->player.pos.x] && \
+	ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y * 1.6f)][(int)game->player.pos.x], "03"))
+		move_cam_y(game, velocity);
+}
+
+void handle_next_wall(t_game *game, t_vec map_pos , t_vec velocity)
+{
+	if (map_pos.x < get_next_wall_x(game) &&  game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)] \
+	&& ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
+		move_cam_x(game, velocity);
+	
+	if (map_pos.y < get_next_wall_y(game) && game->map[(int)(game->player.pos.y + velocity.y * 1.6f)] && \
+	game->map[(int)(game->player.pos.y + velocity.y * 1.6f)][(int)game->player.pos.x] && \
+	ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y * 1.6f)][(int)game->player.pos.x], "03"))
+		move_cam_y(game, velocity);
+}
 
 void	watch_rotate(t_game *game)
 {
@@ -76,23 +100,25 @@ void	watch_walk(t_game *game)
 
 	if (game->buttons.down)
 	{
-		if (map_pos.x < get_next_wall_x(game) &&  game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)] \
-		&& ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
-			move_cam_x(game, velocity);
+		handle_next_wall(game, map_pos, velocity);
+		// if (map_pos.x < get_next_wall_x(game) &&  game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)] \
+		// && ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
+		// 	move_cam_x(game, velocity);
 		
-		if (map_pos.y < get_next_wall_y(game) && game->map[(int)(game->player.pos.y + velocity.y * 1.6f)] && ft_char_in_set(game->map[(int)(game->player.pos.y + \
-		velocity.y * 1.6f)][(int)game->player.pos.x], "03"))
-			move_cam_y(game, velocity);
+		// if (map_pos.y < get_next_wall_y(game) && game->map[(int)(game->player.pos.y + velocity.y * 1.6f)] && ft_char_in_set(game->map[(int)(game->player.pos.y + \
+		// velocity.y * 1.6f)][(int)game->player.pos.x], "03"))
+		// 	move_cam_y(game, velocity);
 	}
 	else if (game->buttons.up)
 	{
-		if (map_pos.x > get_previous_wall_x(game) && game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)] \
-		&& ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
-			move_cam_x(game, velocity);
+		handle_previous_wall(game, map_pos, velocity);
+		// if (map_pos.x > get_previous_wall_x(game) && game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)] \
+		// && ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
+		// 	move_cam_x(game, velocity);
 		
-		if (map_pos.y > get_previous_wall_y(game) && game->map[(int)(game->player.pos.y + velocity.y * 1.6f)] && \
-		ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y * 1.6f)][(int)game->player.pos.x], "03"))
-			move_cam_y(game, velocity);
+		// if (map_pos.y > get_previous_wall_y(game) && game->map[(int)(game->player.pos.y + velocity.y * 1.6f)] && \
+		// ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y * 1.6f)][(int)game->player.pos.x], "03"))
+		// 	move_cam_y(game, velocity);
 	}
 }
 
@@ -100,7 +126,7 @@ void	watch_strafe(t_game *game)
 {
 	t_vec	strafe_vel;
 	double	old_dir_x;
-	t_int_vec map_pos;
+	t_vec map_pos;
 
 	strafe_vel = game->player.direction;
 	old_dir_x = strafe_vel.x;
@@ -116,28 +142,29 @@ void	watch_strafe(t_game *game)
 	map_pos.y = ((strafe_vel.y * 1.6f));
 
 	if (game->buttons.right)
-	{
-		if (map_pos.x < get_next_wall_x(game) && game->map[(int)game->player.pos.y][(int)(game->player.pos.x + strafe_vel.x * 1.6f)] \
-		&& ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + strafe_vel.x * 1.6f)], "03"))
-			move_cam_x(game, strafe_vel);
+		handle_next_wall(game, map_pos, strafe_vel);
+	// {
+	// 	if (map_pos.x < get_next_wall_x(game) && game->map[(int)game->player.pos.y][(int)(game->player.pos.x + strafe_vel.x * 1.6f)] \
+	// 	&& ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + strafe_vel.x * 1.6f)], "03"))
+	// 		move_cam_x(game, strafe_vel);
 		
-		if (map_pos.y < get_next_wall_y(game) && game->map[(int)(game->player.pos.y + strafe_vel.y * 1.6f)] \
-		&& ft_char_in_set(game->map[(int)(game->player.pos.y + strafe_vel.y * 1.6f)][(int)game->player.pos.x], "03"))
-			move_cam_y(game, strafe_vel);
-	}
+	// 	if (map_pos.y < get_next_wall_y(game) && game->map[(int)(game->player.pos.y + strafe_vel.y * 1.6f)] \
+	// 	&& ft_char_in_set(game->map[(int)(game->player.pos.y + strafe_vel.y * 1.6f)][(int)game->player.pos.x], "03"))
+	// 		move_cam_y(game, strafe_vel);
+	// }
 	else if (game->buttons.left)
-	{
-		if (map_pos.x > get_previous_wall_x(game) && game->map[(int)game->player.pos.y][(int)(game->player.pos.x + strafe_vel.x * 1.6f)] \
-		 && ft_char_in_set(game->map[(int)game->player.pos.y][(int)
-		(game->player.pos.x + strafe_vel.x * 1.6f)], "03"))
-			move_cam_x(game, strafe_vel);
+		handle_previous_wall(game, map_pos, strafe_vel);
+	// {
+	// 	if (map_pos.x > get_previous_wall_x(game) && game->map[(int)game->player.pos.y][(int)(game->player.pos.x + strafe_vel.x * 1.6f)] \
+	// 	 && ft_char_in_set(game->map[(int)game->player.pos.y][(int)
+	// 	(game->player.pos.x + strafe_vel.x * 1.6f)], "03"))
+	// 		move_cam_x(game, strafe_vel);
 		
-		if (map_pos.y > get_previous_wall_y(game) && game->map[(int)(game->player.pos.y + strafe_vel.y * 1.6f)] && \
-		ft_char_in_set(game->map[(int)(game->player.pos.y + \
-		strafe_vel.y * 1.6f)][(int)game->player.pos.x], "03"))
-			move_cam_y(game, strafe_vel);
-	}
-
+	// 	if (map_pos.y > get_previous_wall_y(game) && game->map[(int)(game->player.pos.y + strafe_vel.y * 1.6f)] && \
+	// 	ft_char_in_set(game->map[(int)(game->player.pos.y + \
+	// 	strafe_vel.y * 1.6f)][(int)game->player.pos.x], "03"))
+	// 		move_cam_y(game, strafe_vel);
+	// }
 }
 
 void	watch_functions(t_game *game)
