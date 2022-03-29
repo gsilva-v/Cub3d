@@ -7,6 +7,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <sys/time.h>
+# include <time.h>
 # include <get_next_line.h>
 # include "../libs/vec_lib/vec.h"
 # include "../libs/libft/libft.h"
@@ -135,6 +136,7 @@ typedef struct s_game{
 	float		*z_buffer;
 	int			is_on_focus;
 	t_resource	resources;
+	t_vec		sprite_pos;
 	t_vec		map_offset;
 	void		*mlx;
 	void		*win;

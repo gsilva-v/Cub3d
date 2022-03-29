@@ -1,9 +1,5 @@
 #include <cub3d_bonus.h>
 
-t_vec sprite_pos = {
-	.x = 10.5, .y = 3.5
-};
-
 static void	reset_values(t_rays *values, t_player *player)
 {
 	double	multiplier;
@@ -82,22 +78,22 @@ void	raycasting(t_game *game)
 	t_rays	values;
 
 	values.rays = 0;
+	
+	/* t_vec enemy_direction = game->player.pos;
+	vec_sub(&enemy_direction, &game->sprite_pos);
+	vec_magnitude(&enemy_direction);
+	vec_normalize(&enemy_direction);
 
-	// t_vec enemy_direction = game->player.pos;
-	// vec_sub(&enemy_direction, &sprite_pos);
-	// vec_magnitude(&enemy_direction);
-	// vec_normalize(&enemy_direction);
+	vec_scale(&enemy_direction, 1);
+	vec_scale(&enemy_direction, game->elapsed_time);
 
-	// vec_scale(&enemy_direction, 1);
-	// vec_scale(&enemy_direction, game->elapsed_time);
-
-	// if (ft_char_in_set(game->map[(int)sprite_pos.y][(int)
-	// 		(sprite_pos.x + enemy_direction.x * 1.6f)], "03"))
-	// 	sprite_pos.x += enemy_direction.x;
+	if (ft_char_in_set(game->map[(int)game->sprite_pos.y][(int)
+			(game->sprite_pos.x + enemy_direction.x * 1.6f)], "03"))
+		game->sprite_pos.x += enemy_direction.x;
 		
-	// if (ft_char_in_set(game->map[(int)(sprite_pos.y + enemy_direction.y * \
-	// 1.6f)][(int)sprite_pos.x], "03"))
-	// 	sprite_pos.y += enemy_direction.y;
+	if (ft_char_in_set(game->map[(int)(game->sprite_pos.y + enemy_direction.y * \
+	1.6f)][(int)game->sprite_pos.x], "03"))
+		game->sprite_pos.y += enemy_direction.y; */
 
 
 	while (values.rays < SCREENWIDTH)
@@ -114,5 +110,5 @@ void	raycasting(t_game *game)
 		game->z_buffer[values.rays] = values.perp_wall;
 		values.rays++;
 	}
-	draw_sprite(game, sprite_pos, &game->resources.enemy);
+	draw_sprite(game, game->sprite_pos, &game->resources.enemy);
 }

@@ -29,10 +29,22 @@ void	init_player(t_game *game)
 	game->player.pos.y += 0.5f;
 }
 
+int		init_sprites(t_game *game)
+{
+	while(1)
+	{
+		game->sprite_pos.x = (float)rand()/(float)(RAND_MAX/ get_higher_len(game->map) - 1);
+		game->sprite_pos.y = (float)rand()/(float)(RAND_MAX/ matrix_len(game->map) - 1);
+		if (game->map[(int)game->sprite_pos.y][(int)game->sprite_pos.x] == FLOOR)
+			break;
+	}
+}
 void	init_game(t_game *game)
 {
+	srand(time(NULL));
 	game->mlx = mlx_init();
 	init_player(game);
+	init_sprites(game);
 	game->player.movespeed = 3.0f;
 	game->buffer = ft_calloc(1, SCREENHEIGHT);
 	game->z_buffer = ft_calloc(sizeof(float), SCREENWIDTH);
