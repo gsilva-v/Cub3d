@@ -176,14 +176,12 @@ void	watch_functions(t_game *game)
 		pos = game->player.pos;
 		pos.x += game->player.direction.x * 1.3f;
 		pos.y += game->player.direction.y * 1.3f;
-		if (game->map[(int)pos.y][(int)game->player.pos.x] == DOOR \
-			|| game->map[(int)game->player.pos.y][(int)pos.x] == DOOR)
+		if (game->map[(int)pos.y][(int)pos.x] == DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = OPEN_DOOR;
 			game->buttons.function = 0;
 		}
-		else if (game->map[(int)pos.y][(int)game->player.pos.x] == OPEN_DOOR \
-			|| game->map[(int)game->player.pos.y][(int)pos.x] == OPEN_DOOR)
+		else if (game->map[(int)pos.y][(int)pos.x] == OPEN_DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = DOOR;
 			game->buttons.function = 0;
