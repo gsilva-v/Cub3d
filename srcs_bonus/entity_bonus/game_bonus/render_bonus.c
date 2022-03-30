@@ -37,7 +37,9 @@ int	game_render(t_game *game)
 	minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, \
 	game->resources.canvas.img, 0, 0);
-	if (game->lose)
+	if (game->lose == -1)
 		mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You lose, try again! ");
+	if (game->lose == 1)
+		mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You win, congrats! ");
 	return (0);
 }

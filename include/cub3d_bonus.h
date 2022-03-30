@@ -24,8 +24,8 @@
 # define WALL '1'
 # define DOOR '2'
 # define OPEN_DOOR '3'
-# define VALID_BLOCK "0123 \nWENS"
-# define HAS_INSIDE "ESWN023"
+# define VALID_BLOCK "0123F \nWENS"
+# define HAS_INSIDE "ESWN023F"
 # define WRONG_ARG  "Invalid arguments, try ./cub3d ./maps/simple_map.cub"
 # define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"
 # define WTOUT_PLYR "this map dont have a initial point for player"
@@ -153,6 +153,7 @@ typedef struct s_game{
 	int			is_on_focus;
 	t_resource	resources;
 	t_entity	ghost;
+	t_entity	final;
 	t_vec		map_offset;
 	int			enemy_on_view;
 	void		*mlx;

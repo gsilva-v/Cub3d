@@ -6,7 +6,7 @@ int	sprite_render(t_game *game)
 	static float	elapse;
 	int				index;
 
-	if (game->lose)
+	if (game->lose == -1)
 	{
 		draw_sprite(game, game->ghost.pos, &game->ghost.sprite);
 		return (0);
@@ -24,5 +24,6 @@ int	sprite_render(t_game *game)
 	index = animation->index;
 	sprite_update(game);
 	draw_sprite(game, game->ghost.pos, &animation->sprites[index]);
+	draw_sprite(game, game->final.pos, &game->final.sprite);
 	return (0);
 }

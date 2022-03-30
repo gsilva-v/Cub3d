@@ -41,12 +41,44 @@ int		init_sprites(t_game *game)
 			break;
 	}
 }
+
+void	init_final_point(t_game *game)
+{
+	int x;
+	int y;
+
+	y = 0;
+	game->final.pos.x = -1;
+	game->final.pos.y = -1;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'F' && game->final.pos.x == -1)
+			{
+				game->final.pos.x = x;
+				game->final.pos.y = y;
+				game->map[y][x] = FLOOR;
+			}
+			else if (game->map[y][x] == 'F' && game->final.pos.x != -1)
+				show_error(game, 1, "This map have 2 or more finals!");
+			x++;
+		}
+		y++;
+	}
+	
+}
+
+
+
 void	init_game(t_game *game)
 {
 	srand(time(NULL));
 	game->mlx = mlx_init();
 	init_player(game);
 	init_sprites(game);
+	init_final_point(game);
 	game->player.movespeed = 3.0f;
 	game->buffer = ft_calloc(1, SCREENHEIGHT);
 	game->z_buffer = ft_calloc(sizeof(float), SCREENWIDTH);

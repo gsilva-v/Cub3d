@@ -109,16 +109,16 @@ void	load_imgs(t_game *game)
 	draw_map(game);
 	init_animation(game, &game->ghost.animation, "./imgs/ghost", 5);
 
-	r->enemy.img = mlx_xpm_file_to_image(game->mlx, "./imgs/macaco.xpm", \
-	&r->enemy.width, &r->enemy.height);
-	r->enemy.addr = mlx_get_data_addr(r->enemy.img, &r->enemy.bits_per_pixel, \
-	&r->enemy.line_length, &r->enemy.endian);
+	game->final.sprite.img = mlx_xpm_file_to_image(game->mlx, "./imgs/macaco.xpm", \
+	&game->final.sprite.width, &game->final.sprite.height);
+	game->final.sprite.addr = mlx_get_data_addr(game->final.sprite.img, &game->final.sprite.bits_per_pixel, \
+	&game->final.sprite.line_length, &game->final.sprite.endian);
 
 	game->ghost.sprite.img = mlx_xpm_file_to_image(game->mlx, "./imgs/ghost5.xpm", \
 	&game->ghost.sprite.width, &game->ghost.sprite.height);
 	game->ghost.sprite.addr = mlx_get_data_addr(game->ghost.sprite.img, &game->ghost.sprite.bits_per_pixel, \
 	&game->ghost.sprite.line_length, &game->ghost.sprite.endian);
-
+	
 
 	load_block(game, &r->wall);
 	r->door.so.name = ft_strdup("./imgs/closed_door.xpm");

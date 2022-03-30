@@ -26,14 +26,32 @@ void	free_block(t_block *block, t_game *game)
 		free_data(game, &block->no);
 }
 
+void free_animation(t_animation *animation, t_game *game)
+{
+	while (animation->n_sprites)
+	{
+		free_data(game, &animation->sprites[animation->n_sprites - 1]);
+		animation->n_sprites--;
+	}
+	if (animation->sprites)
+		free(animation->sprites);
+}
+
+
+void	free_sprite(t_entity *who, t_game *game)
+{
+	if (&who->sprite)
+		free_data(game, &who->sprite);
+	if (&who->animation)
+		free_animation(&who->animation, game);
+}
+
 void	check_data_leaks(t_game *game)
 {
 	if (&game->resources.canvas)
 		free_data(game, &game->resources.canvas);
 	if (&game->resources.map)
 		free_data(game, &game->resources.map);
-	// if (&game->resources.pov)
-	// 	free_data(game, &game->resources.pov);
 	if (&game->resources.enemy)
 		free_data(game, &game->resources.enemy);
 	if (&game->resources.wall)
@@ -42,6 +60,12 @@ void	check_data_leaks(t_game *game)
 		free_block(&game->resources.door, game);
 	if (&game->resources.open_door)
 		free_block(&game->resources.open_door, game);
+	
+	if (&game->ghost.sprite)
+		free_sprite(&game->ghost, game);
+	if (&game->final.sprite)
+		free_sprite(&game->final, game);
+	
 }
 
 void	finish_him(t_game *game, int exit_code)
