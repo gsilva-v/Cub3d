@@ -46,32 +46,58 @@ int	get_next_wall_x(t_game *game)
 
 void	handle_previous_wall(t_game *game, t_vec map_pos, t_vec velocity)
 {
-	if (map_pos.x > get_previous_wall_x(game) && game->map[(int)
-			game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)]
-			&& ft_char_in_set(game->map[(int)game->player.pos.y]
-			[(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
-		move_cam_x(game, velocity);
-	if (map_pos.y > get_previous_wall_y(game) && game->map[(int)
-			(game->player.pos.y + velocity.y * 1.6f)] && game->map[(int)
-			(game->player.pos.y + velocity.y * 1.6f)][(int)game->player.pos.x]
-			&& ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y *
-			1.6f)][(int)game->player.pos.x], "03"))
-		move_cam_y(game, velocity);
+	t_vec	pos;
+
+	pos = game->player.pos;
+	pos.x -= 1;
+	while (pos.x >= 0 && pos.x >= velocity.x + game->player.pos.x && game->map[(int)game->player.pos.y][(int)(pos.x)])
+	{
+		if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(pos.x)], "03"))
+		{
+			move_cam_x(game, velocity);
+			break ;
+		}
+		pos.x -= 1;
+	}
+	pos = game->player.pos;
+	pos.y -= 1;
+	while (pos.y >= 0 && pos.y >= velocity.y + game->player.pos.y && game->map[(int)pos.y][(int)(game->player.pos.x)])
+	{
+		if (ft_char_in_set(game->map[(int)pos.y][(int)(game->player.pos.x)], "03"))
+		{
+			move_cam_y(game, velocity);
+			break ;
+		}
+		pos.y -= 1;
+	}
 }
 
 void	handle_next_wall(t_game *game, t_vec map_pos, t_vec velocity)
 {
-	if (map_pos.x < get_next_wall_x(game) && game->map[(int)game->player.pos.y]
-		[(int)(game->player.pos.x + velocity.x * 1.6f)]
-			&& ft_char_in_set(game->map[(int)game->player.pos.y]
-			[(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
-		move_cam_x(game, velocity);
-	if (map_pos.y < get_next_wall_y(game) && game->map[(int)(game->player.pos.y
-			+ velocity.y * 1.6f)] && game->map[(int)(game->player.pos.y
-			+ velocity.y * 1.6f)][(int)game->player.pos.x] &&
-			ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y *
-			1.6f)][(int)game->player.pos.x], "03"))
-		move_cam_y(game, velocity);
+	t_vec	pos;
+
+	pos = game->player.pos;
+	pos.x += 1;
+	while (pos.x <= velocity.x + game->player.pos.x && game->map[(int)game->player.pos.y][(int)(pos.x)])
+	{
+		if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(pos.x)], "03"))
+		{
+			move_cam_x(game, velocity);
+			break ;
+		}
+		pos.x += 1;
+	}
+	pos = game->player.pos;
+	pos.y += 1;
+	while (pos.y <= velocity.y + game->player.pos.y && game->map[(int)pos.y][(int)(game->player.pos.x)])
+	{
+		if (ft_char_in_set(game->map[(int)pos.y][(int)(game->player.pos.x)], "03"))
+		{
+			move_cam_y(game, velocity);
+			break ;
+		}
+		pos.y += 1;
+	}
 }
 
 void	watch_rotate(t_game *game)
