@@ -6,11 +6,8 @@ int	sprite_render(t_game *game)
 	static float	elapse;
 	int				index;
 
-	if (game->lose == -1)
-	{
-		draw_sprite(game, game->ghost.pos, &game->ghost.sprite);
-		return (0);
-	}
+		
+	
 	elapse += game->elapsed_time;
 	animation = &game->ghost.animation;
 	if (elapse >= animation->seconds)
@@ -22,8 +19,12 @@ int	sprite_render(t_game *game)
 		elapse = 0;
 	}
 	index = animation->index;
-	sprite_update(game);
-	draw_sprite(game, game->ghost.pos, &animation->sprites[index]);
+	if (!game->lose)
+		sprite_update(game);
+	if (game->lose == -1)
+		draw_sprite(game, game->ghost.pos, &game->ghost.sprite);
+	else
+		draw_sprite(game, game->ghost.pos, &animation->sprites[index]);
 	draw_sprite(game, game->final.pos, &game->final.sprite);
 	return (0);
 }

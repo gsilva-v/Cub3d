@@ -53,11 +53,17 @@ void draw_sprite(t_game *game, t_vec pos, t_data *text)
 			y = sprite.draw_start.y;
 			while (y < sprite.draw_end.y)
 			{
+				int	is_transparence = 0;
 				d = (y - sprite.v_move_screen) * 256 - SCREENHEIGHT * 127 + \
 				sprite.sprite_h * 128;
 				sprite.text.y = ((d * text->height) / sprite.sprite_h) / 256;
-				get_and_draw(game,  (t_vec){.y = y, .x = stripe}, (t_vec){.x = 
-					sprite.text.x, .y = sprite.text.y}, text);
+				color = get_pixel(text, (t_vec){.x =sprite.text.x, .y = sprite.text.y});
+				if (color == 0xff00ff)
+					is_transparence = 1;
+				color = reshade(color, 0);
+				color = lamp((t_vec){.y = y, .x = stripe}, game, color, sprite.transform.y);
+				if (!is_transparence)
+					draw_pixel(&game->resources.canvas, (t_vec){.y = y, .x = stripe}, color);
 				y++;
 			}
 		}

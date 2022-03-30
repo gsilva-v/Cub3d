@@ -101,6 +101,7 @@ typedef struct s_entity
 	t_data		sprite;
 	t_animation	animation;
 	t_vec		pos;
+	int			is_on_view;
 } t_entity;
 
 typedef struct s_player{
@@ -124,6 +125,7 @@ typedef struct s_resource {
 	t_data	enemy;
 	t_data	canvas;
 	t_data	map;
+	t_data	floor;
 	t_block	wall;
 	t_block	door;
 	t_block	open_door;

@@ -132,6 +132,10 @@ void	load_imgs(t_game *game)
 	game->ghost.sprite.addr = mlx_get_data_addr(game->ghost.sprite.img, &game->ghost.sprite.bits_per_pixel, \
 	&game->ghost.sprite.line_length, &game->ghost.sprite.endian);
 	
+	game->resources.floor.img = mlx_xpm_file_to_image(game->mlx, "./imgs/floor_1.xpm", \
+	&game->resources.floor.width, &game->resources.floor.height);
+	game->resources.floor.addr = mlx_get_data_addr(game->resources.floor.img, &game->resources.floor.bits_per_pixel, \
+	&game->resources.floor.line_length, &game->resources.floor.endian);
 
 	load_block(game, &r->wall);
 	r->door.so.name = ft_strdup("./imgs/closed_door.xpm");

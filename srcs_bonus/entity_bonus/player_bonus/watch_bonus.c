@@ -137,8 +137,8 @@ void	watch_functions(t_game *game)
 	if (game->buttons.function)
 	{
 		pos = game->player.pos;
-		pos.x += game->player.direction.x * 1.3f;
-		pos.y += game->player.direction.y * 1.3f;
+		pos.x += game->player.direction.x * 1.8f;
+		pos.y += game->player.direction.y * 1.8f;
 		if (game->map[(int)pos.y][(int)pos.x] == DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = OPEN_DOOR;

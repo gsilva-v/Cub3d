@@ -72,20 +72,82 @@ void	dda(t_rays *values, t_game *game)
 // GERAR NUMERO ALEATORIO PARA OS SPRITES
 // float x = (float)rand()/(float)(RAND_MAX/a);
 
+void	floor_casting(t_game *game)
+{
+	for(int y = SCREENHEIGHT / 2; y < SCREENHEIGHT; y++)
+    {
 
+		t_vec	raydir0 = game->player.direction;
+		vec_sub(&raydir0, &game->player.plane);
+		t_vec	raydir1 = game->player.direction;
+		vec_sum(&raydir1, &game->player.plane);
+
+      // Current y position compared to the center of the screen (the horizon)
+      int p = y - SCREENHEIGHT / 2;
+
+      // Vertical position of the camera.
+      float posZ = 0.5 * SCREENHEIGHT;
+
+      // Horizontal distance from the camera to the floor for the current row.
+      // 0.5 is the z position exactly in the middle between floor and ceiling.
+      float rowDistance = posZ / p;
+
+      // calculate the real world step vector we have to add for each x (parallel to camera plane)
+      // adding step by step avoids multiplications with a weight in the inner loop
+      float floorStepX = rowDistance * (raydir1.x - raydir0.x) / SCREENWIDTH;
+      float floorStepY = rowDistance * (raydir1.y - raydir0.y) / SCREENWIDTH;
+
+      // real world coordinates of the leftmost column. This will be updated as we step to the right.
+      float floorX = game->player.pos.x + rowDistance * raydir0.x;
+      float floorY = game->player.pos.y + rowDistance * raydir0.y;
+
+      for(int x = 0; x < SCREENWIDTH; ++x)
+      {
+        // the cell coord is simply got from the integer parts of floorX and floorY
+        int cellX = (int)(floorX);
+        int cellY = (int)(floorY);
+
+        // get the texture coordinate from the fractional part
+        int tx = (int)(BLOCK_SIZE * (floorX - cellX)) & (BLOCK_SIZE - 1);
+        int ty = (int)(BLOCK_SIZE * (floorY - cellY)) & (BLOCK_SIZE - 1);
+
+        floorX += floorStepX;
+        floorY += floorStepY;
+
+        // choose texture and draw the pixel
+        int floorTexture = 3;
+        int ceilingTexture = 6;
+        int	color;
+
+		color = get_pixel(&game->resources.floor, (t_vec){.x = tx, .y = ty});
+		color = lamp((t_vec){.x = x, .y = y}, game, color, rowDistance);
+		color = reshade(color, 0);
+		draw_pixel(&game->resources.canvas, (t_vec){.x = x, .y =y}, color);
+      }
+    }
+}
+
+int		is_on_view(t_game *game, t_entity *entity, t_vec ray_dir)
+{
+	t_vec	dir_player_entity;
+
+	dir_player_entity = (t_vec) {
+		.x = entity->pos.x - game->player.pos.x,
+		.y = entity->pos.y - game->player.pos.y
+	};
+	vec_magnitude(&dir_player_entity);
+	vec_normalize(&dir_player_entity);
+	if (vec_equal(ray_dir, dir_player_entity))
+		entity->is_on_view = 1;
+}
 void	raycasting(t_game *game)
 {
 	t_rays	values;
-	t_vec	dirPlayerEnemy;
-
-	dirPlayerEnemy = (t_vec) {
-		.x = game->ghost.pos.x - game->player.pos.x,
-		.y = game->ghost.pos.y - game->player.pos.y
-	};
-	vec_magnitude(&dirPlayerEnemy);
-	vec_normalize(&dirPlayerEnemy);
+	
+	floor_casting(game);
 	values.rays = 0;
-	game->enemy_on_view = 0;
+	game->ghost.is_on_view = 0;
+	game->final.is_on_view = 0;
 	while (values.rays < SCREENWIDTH)
 	{
 		// reset values
@@ -97,18 +159,12 @@ void	raycasting(t_game *game)
 		t_vec	ray_dir = values.ray_dir;
 		vec_magnitude(&values.ray_dir);
 		vec_normalize(&ray_dir);
-		if (vec_equal(ray_dir, dirPlayerEnemy))
-			game->enemy_on_view = 1;
+		is_on_view(game, &game->ghost, ray_dir);
+		is_on_view(game, &game->final, ray_dir);
 		// renderização
 		ft_memset(game->buffer, 0, SCREENHEIGHT);
 		render_engine(&values, game);
 		game->z_buffer[values.rays] = values.perp_wall;
 		values.rays++;
 	}
-	// if (game->ghost.pos.x - game->player.pos.x >= 0.2 && game->ghost.pos.y - game->player.pos.y >= 0.2)
-	// {
-	// 	mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You loose, try again! ");
-	// 	sleep (10);
-	// 	exit (1);
-	// }
 }

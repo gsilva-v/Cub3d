@@ -10,10 +10,10 @@ int	sprite_update(t_game *game)
 	vec_magnitude(&enemy_direction);
 	vec_normalize(&enemy_direction);
 
-	vec_scale(&enemy_direction, 1);
+	vec_scale(&enemy_direction, 1.5f);
 	vec_scale(&enemy_direction, game->elapsed_time);
 
-	if (dist > 0.4f)
+	if (dist > 0.4f && dist < 4.f)
 	{
 		if (ft_char_in_set(game->map[(int)game->ghost.pos.y][(int)
 			(game->ghost.pos.x + enemy_direction.x * 1.6f)], "03"))

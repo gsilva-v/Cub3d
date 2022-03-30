@@ -49,9 +49,9 @@ int	lamp(t_vec pos, t_game *game, int color, float per_dist)
 	point = (t_vec){.x = pos.x, .y = pos.y};
 	mid_screen = (t_vec){.x = SCREENWIDTH / 2, .y = SCREENHEIGHT / 2};
 	dist = distance(point, mid_screen);
-	shade = (1 + (((2.f * dist) / 400 - 2.f) * -1)) * (1 / (fabs(per_dist) / 2));
-	if (shade > 3)
-		shade = 3;
+	shade = (1 + (((4.f * dist) / 400 - 4.f) * -1)) * (1 / (fabs(per_dist) / 4));
+	if (shade > 5)
+		shade = 5;
 	if (dist < 400 && game->buttons.light && shade >= 1.f)
 		color = get_color_shade(color, shade);
 	return (color);
@@ -61,8 +61,8 @@ int	reshade(int main_color, int have_reshade)
 {
 	int	color;
 
-	color = get_color_shade(main_color, 0.6);
-	if (have_reshade == 1)
-		color = get_color_shade(main_color, 0.6);
+	color = get_color_shade(main_color, 0.1);
+	color = get_color_shade(main_color, 0.3);
+	color = get_color_shade(main_color, 0.1);
 	return (color);
 }
