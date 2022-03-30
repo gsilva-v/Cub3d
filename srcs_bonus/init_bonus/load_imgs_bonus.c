@@ -102,7 +102,20 @@ void	load_imgs(t_game *game)
 	&r->canvas.bits_per_pixel, &r->canvas.line_length, &r->canvas.endian);
 
 
-	r->map.img = mlx_new_image(game->mlx, get_higher_len(game->map) * MBS, matrix_len(game->map) * MBS);
+
+	int	width;
+	int height;
+
+	width = get_higher_len(game->map) * MBS;
+	height =  matrix_len(game->map) * MBS;
+
+	if (width < 100)
+		width = 100;
+
+	if (height < 100)
+		height = 100;
+
+	r->map.img = mlx_new_image(game->mlx, width, height);
 	r->map.addr = mlx_get_data_addr(r->map.img, \
 	&r->map.bits_per_pixel, &r->map.line_length, &r->map.endian);
 	clean_minimap(game);

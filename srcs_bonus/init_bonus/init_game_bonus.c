@@ -67,10 +67,9 @@ void	init_final_point(t_game *game)
 		}
 		y++;
 	}
-	
+	if (game->final.pos.x == -1)
+		show_error(game, 1, "This map dont have a final!");
 }
-
-
 
 void	init_game(t_game *game)
 {

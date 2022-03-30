@@ -4,6 +4,7 @@ fazer a mecanica do sprite pegar o jogador - feito
 
 fazer o fim do jogo (achar o mamaco) - feito
 
+procurar os erros no valgrind
 caçar seg
 leak
 trocar o chao
