@@ -4,7 +4,7 @@ NAME_BONUS = cub3D_bonus
 CC = gcc
 INCLUDE = -I ./include/
 CFLAGS = -g $(INCLUDE)
-MLX_FLAGS = -lmlx_Linux -lXext -lX11
+MLX_FLAGS = -lmlx -lXext -lX11
 
 RM = rm -rf
 PATH_LIBS = ./libs/

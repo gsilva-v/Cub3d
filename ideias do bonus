@@ -1,14 +1,13 @@
 tirar a porta do mandatorio - feito
 arrumar a lanterna - feito
 fazer a mecanica do sprite pegar o jogador - feito
-
 fazer o fim do jogo (achar o mamaco) - feito
+trocar o chao - feito
+consertar o minimapa - feito
+procurar os erros no valgrind - feito
 
-procurar os erros no valgrind
 caçar seg
 leak
-trocar o chao
-consertar o minimapa
 norminette
 
 
@@ -30,6 +29,9 @@ melhorar a lanterna
 talvez bateria na lanterna
 sistema de tiros
 sistema de pulos
+troca de entre a arma e a lanterna
+lanterna para o fantasma
+olhar pra cima e para baixo
 
 menu de configurações{
 	horientado pelo mouse e pelas setas
