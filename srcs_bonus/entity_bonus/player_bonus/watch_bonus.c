@@ -49,7 +49,7 @@ void	handle_previous_wall(t_game *game, t_vec map_pos, t_vec velocity)
 	t_vec	pos;
 
 	pos = game->player.pos;
-	while (&& pos.x >= velocity.x + game->player.pos.x && game->map[(int)game->player.pos.y][(int)(pos.x)])
+	while (pos.x >= velocity.x + game->player.pos.x && game->map[(int)game->player.pos.y][(int)(pos.x)])
 	{
 		if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(pos.x)], "03"))
 		{
