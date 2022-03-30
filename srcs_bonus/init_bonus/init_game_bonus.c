@@ -31,7 +31,7 @@ void	init_player(t_game *game)
 
 int		init_sprites(t_game *game)
 {
-	while(1)
+	while (1)
 	{
 		game->sprite_pos.x = (float)rand()/(float)(RAND_MAX/ get_higher_len(game->map) - 1);
 		game->sprite_pos.y = (float)rand()/(float)(RAND_MAX/ matrix_len(game->map) - 1);

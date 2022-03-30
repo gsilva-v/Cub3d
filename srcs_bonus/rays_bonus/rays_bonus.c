@@ -79,7 +79,7 @@ void	raycasting(t_game *game)
 
 	values.rays = 0;
 	
-	/* t_vec enemy_direction = game->player.pos;
+	t_vec enemy_direction = game->player.pos;
 	vec_sub(&enemy_direction, &game->sprite_pos);
 	vec_magnitude(&enemy_direction);
 	vec_normalize(&enemy_direction);
@@ -93,7 +93,8 @@ void	raycasting(t_game *game)
 		
 	if (ft_char_in_set(game->map[(int)(game->sprite_pos.y + enemy_direction.y * \
 	1.6f)][(int)game->sprite_pos.x], "03"))
-		game->sprite_pos.y += enemy_direction.y; */
+		game->sprite_pos.y += enemy_direction.y;
+	
 
 
 	while (values.rays < SCREENWIDTH)
@@ -110,5 +111,11 @@ void	raycasting(t_game *game)
 		game->z_buffer[values.rays] = values.perp_wall;
 		values.rays++;
 	}
-	draw_sprite(game, game->sprite_pos, &game->resources.enemy);
+	// if (game->sprite_pos.x - game->player.pos.x <= 0.2 && game->sprite_pos.y - game->player.pos.y <= 0.2)
+	// {
+	// 	mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You loose, try again! ");
+	// 	sleep (10);
+	// 	exit (1);
+	// }
+		draw_sprite(game, game->sprite_pos, &game->resources.enemy);
 }

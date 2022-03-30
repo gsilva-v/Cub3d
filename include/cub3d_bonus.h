@@ -144,6 +144,7 @@ typedef struct s_game{
 	int			is_open_door;
 	double		last_time;
 	double		elapsed_time;
+	int			lose;
 }	t_game;
 
 // TIME

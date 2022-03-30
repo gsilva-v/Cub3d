@@ -26,15 +26,22 @@ static void	clean_map(t_game *game)
 
 int	game_render(t_game *game)
 {
-	game->elapsed_time = passed_time(game->last_time);
-	game->last_time = current_time();
-	if (game->is_on_focus)
-		mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);
-	clean_map(game);
 	game_update(game);
-	player_render(game);
-	minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, \
-	game->resources.canvas.img, 0, 0);
+	if (game->lose)
+	{
+		mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You lose, try again! ");
+	}
+	else
+	{
+		game->elapsed_time = passed_time(game->last_time);
+		game->last_time = current_time();
+		if (game->is_on_focus)
+			mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);
+		clean_map(game);
+		player_render(game);
+		minimap(game);
+		mlx_put_image_to_window(game->mlx, game->win, \
+		game->resources.canvas.img, 0, 0);
+	}
 	return (0);
 }

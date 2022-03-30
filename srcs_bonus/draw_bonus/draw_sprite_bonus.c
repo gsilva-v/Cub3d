@@ -11,6 +11,9 @@ void draw_sprite(t_game *game, t_vec pos, t_data *text)
 // checar a distancia entre a sprite e o player
 	sprite.pos.x = pos.x - game->player.pos.x;
 	sprite.pos.y = pos.y - game->player.pos.y;
+	
+	if (game->sprite_pos.x - game->player.pos.x <= 0.2f && game->sprite_pos.y - game->player.pos.y <= 0.2f)
+		game->lose = 1;
 
 // cria a projeção no mapa
 	sprite.inv_delta = 1.0 / (game->player.plane.x * game->player.direction.y \
