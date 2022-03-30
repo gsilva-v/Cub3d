@@ -79,8 +79,8 @@ void	raycasting(t_game *game)
 	t_vec	dirPlayerEnemy;
 
 	dirPlayerEnemy = (t_vec) {
-		.x = game->sprite_pos.x - game->player.pos.x,
-		.y = game->sprite_pos.y - game->player.pos.y
+		.x = game->ghost.pos.x - game->player.pos.x,
+		.y = game->ghost.pos.y - game->player.pos.y
 	};
 	vec_magnitude(&dirPlayerEnemy);
 	vec_normalize(&dirPlayerEnemy);
@@ -105,7 +105,7 @@ void	raycasting(t_game *game)
 		game->z_buffer[values.rays] = values.perp_wall;
 		values.rays++;
 	}
-	// if (game->sprite_pos.x - game->player.pos.x >= 0.2 && game->sprite_pos.y - game->player.pos.y >= 0.2)
+	// if (game->ghost.pos.x - game->player.pos.x >= 0.2 && game->ghost.pos.y - game->player.pos.y >= 0.2)
 	// {
 	// 	mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You loose, try again! ");
 	// 	sleep (10);

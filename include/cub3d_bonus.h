@@ -153,7 +153,6 @@ typedef struct s_game{
 	int			is_on_focus;
 	t_resource	resources;
 	t_entity	ghost;
-	t_vec		sprite_pos;
 	t_vec		map_offset;
 	int			enemy_on_view;
 	void		*mlx;
