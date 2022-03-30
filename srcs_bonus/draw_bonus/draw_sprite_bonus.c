@@ -12,9 +12,6 @@ void draw_sprite(t_game *game, t_vec pos, t_data *text)
 	sprite.pos.x = pos.x - game->player.pos.x;
 	sprite.pos.y = pos.y - game->player.pos.y;
 	
-	if (game->sprite_pos.x - game->player.pos.x <= 0.2f && game->sprite_pos.y - game->player.pos.y <= 0.2f)
-		game->lose = 1;
-
 // cria a projeção no mapa
 	sprite.inv_delta = 1.0 / (game->player.plane.x * game->player.direction.y \
 	- game->player.direction.x * game->player.plane.y);
@@ -42,7 +39,7 @@ void draw_sprite(t_game *game, t_vec pos, t_data *text)
 		sprite.draw_start.x = 0;
 	sprite.draw_end.x = sprite.sprite_w/ 2 + sprite.sprite_screen;
 	if (sprite.draw_end.x >= SCREENWIDTH)
-		sprite.draw_end.x = SCREENWIDTH;
+		sprite.draw_end.x = SCREENWIDTH - 1;
 	stripe = sprite.draw_start.x;
 
 // desenha a sprite

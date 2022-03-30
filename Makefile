@@ -56,6 +56,7 @@ PATH_UTILS_B = $(PATH_SRCS_B)utils_bonus/
 PATH_ENTITY_B = $(PATH_SRCS_B)entity_bonus/
 PATH_GAME_B = $(PATH_ENTITY_B)game_bonus/
 PATH_PLAYER_B = $(PATH_ENTITY_B)player_bonus/
+PATH_SPRITE_B = $(PATH_ENTITY_B)sprite_bonus/
 
 PATH_OBJS_B = ./objs_bonus/
 OBJ_PATH_B = ./objs_bonus/
@@ -64,6 +65,7 @@ SRCS_B += $(addprefix $(PATH_CLOSE_B), kill_window_bonus finish_him_bonus)
 SRCS_B += $(addprefix $(PATH_DRAW_B), draw_pixel_bonus minimap_bonus draw_sprite_bonus)
 SRCS_B += $(addprefix $(PATH_GAME_B), mouse_handle_bonus update_bonus render_bonus run_bonus)
 SRCS_B += $(addprefix $(PATH_PLAYER_B), update_bonus render_bonus watch_bonus watch_utils_bonus)
+SRCS_B += $(addprefix $(PATH_SPRITE_B), update_bonus render_bonus)
 SRCS_B += $(addprefix $(PATH_INIT_B), init_game_bonus load_imgs_bonus start_orientation_bonus)
 SRCS_B += $(addprefix $(PATH_MAIN_B), main_bonus)
 SRCS_B += $(addprefix $(PATH_PARSE_B), parse_map_bonus parse_map_utils_bonus parse_resources_bonus parse_resources_utils_bonus parse_resources_utils2_bonus)
@@ -127,6 +129,7 @@ $(OBJ_PATH_B):
 	@mkdir -p  $(PATH_OBJS_B)entity_bonus/
 	@mkdir -p  $(PATH_OBJS_B)entity_bonus/game_bonus
 	@mkdir -p  $(PATH_OBJS_B)entity_bonus/player_bonus
+	@mkdir -p  $(PATH_OBJS_B)entity_bonus/sprite_bonus
 	@mkdir -p  $(PATH_OBJS_B)init_bonus/
 	@mkdir -p  $(PATH_OBJS_B)main_bonus/
 	@mkdir -p  $(PATH_OBJS_B)parse_bonus/

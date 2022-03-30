@@ -39,6 +39,7 @@ int	game_render(t_game *game)
 			mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);
 		clean_map(game);
 		player_render(game);
+		sprite_render(game);
 		minimap(game);
 		mlx_put_image_to_window(game->mlx, game->win, \
 		game->resources.canvas.img, 0, 0);

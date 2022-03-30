@@ -31,11 +31,13 @@ void	init_player(t_game *game)
 
 int		init_sprites(t_game *game)
 {
+	float	dist;
 	while (1)
 	{
 		game->sprite_pos.x = (float)rand()/(float)(RAND_MAX/ get_higher_len(game->map) - 1);
 		game->sprite_pos.y = (float)rand()/(float)(RAND_MAX/ matrix_len(game->map) - 1);
-		if (game->map[(int)game->sprite_pos.y][(int)game->sprite_pos.x] == FLOOR)
+		dist = vec_dist(game->sprite_pos, game->player.pos);
+		if (game->map[(int)game->sprite_pos.y][(int)game->sprite_pos.x] == FLOOR && dist >= 3)
 			break;
 	}
 }

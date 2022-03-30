@@ -17,3 +17,8 @@ void	vec_magnitude(t_vec *v)
 {
 	v->magnitude = sqrt((v->x * v->x) + (v->y * v->y));
 }
+
+int	vec_equal(t_vec v1, t_vec v2)
+{
+	return (fabs(v1.x - v2.x) < 0.1 && fabs(v1.y - v2.y) < 0.1);
+}

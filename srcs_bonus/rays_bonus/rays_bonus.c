@@ -76,27 +76,16 @@ void	dda(t_rays *values, t_game *game)
 void	raycasting(t_game *game)
 {
 	t_rays	values;
+	t_vec	dirPlayerEnemy;
 
+	dirPlayerEnemy = (t_vec) {
+		.x = game->sprite_pos.x - game->player.pos.x,
+		.y = game->sprite_pos.y - game->player.pos.y
+	};
+	vec_magnitude(&dirPlayerEnemy);
+	vec_normalize(&dirPlayerEnemy);
 	values.rays = 0;
-	
-	t_vec enemy_direction = game->player.pos;
-	vec_sub(&enemy_direction, &game->sprite_pos);
-	vec_magnitude(&enemy_direction);
-	vec_normalize(&enemy_direction);
-
-	vec_scale(&enemy_direction, 1);
-	vec_scale(&enemy_direction, game->elapsed_time);
-
-	if (ft_char_in_set(game->map[(int)game->sprite_pos.y][(int)
-			(game->sprite_pos.x + enemy_direction.x * 1.6f)], "03"))
-		game->sprite_pos.x += enemy_direction.x;
-		
-	if (ft_char_in_set(game->map[(int)(game->sprite_pos.y + enemy_direction.y * \
-	1.6f)][(int)game->sprite_pos.x], "03"))
-		game->sprite_pos.y += enemy_direction.y;
-	
-
-
+	game->enemy_on_view = 0;
 	while (values.rays < SCREENWIDTH)
 	{
 		// reset values
@@ -105,17 +94,21 @@ void	raycasting(t_game *game)
 		check_dist(&values, &game->player);
 		// algoritmo DDA
 		dda(&values, game);
+		t_vec	ray_dir = values.ray_dir;
+		vec_magnitude(&values.ray_dir);
+		vec_normalize(&ray_dir);
+		if (vec_equal(ray_dir, dirPlayerEnemy))
+			game->enemy_on_view = 1;
 		// renderização
 		ft_memset(game->buffer, 0, SCREENHEIGHT);
 		render_engine(&values, game);
 		game->z_buffer[values.rays] = values.perp_wall;
 		values.rays++;
 	}
-	// if (game->sprite_pos.x - game->player.pos.x <= 0.2 && game->sprite_pos.y - game->player.pos.y <= 0.2)
+	// if (game->sprite_pos.x - game->player.pos.x >= 0.2 && game->sprite_pos.y - game->player.pos.y >= 0.2)
 	// {
 	// 	mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You loose, try again! ");
 	// 	sleep (10);
 	// 	exit (1);
 	// }
-		draw_sprite(game, game->sprite_pos, &game->resources.enemy);
 }

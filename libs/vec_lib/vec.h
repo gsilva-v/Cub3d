@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 08:25:49 by user42            #+#    #+#             */
-/*   Updated: 2022/03/24 09:27:40 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/03/30 09:39:20 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ t_vec	*new_vec(float x, float y, float z);
 void	vec_magnitude(t_vec *v);
 float	vec_dot_product(t_vec *vec1, t_vec *vec2);
 void	change_value(t_vec *vec, float x, float y, float z);
+float	vec_dist(t_vec v1, t_vec v2);
+int		vec_equal(t_vec v1, t_vec v2);
 
 #endif

@@ -138,6 +138,7 @@ typedef struct s_game{
 	t_resource	resources;
 	t_vec		sprite_pos;
 	t_vec		map_offset;
+	int			enemy_on_view;
 	void		*mlx;
 	void		*win;
 	char		**map;
@@ -159,6 +160,8 @@ void	get_and_draw(t_game *game, t_vec canv_pos, t_vec t_pos, t_data *text);
 
 // SPRITE
 void	draw_sprite(t_game *game, t_vec pos, t_data *text);
+int		sprite_render(t_game *game);
+int		sprite_update(t_game *game);
 
 //  MOUSE
 int		enter_window(t_game *game);
@@ -193,7 +196,7 @@ int		set_color_background(t_game *game, char **config);
 // COLOR
 int		create_rgb(int r, int g, int b);
 int		get_pixel(t_data *data, t_vec point);
-int		lamp(int x, int y, t_game *game, int color);
+int		lamp(t_vec pos, t_game *game, int color, float dist);
 int		reshade(int main_color, int have_reshade);
 
 // DRAW

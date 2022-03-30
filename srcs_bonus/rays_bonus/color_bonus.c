@@ -39,17 +39,21 @@ static int	get_color_shade(int color, double qnt_shade)
 	return (create_rgb(r, g, b));
 }
 
-int	lamp(int x, int y, t_game *game, int color)
+int	lamp(t_vec pos, t_game *game, int color, float per_dist)
 {
 	float	dist;
+	float	shade;
 	t_vec	mid_screen;
 	t_vec	point;
 
-	point = (t_vec){.x = x, .y = y};
+	point = (t_vec){.x = pos.x, .y = pos.y};
 	mid_screen = (t_vec){.x = SCREENWIDTH / 2, .y = SCREENHEIGHT / 2};
 	dist = distance(point, mid_screen);
-	if (dist < 400 && game->buttons.light)
-		color = get_color_shade(color, 1 + (((2.f * dist) / 400 - 2.f) * -1));
+	shade = (1 + (((2.f * dist) / 400 - 2.f) * -1)) * (1 / (fabs(per_dist) / 2));
+	if (shade > 3)
+		shade = 3;
+	if (dist < 400 && game->buttons.light && shade >= 1.f)
+		color = get_color_shade(color, shade);
 	return (color);
 }
 
