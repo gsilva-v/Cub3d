@@ -88,6 +88,21 @@ typedef struct s_rays{
 	int			step_y;
 }	t_rays;
 
+typedef struct s_animation
+{
+	t_data	*sprites;
+	int		index;
+	int		n_sprites;
+	float	seconds;
+} t_animation;
+
+typedef struct s_entity
+{
+	t_data		sprite;
+	t_animation	animation;
+	t_vec		pos;
+} t_entity;
+
 typedef struct s_player{
 	t_vec	pos;
 	t_vec	plane;
@@ -95,6 +110,7 @@ typedef struct s_player{
 	float	rotate_cam;
 	float	movespeed;
 }	t_player;
+
 
 typedef struct s_block{
 	t_data	no;
@@ -136,6 +152,7 @@ typedef struct s_game{
 	float		*z_buffer;
 	int			is_on_focus;
 	t_resource	resources;
+	t_entity	ghost;
 	t_vec		sprite_pos;
 	t_vec		map_offset;
 	int			enemy_on_view;

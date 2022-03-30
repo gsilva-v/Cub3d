@@ -64,6 +64,31 @@ void	clean_minimap(t_game *game)
 	}
 }
 
+void	init_animation(t_game *game, t_animation *animation, char *name, int n_sprites)
+{
+	int		index;
+	char	*tmp;
+	char	*tmp2;
+
+	index = 0;
+	animation->index = 0;
+	animation->sprites = ft_calloc(n_sprites, sizeof(t_data));
+	animation->n_sprites = n_sprites;
+	animation->seconds = 0.2f;
+	while (index < n_sprites)
+	{
+		tmp2 = ft_itoa(index);
+		tmp = ft_strjoin(ft_strdup(name), tmp2);
+		free (tmp2);
+		tmp = ft_strjoin(tmp, ".xpm");
+		animation->sprites[index].img = mlx_xpm_file_to_image(game->mlx, tmp, \
+		&animation->sprites[index].width, &animation->sprites[index].height);
+		animation->sprites[index].addr = mlx_get_data_addr(animation->sprites[index].img, &animation->sprites[index].bits_per_pixel, \
+		&animation->sprites[index].line_length, &animation->sprites[index].endian);
+		free(tmp);
+		index++;
+	}
+}
 
 
 void	load_imgs(t_game *game)
@@ -82,16 +107,17 @@ void	load_imgs(t_game *game)
 	&r->map.bits_per_pixel, &r->map.line_length, &r->map.endian);
 	clean_minimap(game);
 	draw_map(game);
-
-	// r->pov.img = mlx_xpm_file_to_image(game->mlx, POV, \
-	// &trash, &trash);
-	// r->pov.addr = mlx_get_data_addr(r->pov.img, &r->pov.bits_per_pixel, \
-	// &r->pov.line_length, &r->pov.endian);
+	init_animation(game, &game->ghost.animation, "./imgs/ghost", 5);
 
 	r->enemy.img = mlx_xpm_file_to_image(game->mlx, "./imgs/macaco.xpm", \
 	&r->enemy.width, &r->enemy.height);
 	r->enemy.addr = mlx_get_data_addr(r->enemy.img, &r->enemy.bits_per_pixel, \
 	&r->enemy.line_length, &r->enemy.endian);
+
+	game->ghost.sprite.img = mlx_xpm_file_to_image(game->mlx, "./imgs/ghost5.xpm", \
+	&game->ghost.sprite.width, &game->ghost.sprite.height);
+	game->ghost.sprite.addr = mlx_get_data_addr(game->ghost.sprite.img, &game->ghost.sprite.bits_per_pixel, \
+	&game->ghost.sprite.line_length, &game->ghost.sprite.endian);
 
 
 	load_block(game, &r->wall);

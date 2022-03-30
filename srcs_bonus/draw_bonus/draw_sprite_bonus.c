@@ -57,7 +57,7 @@ void draw_sprite(t_game *game, t_vec pos, t_data *text)
 				sprite.sprite_h * 128;
 				sprite.text.y = ((d * text->height) / sprite.sprite_h) / 256;
 				get_and_draw(game,  (t_vec){.y = y, .x = stripe}, (t_vec){.x = 
-					sprite.text.x, .y = sprite.text.y}, &game->resources.enemy);
+					sprite.text.x, .y = sprite.text.y}, text);
 				y++;
 			}
 		}
