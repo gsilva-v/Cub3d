@@ -49,26 +49,24 @@ void	handle_previous_wall(t_game *game, t_vec map_pos, t_vec velocity)
 	t_vec	pos;
 
 	pos = game->player.pos;
-	pos.x -= 1;
-	while (pos.x >= 0 && pos.x >= velocity.x + game->player.pos.x && game->map[(int)game->player.pos.y][(int)(pos.x)])
+	while (&& pos.x >= velocity.x + game->player.pos.x && game->map[(int)game->player.pos.y][(int)(pos.x)])
 	{
 		if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(pos.x)], "03"))
 		{
 			move_cam_x(game, velocity);
 			break ;
 		}
-		pos.x -= 1;
+		pos.x -= game->player.direction.x;
 	}
 	pos = game->player.pos;
-	pos.y -= 1;
-	while (pos.y >= 0 && pos.y >= velocity.y + game->player.pos.y && game->map[(int)pos.y][(int)(game->player.pos.x)])
+	while (pos.y >= velocity.y + game->player.pos.y && game->map[(int)pos.y][(int)(game->player.pos.x)])
 	{
 		if (ft_char_in_set(game->map[(int)pos.y][(int)(game->player.pos.x)], "03"))
 		{
 			move_cam_y(game, velocity);
 			break ;
 		}
-		pos.y -= 1;
+		pos.y -= game->player.direction.y;
 	}
 }
 
@@ -77,7 +75,6 @@ void	handle_next_wall(t_game *game, t_vec map_pos, t_vec velocity)
 	t_vec	pos;
 
 	pos = game->player.pos;
-	pos.x += 1;
 	while (pos.x <= velocity.x + game->player.pos.x && game->map[(int)game->player.pos.y][(int)(pos.x)])
 	{
 		if (ft_char_in_set(game->map[(int)game->player.pos.y][(int)(pos.x)], "03"))
@@ -85,10 +82,9 @@ void	handle_next_wall(t_game *game, t_vec map_pos, t_vec velocity)
 			move_cam_x(game, velocity);
 			break ;
 		}
-		pos.x += 1;
+		pos.x += game->player.direction.x;
 	}
 	pos = game->player.pos;
-	pos.y += 1;
 	while (pos.y <= velocity.y + game->player.pos.y && game->map[(int)pos.y][(int)(game->player.pos.x)])
 	{
 		if (ft_char_in_set(game->map[(int)pos.y][(int)(game->player.pos.x)], "03"))
@@ -96,7 +92,7 @@ void	handle_next_wall(t_game *game, t_vec map_pos, t_vec velocity)
 			move_cam_y(game, velocity);
 			break ;
 		}
-		pos.y += 1;
+		pos.y +=  game->player.direction.y;
 	}
 }
 
@@ -126,9 +122,9 @@ void	watch_walk(t_game *game)
 		vec_scale(&velocity, 0);
 	map_pos.x = ((velocity.x * 1.6f));
 	map_pos.y = ((velocity.y * 1.6f));
-	if (game->buttons.down)
+	if (game->buttons.up)
 		handle_next_wall(game, map_pos, velocity);
-	else if (game->buttons.up)
+	else if (game->buttons.down)
 		handle_previous_wall(game, map_pos, velocity);
 }
 
