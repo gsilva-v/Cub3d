@@ -4,12 +4,11 @@ fazer a mecanica do sprite pegar o jogador - feito
 fazer o fim do jogo (achar o mamaco) - feito
 trocar o chao - feito
 consertar o minimapa - feito
-procurar os erros no valgrind - feito
 
+procurar os erros no valgrind
 caçar seg
 leak
 norminette
-
 
 obrigatorio:
 movimentar com o mouse - feito
