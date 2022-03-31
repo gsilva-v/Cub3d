@@ -26,7 +26,7 @@ void	free_block(t_block *block, t_game *game)
 		free_data(game, &block->no);
 }
 
-void free_animation(t_animation *animation, t_game *game)
+void	free_animation(t_animation *animation, t_game *game)
 {
 	while (animation->n_sprites)
 	{
@@ -36,7 +36,6 @@ void free_animation(t_animation *animation, t_game *game)
 	if (animation->sprites)
 		free(animation->sprites);
 }
-
 
 void	free_sprite(t_entity *who, t_game *game)
 {
@@ -62,7 +61,6 @@ void	check_data_leaks(t_game *game)
 		free_block(&game->resources.open_door, game);
 	if (&game->resources.floor)
 		free_data(game, &game->resources.floor);
-	
 	if (&game->ghost.sprite)
 		free_sprite(&game->ghost, game);
 	if (&game->final.sprite)

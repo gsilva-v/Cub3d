@@ -6,8 +6,6 @@ int	sprite_render(t_game *game)
 	static float	elapse;
 	int				index;
 
-		
-	
 	elapse += game->elapsed_time;
 	animation = &game->ghost.animation;
 	if (elapse >= animation->seconds)
