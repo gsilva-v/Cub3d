@@ -23,4 +23,5 @@ int	sprite_update(t_game *game)
 		1.6f)][(int)game->ghost.pos.x], "03"))
 			game->ghost.pos.y += enemy_direction.y;
 	}
+	return (0);
 }

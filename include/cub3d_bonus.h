@@ -56,10 +56,10 @@ typedef struct s_data{
 	char	*name;
 	char	*addr;
 	void	*img;
-	int		bits_per_pixel;
+	int		bpp;
 	int		width;
 	int		height;
-	int		line_length;
+	int		line_len;
 	int		endian;
 }	t_data;
 
@@ -174,6 +174,7 @@ long	current_time(void);
 // MINIMAP
 void	minimap(t_game *game);
 int		get_higher_len(char **matrix);
+void	clean_minimap(t_game *game);
 void	draw_map(t_game *game);
 void	get_and_draw(t_game *game, t_vec canv_pos, t_vec t_pos, t_data *text);
 
@@ -192,6 +193,11 @@ void	move_cam_y(t_game *game, t_vec velocity);
 // INIT
 void	init_game(t_game *game);
 void	load_imgs(t_game *game);
+
+// LOAD IMGS
+int		open_xpm_file(t_data *d, t_game *game);
+void	init_animation(t_game *game, t_animation *anim, char *name, int n_spr);
+
 
 // START ORIENTATION
 void	player_north(t_game *game, int x, int y);
@@ -216,7 +222,7 @@ int		set_color_background(t_game *game, char **config);
 int		create_rgb(int r, int g, int b);
 int		get_pixel(t_data *data, t_vec point);
 int		lamp(t_vec pos, t_game *game, int color, float dist);
-int		reshade(int main_color, int have_reshade);
+int		reshade(int main_color);
 
 // DRAW
 void	draw_pixel(t_data *data, t_vec vec, int color);

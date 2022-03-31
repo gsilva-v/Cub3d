@@ -60,12 +60,14 @@ void	check_data_leaks(t_game *game)
 		free_block(&game->resources.door, game);
 	if (&game->resources.open_door)
 		free_block(&game->resources.open_door, game);
+	if (&game->resources.floor)
+		free_data(game, &game->resources.floor);
 	
 	if (&game->ghost.sprite)
 		free_sprite(&game->ghost, game);
 	if (&game->final.sprite)
 		free_sprite(&game->final, game);
-	
+
 }
 
 void	finish_him(t_game *game, int exit_code)

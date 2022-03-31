@@ -21,7 +21,7 @@ void draw_sprite(t_game *game, t_vec pos, t_data *text)
 	sprite.pos.x + game->player.plane.x * sprite.pos.y);
 
 // cria a sprite com o tamanho dependendo da projeção criada
-	sprite.sprite_screen = (int)((SCREENWIDTH/2) * (1 + \
+	sprite.sprite_screen = (int)((SCREENWIDTH / 2) * (1 + \
 	sprite.transform.x/ sprite.transform.y));
 	sprite.v_move_screen = (int)(VMOVE / sprite.transform.y);
 	sprite.sprite_h = abs(((int)(SCREENHEIGHT / (sprite.transform.y)))) / VDIV;
@@ -34,10 +34,10 @@ void draw_sprite(t_game *game, t_vec pos, t_data *text)
 	if (sprite.draw_end.y >= SCREENHEIGHT)
 		sprite.draw_end.y = SCREENHEIGHT - 1;
 	sprite.sprite_w= abs((int)(SCREENHEIGHT / (sprite.transform.y))) / UDIV;
-	sprite.draw_start.x = -sprite.sprite_w/ 2 + sprite.sprite_screen;
+	sprite.draw_start.x = -sprite.sprite_w / 2 + sprite.sprite_screen;
 	if (sprite.draw_start.x < 0)
 		sprite.draw_start.x = 0;
-	sprite.draw_end.x = sprite.sprite_w/ 2 + sprite.sprite_screen;
+	sprite.draw_end.x = sprite.sprite_w / 2 + sprite.sprite_screen;
 	if (sprite.draw_end.x >= SCREENWIDTH)
 		sprite.draw_end.x = SCREENWIDTH - 1;
 	stripe = sprite.draw_start.x;
@@ -60,7 +60,7 @@ void draw_sprite(t_game *game, t_vec pos, t_data *text)
 				color = get_pixel(text, (t_vec){.x =sprite.text.x, .y = sprite.text.y});
 				if (color == 0xff00ff)
 					is_transparence = 1;
-				color = reshade(color, 0);
+				color = reshade(color);
 				color = lamp((t_vec){.y = y, .x = stripe}, game, color, sprite.transform.y);
 				if (!is_transparence)
 					draw_pixel(&game->resources.canvas, (t_vec){.y = y, .x = stripe}, color);

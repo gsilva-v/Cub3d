@@ -57,7 +57,7 @@ int	lamp(t_vec pos, t_game *game, int color, float per_dist)
 	return (color);
 }
 
-int	reshade(int main_color, int have_reshade)
+int	reshade(int main_color)
 {
 	int	color;
 

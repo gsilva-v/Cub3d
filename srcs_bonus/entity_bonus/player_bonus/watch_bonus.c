@@ -5,8 +5,8 @@ int	get_previous_wall_x(t_game *game)
 	int	index;
 
 	index = 0;
-	while (game->map[(int)game->player.pos.y][(int)game->player.pos.x - index]
-	!= WALL)
+	while (game->map[(int)game->player.pos.y][(int)game->player.pos.x - index] && \
+		game->map[(int)game->player.pos.y][(int)game->player.pos.x - index] != WALL)
 		index--;
 	return (index);
 }
@@ -16,8 +16,9 @@ int	get_previous_wall_y(t_game *game)
 	int	index;
 
 	index = 0;
-	while (game->map[(int)game->player.pos.y - index][(int)game->player.pos.x]
-		!= WALL)
+	while (game->map[(int)game->player.pos.y - index] && \
+		game->map[(int)game->player.pos.y - index][(int)game->player.pos.x] && \
+		game->map[(int)game->player.pos.y - index][(int)game->player.pos.x] != WALL)
 		index--;
 	return (index);
 }
@@ -27,8 +28,9 @@ int	get_next_wall_y(t_game *game)
 	int	index;
 
 	index = 0;
-	while (game->map[(int)game->player.pos.y + index][(int)game->player.pos.x]
-		!= WALL)
+	while (game->map[(int)game->player.pos.y + index] && \
+	game->map[(int)game->player.pos.y + index][(int)game->player.pos.x] \
+	&& game->map[(int)game->player.pos.y + index][(int)game->player.pos.x] != WALL)
 		index++;
 	return (index);
 }
@@ -38,39 +40,75 @@ int	get_next_wall_x(t_game *game)
 	int	index;
 
 	index = 0;
-	while (game->map[(int)game->player.pos.y][(int)game->player.pos.x + \
+	while (game->map[(int)game->player.pos.y] && game->map[(int)game->player.pos.y][(int)game->player.pos.x + \
+	index] && game->map[(int)game->player.pos.y][(int)game->player.pos.x + \
 	index] != WALL)
 		index++;
 	return (index);
 }
 
+int test_previous_y(t_game *game, t_vec map_pos, t_vec velocity)
+{
+	if (!(map_pos.y > get_previous_wall_y(game)))
+		return (0);
+	if (!(game->map[(int)(game->player.pos.y + velocity.y * 1.0f)]))
+		return (0);
+	if (!(game->map[(int)(game->player.pos.y + velocity.y * 1.0f)][(int)game->player.pos.x]))
+		return (0);
+	if (!(ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y *1.0f)][(int)game->player.pos.x], "03")))
+		return (0);
+	return (1);
+}
+
+int test_previous_x(t_game *game, t_vec map_pos, t_vec velocity)
+{
+	if (!(map_pos.x > get_previous_wall_x(game)))
+		return (0);
+	if (!(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.0f)]))
+		return (0);
+	if (!(ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.0f)], "03")))
+		return (0);
+	return (1);
+}
+
 void	handle_previous_wall(t_game *game, t_vec map_pos, t_vec velocity)
 {
-	if (map_pos.x > get_previous_wall_x(game) && game->map[(int)
-			game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.6f)]
-			&& ft_char_in_set(game->map[(int)game->player.pos.y]
-			[(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
+	if (test_previous_x(game, map_pos, velocity))
 		move_cam_x(game, velocity);
-	if (map_pos.y > get_previous_wall_y(game) && game->map[(int)
-			(game->player.pos.y + velocity.y * 1.6f)] && game->map[(int)
-			(game->player.pos.y + velocity.y * 1.6f)][(int)game->player.pos.x]
-			&& ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y *
-			1.6f)][(int)game->player.pos.x], "03"))
+	if (test_previous_y(game, map_pos, velocity))
 		move_cam_y(game, velocity);
 }
 
+int test_next_x(t_game *game, t_vec map_pos, t_vec velocity)
+{
+	if(!(map_pos.x < get_next_wall_x(game)))
+		return (0);
+	if(!(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.0f)]))
+		return (0);
+	if(!ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + velocity.x * 1.0f)], "03"))
+		return (0);
+	return (1);
+}
+
+int test_next_y(t_game *game, t_vec map_pos, t_vec velocity)
+{
+	if(!(map_pos.y < get_next_wall_y(game)))
+		return(0);
+	if(!(game->map[(int)(game->player.pos.y + velocity.y * 1.0f)]))
+		return(0);
+	if(!(game->map[(int)(game->player.pos.y + velocity.y * 1.0f)][(int)game->player.pos.x]))
+		return(0);
+	if(!ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y * 1.0f)][(int)game->player.pos.x], "03"))
+		return(0);
+	return(1);
+}
+
+
 void	handle_next_wall(t_game *game, t_vec map_pos, t_vec velocity)
 {
-	if (map_pos.x < get_next_wall_x(game) && game->map[(int)game->player.pos.y]
-		[(int)(game->player.pos.x + velocity.x * 1.6f)]
-			&& ft_char_in_set(game->map[(int)game->player.pos.y]
-			[(int)(game->player.pos.x + velocity.x * 1.6f)], "03"))
+	if (test_next_x(game, map_pos, velocity))
 		move_cam_x(game, velocity);
-	if (map_pos.y < get_next_wall_y(game) && game->map[(int)(game->player.pos.y
-			+ velocity.y * 1.6f)] && game->map[(int)(game->player.pos.y
-			+ velocity.y * 1.6f)][(int)game->player.pos.x] &&
-			ft_char_in_set(game->map[(int)(game->player.pos.y + velocity.y *
-			1.6f)][(int)game->player.pos.x], "03"))
+	if (test_next_y(game, map_pos, velocity))
 		move_cam_y(game, velocity);
 }
 
@@ -98,8 +136,8 @@ void	watch_walk(t_game *game)
 		vec_scale(&velocity, -movespeed);
 	else
 		vec_scale(&velocity, 0);
-	map_pos.x = ((velocity.x * 1.6f));
-	map_pos.y = ((velocity.y * 1.6f));
+	map_pos.x = ((velocity.x * 1.0f));
+	map_pos.y = ((velocity.y * 1.0f));
 	if (game->buttons.down)
 		handle_next_wall(game, map_pos, velocity);
 	else if (game->buttons.up)
@@ -122,8 +160,8 @@ void	watch_strafe(t_game *game)
 		vec_scale(&strafe_vel, -game->player.movespeed * game->elapsed_time);
 	else
 		vec_scale(&strafe_vel, 0);
-	map_pos.x = ((strafe_vel.x * 1.6f));
-	map_pos.y = ((strafe_vel.y * 1.6f));
+	map_pos.x = ((strafe_vel.x * 1.0f));
+	map_pos.y = ((strafe_vel.y * 1.0f));
 	if (game->buttons.right)
 		handle_next_wall(game, map_pos, strafe_vel);
 	else if (game->buttons.left)

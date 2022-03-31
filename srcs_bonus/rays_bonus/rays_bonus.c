@@ -121,13 +121,13 @@ void	floor_casting(t_game *game)
 
 		color = get_pixel(&game->resources.floor, (t_vec){.x = tx, .y = ty});
 		color = lamp((t_vec){.x = x, .y = y}, game, color, rowDistance);
-		color = reshade(color, 0);
+		color = reshade(color);
 		draw_pixel(&game->resources.canvas, (t_vec){.x = x, .y =y}, color);
       }
     }
 }
 
-int		is_on_view(t_game *game, t_entity *entity, t_vec ray_dir)
+void	is_on_view(t_game *game, t_entity *entity, t_vec ray_dir)
 {
 	t_vec	dir_player_entity;
 
@@ -140,6 +140,7 @@ int		is_on_view(t_game *game, t_entity *entity, t_vec ray_dir)
 	if (vec_equal(ray_dir, dir_player_entity))
 		entity->is_on_view = 1;
 }
+
 void	raycasting(t_game *game)
 {
 	t_rays	values;

@@ -29,7 +29,7 @@ void	init_player(t_game *game)
 	game->player.pos.y += 0.5f;
 }
 
-int		init_sprites(t_game *game)
+void	init_sprites(t_game *game)
 {
 	float	dist;
 	while (1)

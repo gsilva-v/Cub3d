@@ -54,7 +54,7 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		is_visible = 0;
 		if (color != 0xff00ff)
 			is_visible = 1;
-		color = reshade(color, values->hit_side);
+		color = reshade(color);
 		color = lamp((t_vec){.x = values->rays, .y = index}, game, color, values->perp_wall);
 		if (is_visible && game->buffer[index] == 0)
 		{
