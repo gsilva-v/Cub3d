@@ -61,8 +61,8 @@ static void	init_final_point(t_game *game)
 		{
 			if (game->map[y][x] == 'F' && game->final.pos.x == -1)
 			{
-				game->final.pos.x = x;
-				game->final.pos.y = y;
+				game->final.pos.x = x + 0.5f;
+				game->final.pos.y = y + 0.5f;
 				game->map[y][x] = FLOOR;
 			}
 			else if (game->map[y][x] == 'F' && game->final.pos.x != -1)

@@ -9,10 +9,10 @@ static void	reset_values(t_floor *floor, int y, t_game *game)
 	vec_sub(&floor->raydir0, &game->player.plane);
 	floor->raydir1 = game->player.direction;
 	vec_sum(&floor->raydir1, &game->player.plane);
-//  pega o ponto x = 0, y = screenheight/2 e transforma em x = 0, y = 0 
+//  pega o ponto x = 0, y = screenheight/2 e transforma em x = 0, y = 0
 	pos = y - SCREENHEIGHT / 2;
-//   calculo da perspectiva do chao
-	//   calculo da profundidade
+//  calculo da perspectiva do chao
+	// calculo da profundidade
 	pos_z = 0.5 * SCREENHEIGHT;
 	// calculo da distancia do chao
 	floor->rowDistance = pos_z / pos;
@@ -35,8 +35,8 @@ static void	pick_texture(t_floor *floor)
 	cell.x = (int)(floor->pos.x);
 	cell.y = (int)(floor->pos.y);
 	// get the texture coordinate from the fractional part
-	floor->text.x = (int)(BLOCK_SIZE * (floor->pos.x - cell.x)) & (BLOCK_SIZE - 1);
-	floor->text.y = (int)(BLOCK_SIZE * (floor->pos.y - cell.y)) & (BLOCK_SIZE - 1);
+	floor->text.x = (int)(BLOCK_SIZE * (floor->pos.x - cell.x));
+	floor->text.y = (int)(BLOCK_SIZE * (floor->pos.y - cell.y));
 	floor->pos.x += floor->step.x;
 	floor->pos.y += floor->step.y;
 }
