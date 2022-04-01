@@ -38,8 +38,8 @@ int	game_render(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, \
 	game->resources.canvas.img, 0, 0);
 	if (game->lose == -1)
-		mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You lose, try again! ");
+		mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, LOSE);
 	if (game->lose == 1)
-		mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, " You win, congrats! ");
+		mlx_string_put(game->mlx, game->win, 150, 150, 0xff0000, WIN);
 	return (0);
 }

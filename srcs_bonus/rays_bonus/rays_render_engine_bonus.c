@@ -54,8 +54,7 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		is_visible = 0;
 		if (color != 0xff00ff)
 			is_visible = 1;
-		color = reshade(color);
-		color = lamp((t_vec){.x = values->rays, .y = index}, game, color, values->perp_wall);
+		color = set_color(game, color, values, index);
 		if (is_visible && game->buffer[index] == 0)
 		{
 			draw_pixel(&game->resources.canvas, (t_vec){.x = values->rays, \
@@ -64,7 +63,6 @@ static void	render_3d(t_texture *text, t_rays *values, t_game *game)
 		}
 		index++;
 	}
-	check_open_wall(game, values);
 }
 
 static void	render_last_set(t_texture *text, t_rays *values, t_game *game)
@@ -75,6 +73,7 @@ static void	render_last_set(t_texture *text, t_rays *values, t_game *game)
 	text->line_height / 2) * text->step;
 	text->data = get_texture(game, values);
 	render_3d(text, values, game);
+	check_open_wall(game, values);
 }
 
 void	render_engine(t_rays *values, t_game *game)

@@ -30,6 +30,8 @@
 # define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"
 # define WTOUT_PLYR "this map dont have a initial point for player"
 # define DBLE_PLYR "This map have 2 or more initial points to player"
+# define WIN " You win, congrats! "
+# define LOSE " You lose, try again! "
 # define POV "./imgs/pov.xpm"
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
@@ -261,12 +263,19 @@ void	render_engine(t_rays *values, t_game *game);
 t_data	*get_texture(t_game *game, t_rays *values);
 void	set_perp_wall(t_rays *values, t_game *game);
 void	check_transparence(t_game *game, t_rays *values);
+int		set_color(t_game *game, int color, t_rays *values, int index);
 
 // CLOSE
 void	finish_him(t_game *game, int exit_code);
 void	kill_window(t_game *game);
 void	show_error(t_game *game, int exit_code, char *s);
 int		red_cross(t_game *game);
+
+// FREE
+void	free_data(t_game *game, t_data *data);
+void	free_block(t_block *block, t_game *game);
+void	free_animation(t_animation *animation, t_game *game);
+void	free_sprite(t_entity *who, t_game *game);
 
 // UTILS
 int		matrix_len(char **matrix);

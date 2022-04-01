@@ -32,7 +32,7 @@ void	init_animation(t_game *game, t_animation *anim, char *name, int n_spr)
 		&anim->sprites[index].width, &anim->sprites[index].height);
 		anim->sprites[index].addr = \
 		mlx_get_data_addr(anim->sprites[index].img, &anim->sprites[index].bpp,
-			&anim->sprites[index].line_len, &anim->sprites[index].endian);
+				&anim->sprites[index].line_len, &anim->sprites[index].endian);
 		free(tmp);
 		index++;
 	}
@@ -75,4 +75,3 @@ void	clean_minimap(t_game *game)
 		line++;
 	}
 }
-

@@ -16,7 +16,7 @@ int	sprite_update(t_game *game)
 	{
 		if (ft_char_in_set(game->map[(int)game->ghost.pos.y][(int)
 				(game->ghost.pos.x + enemy_direction.x * 1.6f)], "03"))
-			game->ghost.pos.x += enemy_direction.x;	
+			game->ghost.pos.x += enemy_direction.x;
 		if (ft_char_in_set(game->map[(int)(game->ghost.pos.y + \
 		enemy_direction.y * 1.6f)][(int)game->ghost.pos.x], "03"))
 			game->ghost.pos.y += enemy_direction.y;

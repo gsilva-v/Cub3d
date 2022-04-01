@@ -35,3 +35,13 @@ void	set_perp_wall(t_rays *values, t_game *game)
 		values->perp_wall = (fabs(values->map_pos.y - game->player.pos.y + \
 		((1 - values->step_y) / 2)) / values->ray_dir.y);
 }
+
+int	set_color(t_game *game, int color, t_rays *values, int index)
+{
+	t_vec	lamp_vec;
+
+	lamp_vec = (t_vec){.x = values->rays, .y = index};
+	color = reshade(color);
+	color = lamp(lamp_vec, game, color, values->perp_wall);
+	return (color);
+}

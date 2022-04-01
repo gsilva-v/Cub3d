@@ -61,7 +61,7 @@ PATH_SPRITE_B = $(PATH_ENTITY_B)sprite_bonus/
 PATH_OBJS_B = ./objs_bonus/
 OBJ_PATH_B = ./objs_bonus/
 
-SRCS_B += $(addprefix $(PATH_CLOSE_B), kill_window_bonus finish_him_bonus)
+SRCS_B += $(addprefix $(PATH_CLOSE_B), free_zone_bonus kill_window_bonus finish_him_bonus)
 SRCS_B += $(addprefix $(PATH_DRAW_B), draw_pixel_bonus minimap_bonus draw_sprite_bonus)
 SRCS_B += $(addprefix $(PATH_GAME_B), mouse_handle_bonus update_bonus render_bonus run_bonus)
 SRCS_B += $(addprefix $(PATH_PLAYER_B), update_bonus render_bonus watch_bonus watch_utils_bonus)

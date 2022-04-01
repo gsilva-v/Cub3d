@@ -14,26 +14,26 @@ static void	load_block(t_game *game, t_block *block)
 
 void	load_minimap(t_game *game)
 {
-	int	width;
-	int height;
-	t_data *d;
-	
+	int		width;
+	int		height;
+	t_data	*d;
+
 	d = &game->resources.map;
 	width = get_higher_len(game->map) * MBS;
-	height =  matrix_len(game->map) * MBS;
+	height = matrix_len(game->map) * MBS;
 	if (width < 100)
 		width = 100;
 	if (height < 100)
 		height = 100;
 	d->img = mlx_new_image(game->mlx, width, height);
-	d->addr = mlx_get_data_addr(d->img,	&d->bpp, &d->line_len, &d->endian);
+	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->line_len, &d->endian);
 	clean_minimap(game);
 	draw_map(game);
 }
 
 void	load_canvas(t_game *game)
 {
-	t_data *d;
+	t_data	*d;
 
 	d = &game->resources.canvas;
 	d->img = mlx_new_image(game->mlx, SCREENWIDTH, SCREENHEIGHT);
@@ -42,7 +42,7 @@ void	load_canvas(t_game *game)
 
 void	load_sprite(t_game *game)
 {
-	t_data *d;
+	t_data	*d;
 
 	d = &game->final.sprite;
 	d->img = mlx_xpm_file_to_image(game->mlx, "./imgs/monkey.xpm", \
@@ -60,7 +60,7 @@ void	load_sprite(t_game *game)
 
 void	load_imgs(t_game *game)
 {
-	t_resource *r;
+	t_resource	*r;
 
 	r = &game->resources;
 	load_canvas(game);
