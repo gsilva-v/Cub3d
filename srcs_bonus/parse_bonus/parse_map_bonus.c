@@ -86,6 +86,38 @@ static char	**get_map(int fd, char *line)
 	return (map_arr);
 }
 
+char	*normalize_line(char *line, int size)
+{
+	int		index;
+	char	*new_line;
+
+	new_line = ft_calloc(size + 1, sizeof(char));
+	ft_memset(new_line, WALL, size);
+	index = 0;
+	while (line[index])
+	{
+		new_line[index] = line[index];
+		index++;
+	}
+	free(line);
+	return (new_line);
+}
+
+void	normalize_map(t_game *game)
+{
+	int	index;
+	int	size;
+
+	size = get_higher_len(game->map);
+	index = 0;
+	while (game->map[index])
+	{
+		if (ft_strlen(game->map[index]) < size)
+			game->map[index] = normalize_line(game->map[index], size);
+		index++;
+	}
+}
+
 int	parse_map(t_game *game, char *file)
 {
 	int		fd;
@@ -109,5 +141,8 @@ int	parse_map(t_game *game, char *file)
 	close (fd);
 	if (!is_surrounded(game))
 		show_error(game, 1, "This map have a hole for space");
+	normalize_map(game);
+	for (int y = 0; game->map[y]; y++)
+		printf("%s\n", game->map[y]);
 	return (0);
 }

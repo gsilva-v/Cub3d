@@ -139,9 +139,23 @@ void	watch_walk(t_game *game)
 	map_pos.x = ((velocity.x * 1.0f));
 	map_pos.y = ((velocity.y * 1.0f));
 	if (game->buttons.down)
-		handle_next_wall(game, map_pos, velocity);
+	{
+		if (game->player.pos.x + map_pos.x > 0 && \
+			ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + map_pos.x)], "03"))
+			move_cam_x(game, map_pos);
+		if (game->player.pos.y + map_pos.y > 0 && \
+			ft_char_in_set(game->map[(int)(game->player.pos.y + map_pos.y)][(int)game->player.pos.x], "03"))
+			move_cam_y(game, map_pos);
+	}
 	else if (game->buttons.up)
-		handle_previous_wall(game, map_pos, velocity);
+	{
+		if (game->player.pos.x + map_pos.x < get_higher_len(game->map) && \
+			ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + map_pos.x)], "03"))
+			move_cam_x(game, map_pos);
+		if (game->player.pos.y + map_pos.y < matrix_len(game->map) && \
+			ft_char_in_set(game->map[(int)(game->player.pos.y + map_pos.y)][(int)game->player.pos.x], "03"))
+			move_cam_y(game, map_pos);
+	}
 }
 
 void	watch_strafe(t_game *game)
