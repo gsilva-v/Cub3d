@@ -68,64 +68,57 @@ void	dda(t_rays *values, t_game *game)
 	}
 }
 
+	// for(int y = SCREENHEIGHT / 2; y < SCREENHEIGHT; y++)
+	// {
 
-// GERAR NUMERO ALEATORIO PARA OS SPRITES
-// float x = (float)rand()/(float)(RAND_MAX/a);
+	// 	t_vec	raydir0 = game->player.direction;
+	// 	vec_sub(&raydir0, &game->player.plane);
+	// 	t_vec	raydir1 = game->player.direction;
+	// 	vec_sum(&raydir1, &game->player.plane);
 
-void	floor_casting(t_game *game)
-{
-	for(int y = SCREENHEIGHT / 2; y < SCREENHEIGHT; y++)
-    {
+	//   // Current y position compared to the center of the screen (the horizon)
+	//   int p = y - SCREENHEIGHT / 2;
 
-		t_vec	raydir0 = game->player.direction;
-		vec_sub(&raydir0, &game->player.plane);
-		t_vec	raydir1 = game->player.direction;
-		vec_sum(&raydir1, &game->player.plane);
+	//   // Vertical position of the camera.
+	//   float posZ = 0.5 * SCREENHEIGHT;
 
-      // Current y position compared to the center of the screen (the horizon)
-      int p = y - SCREENHEIGHT / 2;
+	//   // Horizontal distance from the camera to the floor for the current row.
+	//   // 0.5 is the z position exactly in the middle between floor and ceiling.
+	//   float rowDistance = posZ / p;
 
-      // Vertical position of the camera.
-      float posZ = 0.5 * SCREENHEIGHT;
+	//   // calculate the real world step vector we have to add for each x (parallel to camera plane)
+	//   // adding step by step avoids multiplications with a weight in the inner loop
+	//   float floorStepX = rowDistance * (raydir1.x - raydir0.x) / SCREENWIDTH;
+	//   float floorStepY = rowDistance * (raydir1.y - raydir0.y) / SCREENWIDTH;
 
-      // Horizontal distance from the camera to the floor for the current row.
-      // 0.5 is the z position exactly in the middle between floor and ceiling.
-      float rowDistance = posZ / p;
+	//   // real world coordinates of the leftmost column. This will be updated as we step to the right.
+	//   float floorX = game->player.pos.x + rowDistance * raydir0.x;
+	//   float floorY = game->player.pos.y + rowDistance * raydir0.y;
 
-      // calculate the real world step vector we have to add for each x (parallel to camera plane)
-      // adding step by step avoids multiplications with a weight in the inner loop
-      float floorStepX = rowDistance * (raydir1.x - raydir0.x) / SCREENWIDTH;
-      float floorStepY = rowDistance * (raydir1.y - raydir0.y) / SCREENWIDTH;
+	//   for(int x = 0; x < SCREENWIDTH; ++x)
+	//   {
+	//     // the cell coord is simply got from the integer parts of floorX and floorY
+	//     int cellX = (int)(floorX);
+	//     int cellY = (int)(floorY);
 
-      // real world coordinates of the leftmost column. This will be updated as we step to the right.
-      float floorX = game->player.pos.x + rowDistance * raydir0.x;
-      float floorY = game->player.pos.y + rowDistance * raydir0.y;
+	//     // get the texture coordinate from the fractional part
+	//     int tx = (int)(BLOCK_SIZE * (floorX - cellX)) & (BLOCK_SIZE - 1);
+	//     int ty = (int)(BLOCK_SIZE * (floorY - cellY)) & (BLOCK_SIZE - 1);
 
-      for(int x = 0; x < SCREENWIDTH; ++x)
-      {
-        // the cell coord is simply got from the integer parts of floorX and floorY
-        int cellX = (int)(floorX);
-        int cellY = (int)(floorY);
+	//     floorX += floorStepX;
+	//     floorY += floorStepY;
 
-        // get the texture coordinate from the fractional part
-        int tx = (int)(BLOCK_SIZE * (floorX - cellX)) & (BLOCK_SIZE - 1);
-        int ty = (int)(BLOCK_SIZE * (floorY - cellY)) & (BLOCK_SIZE - 1);
+	//     // choose texture and draw the pixel
+	//     int floorTexture = 3;
+	//     int ceilingTexture = 6;
+	//     int	color;
 
-        floorX += floorStepX;
-        floorY += floorStepY;
-
-        // choose texture and draw the pixel
-        int floorTexture = 3;
-        int ceilingTexture = 6;
-        int	color;
-
-		color = get_pixel(&game->resources.floor, (t_vec){.x = tx, .y = ty});
-		color = lamp((t_vec){.x = x, .y = y}, game, color, rowDistance);
-		color = reshade(color);
-		draw_pixel(&game->resources.canvas, (t_vec){.x = x, .y =y}, color);
-      }
-    }
-}
+	// 	color = get_pixel(&game->resources.floor, (t_vec){.x = tx, .y = ty});
+	// 	color = lamp((t_vec){.x = x, .y = y}, game, color, rowDistance);
+	// 	color = reshade(color);
+	// 	draw_pixel(&game->resources.canvas, (t_vec){.x = x, .y =y}, color);
+	//   }
+	// }
 
 void	is_on_view(t_game *game, t_entity *entity, t_vec ray_dir)
 {

@@ -149,6 +149,15 @@ typedef struct s_sprite{
 	t_int_vec	text;
 }	t_sprite;
 
+typedef struct s_floor{
+	t_vec		raydir0;
+	t_vec		raydir1;
+	t_vec		step;
+	t_vec		pos;
+	t_int_vec	text;
+	float	rowDistance;
+}	t_floor;
+
 typedef struct s_game{
 	t_player	player;
 	t_buttons	buttons;
@@ -250,6 +259,10 @@ void	change_direction(t_game *game, float rot_speed);
 
 // MAP
 int		update_map(int key_code, t_game *game);
+
+
+// FLOOR
+void	floor_casting(t_game *game);
 
 // RAYS
 void	raycasting(t_game *game);
