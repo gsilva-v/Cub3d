@@ -35,36 +35,38 @@ static void	pick_texture(t_floor *floor)
 	cell.x = (int)(floor->pos.x);
 	cell.y = (int)(floor->pos.y);
 	// get the texture coordinate from the fractional part
-	floor->text.x = (int)(BLOCK_SIZE * (floor->pos.x - cell.x));
-	floor->text.y = (int)(BLOCK_SIZE * (floor->pos.y - cell.y));
+	floor->text.x = (int)(BLOCK_SIZE * (floor->pos.x - \
+	cell.x)) & (BLOCK_SIZE - 1);
+	floor->text.y = (int)(BLOCK_SIZE * (floor->pos.y - \
+	cell.y)) & (BLOCK_SIZE - 1);
 	floor->pos.x += floor->step.x;
 	floor->pos.y += floor->step.y;
 }
 
 void	floor_casting(t_game *game)
 {
-	t_floor floor;
-	int y;
-	int x;
- 	int	color;
+	t_floor		floor;
+	t_int_vec	pos;
+	t_vec		aux;
+	int			color;
 
-	y = SCREENHEIGHT / 2;
-	while (y < SCREENHEIGHT)
+	pos.y = SCREENHEIGHT / 2;
+	while (pos.y < SCREENHEIGHT)
 	{
-		x = 0;
-		reset_values(&floor, y, game);
-		while (x < SCREENWIDTH)
+		pos.x = 0;
+		reset_values(&floor, pos.y, game);
+		while (pos.x < SCREENWIDTH)
 		{
 			pick_texture(&floor);
 			color = get_pixel(&game->resources.floor, \
 			(t_vec){.x = floor.text.x, .y = floor.text.y});
-			color = lamp((t_vec){.x = x, .y = y}, game, color, \
+			aux = (t_vec){.x = pos.x, .y = pos.y};
+			color = lamp(aux, game, color, \
 			floor.rowDistance);
 			color = reshade(color);
-			draw_pixel(&game->resources.canvas, (t_vec){.x = x, \
-			.y =y}, color);
-			x++;
+			draw_pixel(&game->resources.canvas, aux, color);
+			pos.x++;
 		}
-		y++;
+		pos.y++;
 	}
 }

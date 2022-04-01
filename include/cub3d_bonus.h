@@ -138,7 +138,7 @@ typedef struct s_resource {
 typedef struct s_sprite{
 	t_vec		pos;
 	double		inv_delta;
-	t_vec		transform;
+	t_vec		trans;
 	int			sprite_screen;
 	int			v_move_screen;
 	int			sprite_h;
@@ -223,6 +223,7 @@ int		parse_resources(t_game *game, char *file);
 // PARSE MAP UTILS
 int		check_horizontal_wall(char **map, int x, int y);
 int		check_vertical_wall(char **map, int x, int y);
+void	normalize_map(t_game *game);
 
 // PARSE RESOURCE UTILS
 int		valid_conf(char **config);
