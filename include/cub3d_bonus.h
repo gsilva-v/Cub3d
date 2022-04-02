@@ -235,9 +235,12 @@ int		create_rgb(int r, int g, int b);
 int		get_pixel(t_data *data, t_vec point);
 int		lamp(t_vec pos, t_game *game, int color, float dist);
 int		reshade(int main_color);
+int		get_color_shade(int color, double qnt_shade);
 
 // DRAW
 void	draw_pixel(t_data *data, t_vec vec, int color);
+void	draw_circle(t_vec position, int radius, t_data *data, int color);
+void	draw_line(t_vec vec1, t_vec vec2, int color, t_game *game);
 
 // GAME ENTITY
 int		game_render(t_game *game);

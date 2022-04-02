@@ -15,7 +15,7 @@ static void	shift_color(int *a, int *b, int *c)
 	*a = 255;
 }
 
-static int	get_color_shade(int color, double qnt_shade)
+int	get_color_shade(int color, double qnt_shade)
 {
 	int	r;
 	int	g;

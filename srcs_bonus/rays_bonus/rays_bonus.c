@@ -1,14 +1,14 @@
 #include <cub3d_bonus.h>
 
-static void	reset_values(t_rays *values, t_player *player)
+static void	reset_values(t_rays *values, t_game *game)
 {
 	double	multiplier;
 	t_vec	camera_pixel;
 
 	multiplier = 2 * values->rays / (double)SCREENWIDTH - 1;
-	camera_pixel = player->plane;
+	camera_pixel = game->player.plane;
 	vec_scale(&camera_pixel, multiplier);
-	values->ray_dir = player->direction;
+	values->ray_dir = game->player.direction;
 	vec_sum(&values->ray_dir, &camera_pixel);
 	values->dlt_x = 10000000;
 	if (values->ray_dir.x != 0)
@@ -16,6 +16,7 @@ static void	reset_values(t_rays *values, t_player *player)
 	values->dlt_y = 10000000;
 	if (values->ray_dir.y != 0)
 		values->dlt_y = fabs(1 / values->ray_dir.y);
+	
 }
 
 static void	check_dist(t_rays *values, t_player *player)
@@ -93,7 +94,7 @@ void	raycasting(t_game *game)
 	game->final.is_on_view = 0;
 	while (values.rays < SCREENWIDTH)
 	{
-		reset_values(&values, &game->player);
+		reset_values(&values, game);
 		check_dist(&values, &game->player);
 		dda(&values, game);
 		ray_dir = values.ray_dir;

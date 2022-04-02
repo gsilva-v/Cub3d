@@ -55,6 +55,21 @@ void	get_and_draw(t_game *game, t_vec canv_pos, t_vec t_pos, t_data *text)
 		draw_pixel(&game->resources.canvas, canv_pos, color);
 }
 
+void	draw_direction(t_game *game)
+{
+	t_vec	dir;
+	t_vec	player_pos;
+
+	dir = game->player.direction;
+	player_pos = game->player.pos;
+	vec_scale(&dir, 3);
+	vec_sum(&dir, &game->player.pos);
+	vec_scale(&dir, 10);
+	vec_scale(&player_pos, 10);
+	vec_sub(&dir, &game->map_offset);
+	vec_sub(&player_pos, &game->map_offset);
+	draw_line(player_pos, dir, get_color_shade(0xffffff, 0.7f), game);
+}
 void	minimap(t_game *game)
 {
 	int		col;
@@ -77,7 +92,8 @@ void	minimap(t_game *game)
 		aux.y++;
 		line++;
 	}
-	draw_square(&game->resources.canvas, (t_vec){.x = game->player.pos.x * 10 \
-	- game->map_offset.x - 2.5f, .y = game->player.pos.y * 10 - \
-	game->map_offset.y - 2.5f}, 5, 0x0000ff);
+	draw_circle((t_vec){.x = game->player.pos.x * 10 \
+	- game->map_offset.x, .y = game->player.pos.y * 10 - \
+	game->map_offset.y}, 3, &game->resources.canvas, 0x0000FF);
+	draw_direction(game);
 }
