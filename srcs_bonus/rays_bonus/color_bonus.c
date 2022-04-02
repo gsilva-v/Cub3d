@@ -62,7 +62,6 @@ int	reshade(int main_color)
 {
 	int	color;
 
-	color = get_color_shade(main_color, 0.1);
-	color = get_color_shade(color, 0.3);
+	color = get_color_shade(main_color, 0.3f);
 	return (color);
 }

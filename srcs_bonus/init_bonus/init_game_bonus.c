@@ -75,10 +75,65 @@ static void	init_final_point(t_game *game)
 		show_error(game, 1, "This map dont have a final!");
 }
 
+int	player_on_view(char **map, int x, int y)
+{
+	int	width;
+	int	height;
+	int	y_tmp;
+
+	y_tmp = y;
+	width = x + 10;
+	/* if (width > get_higher_len(map))
+		width = get_higher_len(map); */
+	height = y + 10;
+	/* if (height > matrix_len(map))
+		height = matrix_len(map); */
+	while (x < width)
+	{
+		y = y_tmp;
+		while (y < height)
+		{
+			if (x < get_higher_len(map) && y < matrix_len(map))
+			{
+				if (ft_char_in_set(map[y][x], "NSWE"))
+					return (1);
+			}
+			y++;
+		}
+		x++;
+	}
+	return (0);
+}
+
+void	move_minimap_cam(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < matrix_len(game->map))
+	{
+		x = 0;
+		while (x < get_higher_len(game->map))
+		{
+			if (player_on_view(game->map, x, y))
+			{
+				game->map_offset.x = x * 10;
+				game->map_offset.y = y * 10;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+	
+}
+
 void	init_game(t_game *game)
 {
 	srand(time(NULL));
 	game->mlx = mlx_init();
+	move_minimap_cam(game);
 	init_player(game);
 	init_sprites(game);
 	init_final_point(game);
