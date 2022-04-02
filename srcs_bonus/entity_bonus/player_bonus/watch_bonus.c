@@ -10,6 +10,40 @@ void	watch_rotate(t_game *game)
 	}
 }
 
+void	handle_cam_y(t_game *game, t_vec map_pos)
+{
+	t_int_vec	g_pos;
+
+	g_pos.x = (int)(game->player.pos.x + map_pos.x);
+	g_pos.y = (int)(game->player.pos.y + map_pos.y);
+	if (g_pos.x < get_higher_len(game->map) - 1 && g_pos.x > 0 && \
+	game->map[(int)game->player.pos.y] && \
+	ft_char_in_set(game->map[(int)game->player.pos.y][(int)
+			(game->player.pos.x + map_pos.x)], "03"))
+		move_cam_x(game, map_pos);
+	if (g_pos.y < matrix_len(game->map) - 1 && g_pos.y > 0 && \
+	game->map[g_pos.y] && \
+	ft_char_in_set(game->map[g_pos.y][(int)game->player.pos.x], "03"))
+		move_cam_y(game, map_pos);
+}
+
+void	handle_cam_x(t_game *game, t_vec map_pos)
+{
+	t_int_vec	g_pos;
+
+	g_pos.x = (int)(game->player.pos.x + map_pos.x);
+	g_pos.y = (int)(game->player.pos.y + map_pos.y);
+	if (g_pos.x > 0 &&
+		g_pos.x < get_higher_len(game->map) - 1 
+		&& game->map[(int)game->player.pos.y] && \
+		ft_char_in_set(game->map[(int)game->player.pos.y][g_pos.x], "03"))
+		move_cam_x(game, map_pos);
+	if (g_pos.y > 0 && g_pos.y < matrix_len(game->map) - 1 &&
+		game->map[g_pos.y] &&
+		ft_char_in_set(game->map[g_pos.y][(int)game->player.pos.x], "03"))
+		move_cam_y(game, map_pos);
+}
+
 void	watch_walk(t_game *game)
 {
 	t_vec	velocity;
@@ -27,31 +61,9 @@ void	watch_walk(t_game *game)
 	map_pos.x = ((velocity.x * 1.0f));
 	map_pos.y = ((velocity.y * 1.0f));
 	if (game->buttons.down)
-	{
-		if ((int)(game->player.pos.x + map_pos.x) > 0 && \
-			game->map[(int)game->player.pos.y] && \
-			ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + map_pos.x)], "03"))
-			move_cam_x(game, map_pos);
-		if ((int)(game->player.pos.y + map_pos.y) > 0 && \
-			game->map[(int)(game->player.pos.y + map_pos.y)] &&
-			ft_char_in_set(game->map[(int)(game->player.pos.y + map_pos.y)][(int)game->player.pos.x], "03"))
-			move_cam_y(game, map_pos);
-	}
+		handle_cam_x(game, map_pos);
 	else if (game->buttons.up)
-	{
-		if ((int)(game->player.pos.x + map_pos.x) < get_higher_len(game->map) - 1 && \
-			game->map[(int)game->player.pos.y] && \
-			ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + map_pos.x)], "03"))
-			move_cam_x(game, map_pos);
-		if ((int)(game->player.pos.y + map_pos.y) < matrix_len(game->map) - 1 && \
-			game->map[(int)(game->player.pos.y + map_pos.y)] && \
-			ft_char_in_set(game->map[(int)(game->player.pos.y + map_pos.y)][(int)game->player.pos.x], "03"))
-		{
-			// printf("\n\n%s\n", game->map[(int)(game->player.pos.y + map_pos.y)])
-			move_cam_y(game, map_pos);
-
-		}
-	}
+		handle_cam_y(game, map_pos);
 }
 
 void	watch_strafe(t_game *game)
@@ -73,27 +85,9 @@ void	watch_strafe(t_game *game)
 	map_pos.x = ((strafe_vel.x * 1.0f));
 	map_pos.y = ((strafe_vel.y * 1.0f));
 	if (game->buttons.right)
-	{
-		if ((int)(game->player.pos.x + map_pos.x) > 0 && \
-			game->map[(int)game->player.pos.y] && \
-			ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + map_pos.x)], "03"))
-			move_cam_x(game, map_pos);
-		if ((int)(game->player.pos.y + map_pos.y) > 0 && \
-			game->map[(int)(game->player.pos.y + map_pos.y)] &&
-			ft_char_in_set(game->map[(int)(game->player.pos.y + map_pos.y)][(int)game->player.pos.x], "03"))
-			move_cam_y(game, map_pos);
-	}
+		handle_cam_x(game, map_pos);
 	else if (game->buttons.left)
-	{
-		if ((int)(game->player.pos.x + map_pos.x) < get_higher_len(game->map) - 1 && \
-			game->map[(int)game->player.pos.y] && \
-			ft_char_in_set(game->map[(int)game->player.pos.y][(int)(game->player.pos.x + map_pos.x)], "03"))
-			move_cam_x(game, map_pos);
-		if ((int)(game->player.pos.y + map_pos.y) < matrix_len(game->map) - 1&& \
-			game->map[(int)(game->player.pos.y + map_pos.y)] && \
-			ft_char_in_set(game->map[(int)(game->player.pos.y + map_pos.y)][(int)game->player.pos.x], "03"))
-			move_cam_y(game, map_pos);
-	}
+		handle_cam_y(game, map_pos);
 }
 
 void	watch_functions(t_game *game)
