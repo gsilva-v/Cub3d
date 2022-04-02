@@ -93,18 +93,22 @@ void	watch_strafe(t_game *game)
 void	watch_functions(t_game *game)
 {
 	t_vec	pos;
+	t_vec	pos2;
 
 	if (game->buttons.function)
 	{
 		pos = game->player.pos;
+		pos2 = game->player.pos;
 		pos.x += game->player.direction.x;
 		pos.y += game->player.direction.y;
-		if (game->map[(int)pos.y][(int)pos.x] == DOOR || game->map[(int)(pos.y * 1.4f)][(int)(pos.x * 1.4f)] == DOOR)
+		pos2.x += game->player.direction.x *1.4f;
+		pos2.y += game->player.direction.y *1.4f;
+		if (game->map[(int)pos.y][(int)pos.x] == DOOR || game->map[(int)(pos2.y)][(int)(pos2.x)] == DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = OPEN_DOOR;
 			game->buttons.function = 0;
 		}
-		else if (game->map[(int)pos.y][(int)pos.x] == OPEN_DOOR || game->map[(int)(pos.y * 1.4f)][(int)(pos.x * 1.4f)] == OPEN_DOOR)
+		else if (game->map[(int)pos.y][(int)pos.x] == OPEN_DOOR || game->map[(int)(pos2.y)][(int)(pos2.x)] == OPEN_DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = DOOR;
 			game->buttons.function = 0;

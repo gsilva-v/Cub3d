@@ -44,6 +44,7 @@ void	sort_sprite(t_game *game)
 		index++;
 	}
 }
+
 int	sprite_render(t_game *game)
 {
 	t_animation		*animation;

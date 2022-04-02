@@ -166,13 +166,13 @@ void	move_minimap_cam(t_game *game)
 void	init_game(t_game *game)
 {
 	srand(time(NULL));
-	game->mlx = mlx_init();
 	move_minimap_cam(game);
 	init_player(game);
 	init_sprites(game);
 	init_final_point(game);
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, SCREENWIDTH, SCREENHEIGHT, "RAY");
 	game->player.movespeed = 3.0f;
 	game->buffer = ft_calloc(1, SCREENHEIGHT);
 	game->z_buffer = ft_calloc(sizeof(float), SCREENWIDTH);
-	game->win = mlx_new_window(game->mlx, SCREENWIDTH, SCREENHEIGHT, "RAY");
 }
