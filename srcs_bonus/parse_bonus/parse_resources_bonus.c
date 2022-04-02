@@ -76,6 +76,7 @@ static char	*get_resources(char *line, t_game *game, int fd)
 	{
 		close(fd);
 		free(line);
+		free_matrix(config);
 		show_error(game, 1, INV_CFG);
 	}
 	free(line);

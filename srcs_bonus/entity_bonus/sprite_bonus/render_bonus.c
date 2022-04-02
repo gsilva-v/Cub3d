@@ -50,7 +50,7 @@ int	sprite_render(t_game *game)
 	static float	elapse;
 
 	elapse += game->elapsed_time;
-	animation = &game->ghost[0].animation;
+	animation = &game->resources.g_animation;
 	if (elapse >= animation->seconds)
 	{
 		if (animation->index < animation->n_sprites - 1)

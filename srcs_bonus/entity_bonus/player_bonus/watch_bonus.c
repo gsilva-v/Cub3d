@@ -97,14 +97,14 @@ void	watch_functions(t_game *game)
 	if (game->buttons.function)
 	{
 		pos = game->player.pos;
-		pos.x += game->player.direction.x * 1.8f;
-		pos.y += game->player.direction.y * 1.8f;
-		if (game->map[(int)pos.y][(int)pos.x] == DOOR)
+		pos.x += game->player.direction.x;
+		pos.y += game->player.direction.y;
+		if (game->map[(int)pos.y][(int)pos.x] == DOOR || game->map[(int)(pos.y * 1.4f)][(int)(pos.x * 1.4f)] == DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = OPEN_DOOR;
 			game->buttons.function = 0;
 		}
-		else if (game->map[(int)pos.y][(int)pos.x] == OPEN_DOOR)
+		else if (game->map[(int)pos.y][(int)pos.x] == OPEN_DOOR || game->map[(int)(pos.y * 1.4f)][(int)(pos.x * 1.4f)] == OPEN_DOOR)
 		{
 			game->map[(int)pos.y][(int)pos.x] = DOOR;
 			game->buttons.function = 0;

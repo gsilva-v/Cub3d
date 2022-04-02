@@ -23,12 +23,11 @@ void	check_data_leaks(t_game *game)
 	if (&game->resources.floor)
 		free_data(game, &game->resources.floor);
 	if (game->ghost)
-	{
-		free_sprite(game->ghost, game);
 		free(game->ghost);
-	}
 	if (&game->final.sprite)
 		free_sprite(&game->final, game);
+	free_animation(&game->resources.g_animation, game);
+	free_data(game, &game->resources.g_sprite);
 }
 
 void	finish_him(t_game *game, int exit_code)

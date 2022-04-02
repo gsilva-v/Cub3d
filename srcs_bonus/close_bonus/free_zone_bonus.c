@@ -35,6 +35,4 @@ void	free_sprite(t_entity *who, t_game *game)
 {
 	if (&who->sprite)
 		free_data(game, &who->sprite);
-	if (&who->animation)
-		free_animation(&who->animation, game);
 }
