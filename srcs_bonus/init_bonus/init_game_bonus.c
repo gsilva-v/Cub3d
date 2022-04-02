@@ -29,20 +29,54 @@ static void	init_player(t_game *game)
 	game->player.pos.y += 0.5f;
 }
 
+int	get_number_ghost(t_game *game)
+{
+	int	index;
+	int	y;
+	int	x;
+
+	index = 0;
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'G')
+				index++;
+			x++;
+		}
+		y++;
+	}
+	return (index);
+}
 static void	init_sprites(t_game *game)
 {
-	float	dist;
+	int			size;
+	int			index;
+	int			x;
+	int			y;
 
-	while (1)
+	y = 0;
+	index = 0;
+	size = get_number_ghost(game);
+	game->n_ghost = size;
+	game->ghost = (t_entity *)ft_calloc(sizeof(t_entity), size);
+	while (game->map[y])
 	{
-		game->ghost.pos.x = (float)rand()
-			/ (float)(RAND_MAX / get_higher_len(game->map) - 1);
-		game->ghost.pos.y = (float)rand()
-			/ (float)(RAND_MAX / matrix_len(game->map) - 1);
-		dist = vec_dist(game->ghost.pos, game->player.pos);
-		if (game->map[(int)game->ghost.pos.y]
-			[(int)game->ghost.pos.x] == FLOOR && dist >= 3)
-			break ;
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'G')
+			{
+				game->ghost[index].pos.x = x + 0.5f;
+				game->ghost[index].pos.y = y + 0.5f;
+				game->map[y][x] = FLOOR;
+				index++;
+			}
+			x++;
+		}
+		y++;
 	}
 }
 

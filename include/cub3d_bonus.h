@@ -24,8 +24,8 @@
 # define WALL '1'
 # define DOOR '2'
 # define OPEN_DOOR '3'
-# define VALID_BLOCK "0123F \nWENS"
-# define HAS_INSIDE "ESWN023F"
+# define VALID_BLOCK "0123FG \nWENS"
+# define HAS_INSIDE "ESWN023FG"
 # define WRONG_ARG  "Invalid arguments, try ./cub3d ./maps/simple_map.cub"
 # define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"
 # define WTOUT_PLYR "this map dont have a initial point for player"
@@ -100,10 +100,11 @@ typedef struct s_animation
 
 typedef struct s_entity
 {
-	t_data		sprite;
-	t_animation	animation;
-	t_vec		pos;
-	int			is_on_view;
+	t_data			sprite;
+	t_animation		animation;
+	t_vec			pos;
+	int				is_on_view;
+	int				found_player;
 } t_entity;
 
 typedef struct s_player{
@@ -123,7 +124,9 @@ typedef struct s_block{
 }	t_block;
 
 typedef struct s_resource {
-	t_data	pov;
+	t_data		g_sprite;
+	t_animation	g_animation;
+	t_data		pov;
 	t_data	enemy;
 	t_data	canvas;
 	t_data	map;
@@ -165,7 +168,7 @@ typedef struct s_game{
 	float		*z_buffer;
 	int			is_on_focus;
 	t_resource	resources;
-	t_entity	ghost;
+	t_entity	*ghost;
 	t_entity	final;
 	t_vec		map_offset;
 	int			enemy_on_view;
@@ -175,6 +178,7 @@ typedef struct s_game{
 	int			is_open_door;
 	double		last_time;
 	double		elapsed_time;
+	int			n_ghost;
 	int			lose;
 }	t_game;
 

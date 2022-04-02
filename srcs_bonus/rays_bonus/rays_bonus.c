@@ -83,14 +83,38 @@ void	is_on_view(t_game *game, t_entity *entity, t_vec ray_dir)
 		entity->is_on_view = 1;
 }
 
+void	ghost_on_view(t_game *game, t_vec ray_dir)
+{
+	int	index;
+
+	index = 0;
+	while (index < game->n_ghost)
+	{
+		is_on_view(game, &game->ghost[index], ray_dir);
+		index++;
+	}
+}
+
+void	reset_ghost_view(t_game *game)
+{
+	int	index;
+
+	index = 0;
+	while (index < game->n_ghost)
+	{
+		game->ghost[index].is_on_view = 0;
+		index++;
+	}
+}
+
 void	raycasting(t_game *game)
 {
 	t_rays	values;
 	t_vec	ray_dir;
 
 	floor_casting(game);
+	reset_ghost_view(game);
 	values.rays = 0;
-	game->ghost.is_on_view = 0;
 	game->final.is_on_view = 0;
 	while (values.rays < SCREENWIDTH)
 	{
@@ -100,7 +124,7 @@ void	raycasting(t_game *game)
 		ray_dir = values.ray_dir;
 		vec_magnitude(&values.ray_dir);
 		vec_normalize(&ray_dir);
-		is_on_view(game, &game->ghost, ray_dir);
+		ghost_on_view(game, ray_dir);
 		is_on_view(game, &game->final, ray_dir);
 		ft_memset(game->buffer, 0, SCREENHEIGHT);
 		render_engine(&values, game);

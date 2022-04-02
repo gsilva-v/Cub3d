@@ -48,10 +48,13 @@ void	load_sprite(t_game *game)
 	d->img = mlx_xpm_file_to_image(game->mlx, "./imgs/monkey.xpm", \
 	&d->width, &d->height);
 	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->line_len, &d->endian);
-	d = &game->ghost.sprite;
-	d->img = mlx_xpm_file_to_image(game->mlx, "./imgs/ghost5.xpm", \
-	&d->width, &d->height);
-	d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->line_len, &d->endian);
+	if (game->ghost)
+	{
+		d = &game->resources.g_sprite;
+		d->img = mlx_xpm_file_to_image(game->mlx, "./imgs/ghost5.xpm", \
+		&d->width, &d->height);
+		d->addr = mlx_get_data_addr(d->img, &d->bpp, &d->line_len, &d->endian);
+	}
 	d = &game->resources.floor;
 	d->img = mlx_xpm_file_to_image(game->mlx, "./imgs/floor_1.xpm", \
 	&d->width, &d->height);
@@ -65,7 +68,8 @@ void	load_imgs(t_game *game)
 	r = &game->resources;
 	load_canvas(game);
 	load_minimap(game);
-	init_animation(game, &game->ghost.animation, "./imgs/ghost", 5);
+	if (game->ghost)
+		init_animation(game, &game->resources.g_animation, "./imgs/ghost", 5);
 	load_sprite(game);
 	load_block(game, &r->wall);
 	r->door.so.name = ft_strdup("./imgs/closed_door.xpm");
