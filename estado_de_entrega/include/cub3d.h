@@ -6,7 +6,7 @@
 /*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:29:29 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:29:30 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:47:52 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define INV_CFG "This map have any misconfiguration, see ./maps/example.cub"
 # define WTOUT_PLYR "this map dont have a initial point for player"
 # define DBLE_PLYR "This map have 2 or more initial points to player"
-# define POV "./imgs/pov.xpm"
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 # define SHIFT 65505
@@ -104,7 +103,6 @@ typedef struct s_block{
 }	t_block;
 
 typedef struct s_resource {
-	t_data	pov;
 	t_data	canvas;
 	t_block	wall;
 	t_block	door;

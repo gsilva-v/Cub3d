@@ -6,7 +6,7 @@
 /*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:26:14 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:26:16 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:12:15 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static char	*get_resources(char *line, t_game *game, int fd)
 	{
 		close(fd);
 		free(line);
+		free_matrix(config);
 		show_error(game, 1, INV_CFG);
 	}
 	free(line);

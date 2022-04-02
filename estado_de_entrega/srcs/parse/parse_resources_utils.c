@@ -6,7 +6,7 @@
 /*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:26:10 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:26:11 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:12:23 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ static int	my_access(char **config)
 int	set_config(t_game *game, char **config)
 {
 	if (!config[1])
-	{
-		free_matrix(config);
 		return (1);
-	}
 	if ((ft_strncmp(config[0], "C", 1)) && (ft_strncmp(config[0], "F", 1)))
 	{
 		if (my_access(config))

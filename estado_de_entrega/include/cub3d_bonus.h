@@ -6,7 +6,7 @@
 /*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:29:27 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:33:32 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:47:38 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@
 # define DBLE_PLYR "This map have 2 or more initial points to player"
 # define WIN " You win, congrats! "
 # define LOSE " You lose, try again! "
-# define POV "./imgs/pov.xpm"
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 # define SHIFT 65505
@@ -137,7 +136,6 @@ typedef struct s_block{
 typedef struct s_resource {
 	t_data		g_sprite;
 	t_animation	g_animation;
-	t_data		pov;
 	t_data		enemy;
 	t_data		canvas;
 	t_data		map;

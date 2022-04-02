@@ -1,16 +1,16 @@
-NO ./imgs/wall_last.xpm
-SO ./imgs/wall_last.xpm
-WE ./imgs/wall_last.xpm
-EA ./imgs/wall_last.xpm
+NO ./imgs/no_redbrick.xpm
+SO ./imgs/so_redbrick.xpm
+WE ./imgs/we_redbrick.xpm
+EA ./imgs/ea_redbrick.xpm
 
 F 100,100,100
 C 50,50,50
 
 11111111111111
-1E0000G0000011
+1W000000000011
 10000000000001
-10000012100001
+10000010100001
 10000000000001
-1000000000F001
+10000000000001
 10000000000001
 11111111111111

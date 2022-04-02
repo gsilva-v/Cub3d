@@ -6,7 +6,7 @@
 /*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:28:19 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:28:20 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:24:11 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int	check_vertical_wall(char **map, int x, int y)
 	int	tmp_y;
 
 	tmp_y = y;
-	while (map[y] && map[y][x] != WALL && map[y][x] != ' ')
+	while (map[y] && map[y][x] && map[y][x] != WALL && map[y][x] != ' ')
 		y++;
 	if (map[y] == 0 || map[y][x] != WALL || map[y][x] == ' ')
 		return (0);
 	y = tmp_y;
-	while (y >= 0 && map[y][x] != WALL && map[y][x] != ' ')
+	while (y >= 0 && map[y][x] && map[y][x] != WALL && map[y][x] != ' ')
 		y--;
 	if (y < 0)
 		y = 0;

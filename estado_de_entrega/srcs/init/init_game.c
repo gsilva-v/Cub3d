@@ -6,7 +6,7 @@
 /*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:25:51 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:25:52 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:13:32 by gsilva-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	init_player(t_game *game)
 
 void	init_game(t_game *game)
 {
-	game->mlx = mlx_init();
 	init_player(game);
 	game->player.movespeed = 0.1f;
 	game->buffer = ft_calloc(1, SCREENHEIGHT);
+	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, SCREENWIDTH, SCREENHEIGHT, "RAY");
 }
