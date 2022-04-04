@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:29:27 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 17:47:38 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/04 09:17:32 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ int		parse_resources(t_game *game, char *file);
 int		check_horizontal_wall(char **map, int x, int y);
 int		check_vertical_wall(char **map, int x, int y);
 void	normalize_map(t_game *game);
+int		check_diagonalup_wall(char **map, int x, int y);
 
 // PARSE RESOURCE UTILS
 int		valid_conf(char **config);

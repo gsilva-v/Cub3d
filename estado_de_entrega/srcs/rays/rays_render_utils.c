@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays_render_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:26:24 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:29:50 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/04 09:12:36 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_data	*get_texture(t_game *game, t_rays *values)
 {
 	if (game->map[values->map_pos.y][values->map_pos.x] == WALL)
 		return (get_direction(&game->resources.wall, values));
-	if (game->map[values->map_pos.y][values->map_pos.x] == DOOR)
-		return (get_direction(&game->resources.door, values));
 	return ((t_data *)0);
 }
 

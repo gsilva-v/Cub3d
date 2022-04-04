@@ -68,7 +68,7 @@ SRCS_B += $(addprefix $(PATH_PLAYER_B), update_bonus render_bonus watch_bonus wa
 SRCS_B += $(addprefix $(PATH_SPRITE_B), update_bonus render_bonus)
 SRCS_B += $(addprefix $(PATH_INIT_B), init_utils_bonus init_game_bonus load_imgs_bonus load_utils_bonus start_orientation_bonus)
 SRCS_B += $(addprefix $(PATH_MAIN_B), main_bonus)
-SRCS_B += $(addprefix $(PATH_PARSE_B), parse_map_bonus parse_map_utils_bonus parse_resources_bonus parse_resources_utils_bonus parse_resources_utils2_bonus)
+SRCS_B += $(addprefix $(PATH_PARSE_B), parse_map_bonus parse_map_utils_bonus parse_resources_bonus parse_resources_utils_bonus parse_resources_utils2_bonus check_surrounded_bonus)
 SRCS_B += $(addprefix $(PATH_RAYS_B), floor_bonus rays_bonus rays_render_engine_bonus rays_render_utils_bonus color_bonus transparence_bonus)
 SRCS_B += $(addprefix $(PATH_UTILS_B), gnl_bonus time_bonus matrix_len_bonus free_matrix_bonus distance_bonus check_ext_bonus)
   

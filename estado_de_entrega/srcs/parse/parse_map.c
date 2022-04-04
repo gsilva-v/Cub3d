@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:26:07 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:26:08 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/04 09:09:16 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static int	check_surrounded(char **map, int x, int y)
 {
-	int	tmp_x;
-
-	tmp_x = x;
 	if (!check_horizontal_wall(map, x, y))
 		return (0);
-	x = tmp_x;
 	if (!check_vertical_wall(map, x, y))
+		return (0);
+	if (!check_diagonalup_wall(map, x, y))
+		return (0);
+	if (!check_diagonaldown_wall(map, x, y))
 		return (0);
 	return (1);
 }

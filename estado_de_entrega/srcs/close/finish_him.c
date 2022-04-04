@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   finish_him.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:25:19 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:25:20 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/04 09:12:17 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	check_data_leaks(t_game *game)
 {
 	if (&game->resources.wall)
 		free_block(&game->resources.wall, game);
-	if (&game->resources.door)
-		free_block(&game->resources.door, game);
 	if (&game->resources.canvas)
 		free_data(game, &game->resources.canvas);
 }

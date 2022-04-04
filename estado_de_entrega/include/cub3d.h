@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:29:29 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 17:47:52 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/04 09:11:50 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ typedef struct s_block{
 typedef struct s_resource {
 	t_data	canvas;
 	t_block	wall;
-	t_block	door;
 	int		ceil_color;
 	int		floor_color;
 }	t_resource;
@@ -137,6 +136,8 @@ int		parse_resources(t_game *game, char *file);
 // PARSE MAP UTILS
 int		check_horizontal_wall(char **map, int x, int y);
 int		check_vertical_wall(char **map, int x, int y);
+int		check_diagonalup_wall(char **map, int x, int y);
+int		check_diagonaldown_wall(char **map, int x, int y);
 
 // PARSE RESOURCE UTILS
 int		valid_conf(char **config);

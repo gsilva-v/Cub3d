@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_resources_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:28:21 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:28:22 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/04 08:58:10 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static char	**parse_config(char *line)
 
 	if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
 		change_char(line, ' ', 1, 1);
+	if (line[0] == ' ')
+		line[0] = 1;
 	config = ft_split(line, ' ');
 	if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
 		change_char(config[1], 1, ' ', 0);

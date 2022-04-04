@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map_utils.c                                  :+:      :+:    :+:   */
+/*   check_surrounded_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 13:26:04 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/04 09:32:57 by flda-sil         ###   ########.fr       */
+/*   Created: 2022/04/02 13:28:19 by gsilva-v          #+#    #+#             */
+/*   Updated: 2022/04/04 09:32:52 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 int	check_horizontal_wall(char **map, int x, int y)
 {

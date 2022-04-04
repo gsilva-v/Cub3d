@@ -1,9 +1,0 @@
-NO ./path_of_img.xpm
-SO ./path_of_img.xpm
-WE ./path_of_img.xpm
-EA ./path_of_img.xpm
-
-F {r},{g},{b}
-C {r},{g},{b}
-
-{draw the map, don't forget to surround this, use only "WESN \n012" caracters}

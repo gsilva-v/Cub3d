@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_imgs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsilva-v <gsilva-v@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: flda-sil <flda-sil@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:25:54 by gsilva-v          #+#    #+#             */
-/*   Updated: 2022/04/02 13:25:55 by gsilva-v         ###   ########.fr       */
+/*   Updated: 2022/04/04 09:11:23 by flda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,4 @@ void	load_imgs(t_game *game)
 	r->canvas.addr = mlx_get_data_addr(r->canvas.img, \
 	&r->canvas.bits_per_pixel, &r->canvas.line_length, &r->canvas.endian);
 	load_block(game, &r->wall);
-	r->door.so.name = ft_strdup("./imgs/door.xpm");
-	r->door.no.name = ft_strdup("./imgs/door.xpm");
-	r->door.we.name = ft_strdup("./imgs/door.xpm");
-	r->door.ea.name = ft_strdup("./imgs/door.xpm");
-	load_block(game, &r->door);
 }
